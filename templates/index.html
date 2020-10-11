@@ -4,10 +4,16 @@
 <div class="jumbotron">
 	<h2 class="presentation">Sergi DS Portfolio</h2>
 	<p class="lead">Here you will find some projects/mini-projects I have developed using python and working with some data, in some cases using own datasets or searching them automatically in the web.</p>
-	<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/buho1.png') }}" alt="Gompertz Project">
 	<hr class="my-4">
-	<p>I expect that this portfolio let you to see what could be done with data analysis, machine learning or general python scripting so you love them as I love them.</p>
-	<p>And also if you are looking for someone with several experience in IT, Software engineering, with statistical skills and technical skills in business programming (ABAP) and different web/app/science programming you could contact with me.</p>
+	<div class='row'>
+		<div class='col-lg-5'>
+			<p>I expect that this portfolio let you to see what could be done with data analysis, machine learning or general python scripting so you love them as I love them.</p>
+			<p>And also if you are looking for someone with several experience in IT, Software engineering, with statistical skills and technical skills in business programming (ABAP) and different web/app/science programming you could contact with me.</p>
+		</div>
+		<div class='col-lg-7'>
+			<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/buho1.png') }}" alt="Gompertz Project">
+		</div>
+	</div>
 	<p class="lead">
 		<a class="btn btn-primary btn-lg" href="/curriculum" role="button">Curriculum</a>
 	</p>
