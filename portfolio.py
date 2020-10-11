@@ -25,8 +25,8 @@ def post(name):
     return render_template('post.html', post=post)
 
 @app.route('/')
-def holamundo():
-	return 'Hola Sergi!'
+def home_page():
+	return render_template("index.html")
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
