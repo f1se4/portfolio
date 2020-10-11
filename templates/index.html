@@ -1,144 +1,117 @@
-<html>
-	<head>
-		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/bootstrap.css') }}">
-		<title>Sergi DS Portfolio</title>
-	</head>
-	<body>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<a class="navbar-brand" href="#">DS Portfolio</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+{% extends "base.html" %}
 
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Curriculum Vitae</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="http://www.fisoft.es">Personal Page</a>
-				</li>
-				</ul>
+{% block content %}
+<div class="jumbotron">
+	<h2 class="presentation">Sergi DS Portfolio</h2>
+	<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+	<hr class="my-4">
+	<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+	<p class="lead">
+		<a class="btn btn-primary btn-lg" href="#" role="button">Curriculum</a>
+	</p>
+</div>
+<div class="progress">
+	<div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<br>		
+<div class="row">
+	<div class="col-lg-12">
+		<div class='page-header'>
+			<h1 id='projects'>Projects</h1>
+		</div>
+	</div>
+</div>
+<div class ='row'>
+	<div class ='col-lg-4'><!-- col1 init -->
+		<div class="card mb-3">
+			<h3 class="card-header">IT KPI DashBoard</h3>
+		<div class="card-body">
+			<h5 class="card-title">Customized Web Dashboard to share IT KPI</h5>
+			<h6 class="card-subtitle text-muted">IT Dashboard with different metrics, and grouped by technology and country</h6>
+		</div>
+		<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project1.jpg') }}" alt="Gompertz Project">
+		<div class="card-body">
+			<p class="card-text">Customized web dahsboard designed fully in python, using django and plotly-django-dashboard as framework</p>
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item">#Insights</li>
+			<li class="list-group-item">#Django #Plotly-Dashboard</li>
+			<li class="list-group-item">#Data-Cleaning #Data-Analysis #Pandas</li>
+		</ul>
+		<div class="card-body">
+			<a href="#" class="card-link">Presentation</a>
+		</div>
+		<div class="card-footer text-muted">
+			Developed January 2020
+		</div>
+	</div>					
+	</div> <!-- col1 end-->
+	<div class ='col-lg-4'> <!-- col2 init -->
+		<div class="card mb-3">
+				<h3 class="card-header">IT Project Go-Live study through Gompertz Function</h3>
+			<div class="card-body">
+				<h5 class="card-title">Gompertz knowledge applied to IT Go-Live Project</h5>
+				<h6 class="card-subtitle text-muted">Looking for some metrics and KPI objectives in a Go-Live Project, evaluating ticket creation</h6>
 			</div>
-		</nav>
-		<br>
-		<div class="container">
-			<div class="jumbotron">
-				<h2 class="presentation">Sergi DS Portfolio</h2>
-				<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				<hr class="my-4">
-				<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-				<p class="lead">
-					<a class="btn btn-primary btn-lg" href="#" role="button">Curriculum</a>
-				</p>
+			<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project2.jpg') }}" alt="Gompertz Project">
+			<div class="card-body">
+				<p class="card-text">Using data from real company go-live project registered through ticketing helpdesk tool, it's going to be analyzed as pandemic distribution</p>
 			</div>
-			<div class="progress">
-				<div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">#Non-Linear Square Regression</li>
+				<li class="list-group-item">#TimeSeries Insights</li>
+				<li class="list-group-item">#Python DS analysis</li>
+			</ul>
+			<div class="card-body">
+				<a href="#" class="card-link">Notebook</a>
 			</div>
-			<br>		
-			<div class="row">
-				<div class="col-lg-12">
-					<div class='page-header'>
-						<h1 id='projects'>Projects</h1>
-					</div>
-				</div>
+			<div class="card-footer text-muted">
+				Developed on April 2020
 			</div>
-			<div class ='row'>
-				<div class ='col-lg-4'><!-- col1 init -->
-					<div class="card mb-3">
-						<h3 class="card-header">IT KPI DashBoard</h3>
-					<div class="card-body">
-						<h5 class="card-title">Customized Web Dashboard to share IT KPI</h5>
-						<h6 class="card-subtitle text-muted">IT Dashboard with different metrics, and grouped by technology and country</h6>
-					</div>
-					<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project1.jpg') }}" alt="Gompertz Project">
-					<div class="card-body">
-						<p class="card-text">Customized web dahsboard designed fully in python, using django and plotly-django-dashboard as framework</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">#Insights</li>
-						<li class="list-group-item">#Django #Plotly-Dashboard</li>
-						<li class="list-group-item">#Data-Cleaning #Data-Analysis #Pandas</li>
-					</ul>
-					<div class="card-body">
-						<a href="#" class="card-link">Presentation</a>
-					</div>
-					<div class="card-footer text-muted">
-						Developed January 2020
-					</div>
-				</div>					
-				</div> <!-- col1 end-->
-				<div class ='col-lg-4'> <!-- col2 init -->
-					<div class="card mb-3">
-							<h3 class="card-header">IT Project Go-Live study through Gompertz Function</h3>
-						<div class="card-body">
-							<h5 class="card-title">Gompertz knowledge applied to IT Go-Live Project</h5>
-							<h6 class="card-subtitle text-muted">Looking for some metrics and KPI objectives in a Go-Live Project, evaluating ticket creation</h6>
-						</div>
-						<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project2.jpg') }}" alt="Gompertz Project">
-						<div class="card-body">
-							<p class="card-text">Using data from real company go-live project registered through ticketing helpdesk tool, it's going to be analyzed as pandemic distribution</p>
-						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">#Non-Linear Square Regression</li>
-							<li class="list-group-item">#TimeSeries Insights</li>
-							<li class="list-group-item">#Python DS analysis</li>
-						</ul>
-						<div class="card-body">
-							<a href="#" class="card-link">Notebook</a>
-						</div>
-						<div class="card-footer text-muted">
-							Developed on April 2020
-						</div>
-					</div>
-				</div> <!-- col2 end -->
-				<div class='col-lg-4'><!-- col3 init -->
-					<div class="card mb-3">
-						<h3 class="card-header">News WebScrapping #Mollet #Covid</h3>
-					<div class="card-body">
-						<h5 class="card-title">Webscrapping Report for local Covid News</h5>
-						<h6 class="card-subtitle text-muted">Scripting for get from digital local newspapers all news related to #mollet and #covid</h6>
-					</div>
-					<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project3.jpg') }}" alt="Covid Mollet">
-					<div class="card-body">
-						<p class="card-text">The mini-project it's scripting tool done to be executed through crontab and send html report mail to me, family and nearest friends about news summary related to #mollet and #covid.</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">#Mini-project</li>
-						<li class="list-group-item">#Python Script</li>
-						<li class="list-group-item">#WebScrapping</li>
-					</ul>
-					<div class="card-body">
-						<a href="#" class="card-link">Notebook</a>
-					</div>
-					<div class="card-footer text-muted">
-						Developed on March 2020
-					</div>
-				</div>					
-				</div> <!-- col3 end -->			
-			</div> <!-- first row of projects -->
-			<div class="progress">
-				<div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-			</div>
-			<br>
-			<div class="card text-white bg-primary mb-3">
-				<div class="card-header">About this Web Page</div>
-				<div class="card-body">
-				  <p class="card-text">This webpage life in an E2C server, it has been developed over Flask framework and it's working over wsgi-apache-gunicorn application.</p>
-				  <p class="card-text">As part of personal portfolio it's demonstration of using:</p>
-				  <ul>
-					<li>Flask framewok</li>
-					<li>Bootstrap classes</li>
-					<li>WSGI Gunicorn Deployment</li>
-					<li>Apache2 Server Deployment</li>
-					<li>Linux Server Administration</li>
-				  </ul>				  
-				  <p class="card-text"></p>Source Code is public, published in github and it's free to reuse <a href='https://github.com/f1se4/portfolio'>f1se4/portfolio</a></p>
-				</div>
-			</div>						
-		</div> <!-- container -->
-	</body>
-</html>
+		</div>
+	</div> <!-- col2 end -->
+	<div class='col-lg-4'><!-- col3 init -->
+		<div class="card mb-3">
+			<h3 class="card-header">News WebScrapping #Mollet #Covid</h3>
+		<div class="card-body">
+			<h5 class="card-title">Webscrapping Report for local Covid News</h5>
+			<h6 class="card-subtitle text-muted">Scripting for get from digital local newspapers all news related to #mollet and #covid</h6>
+		</div>
+		<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project3.jpg') }}" alt="Covid Mollet">
+		<div class="card-body">
+			<p class="card-text">The mini-project it's scripting tool done to be executed through crontab and send html report mail to me, family and nearest friends about news summary related to #mollet and #covid.</p>
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item">#Mini-project</li>
+			<li class="list-group-item">#Python Script</li>
+			<li class="list-group-item">#WebScrapping</li>
+		</ul>
+		<div class="card-body">
+			<a href="#" class="card-link">Notebook</a>
+		</div>
+		<div class="card-footer text-muted">
+			Developed on March 2020
+		</div>
+	</div>					
+	</div> <!-- col3 end -->			
+</div> <!-- first row of projects -->
+<div class="progress">
+	<div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<br>
+<div class="card text-white bg-primary mb-3">
+	<div class="card-header">About this Web Page</div>
+	<div class="card-body">
+		<p class="card-text">This webpage life in an E2C server, it has been developed over Flask framework and it's working over wsgi-apache-gunicorn application.</p>
+		<p class="card-text">As part of personal portfolio it's demonstration of using:</p>
+		<ul>
+		<li>Flask framewok</li>
+		<li>Bootstrap classes</li>
+		<li>WSGI Gunicorn Deployment</li>
+		<li>Apache2 Server Deployment</li>
+		<li>Linux Server Administration</li>
+		</ul>				  
+		<p class="card-text"></p>Source Code is public, published in github and it's free to reuse <a href='https://github.com/f1se4/portfolio'>f1se4/portfolio</a></p>
+	</div>
+</div>						
+{% endblock %}
