@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn instance to serve portfolio
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/portfolio
+ExecStart=/home/ubuntu/.local/bin/gunicorn --bind :5000 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
