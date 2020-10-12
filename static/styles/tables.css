@@ -30,3 +30,9 @@ tbody tr.active-row {
     font-weight: bold;
     color: #009879;
 }
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: justify;
+    text-justify: inter-word;
+}
