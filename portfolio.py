@@ -1,6 +1,6 @@
 import sys
 from flask import Flask, render_template
-from flask_misaka import markdown
+from flask_misaka import Misaka, markdown
 
 
 app = Flask(__name__)
