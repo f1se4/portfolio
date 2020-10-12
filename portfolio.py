@@ -14,7 +14,13 @@ def home_page():
 def curriculum():
 	with open("./md/curriculum.md", "r") as file:
 		content = file.read()	
-	return render_template("curriculum.html", text=content)    
+	return render_template("curriculum.html", text=content)
+
+@app.route('/gompertz')
+def curriculum():
+	with open("./md/gompertz.md", "r") as file:
+		content = file.read()	
+	return render_template("gompertz.html", text=content)   	
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
