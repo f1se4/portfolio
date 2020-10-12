@@ -1,15 +1,5 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% filter markdown %}
-# Sergi García Muñoz
-## Currículm Vitae
-### Experience
-#### Technical
-#### Other Experience
-### Degrees
-### Interests
-### Languages
-### Others
-{% endfilter %}
+{{ text|markdown }}
 {% endblock %}
