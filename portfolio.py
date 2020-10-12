@@ -4,7 +4,7 @@ from flask_misaka import markdown
 
 
 app = Flask(__name__)
-#Misaka(app, math_explicit=True)
+Misaka(app, math_explicit=True)
 
 @app.route('/')
 def home_page():
