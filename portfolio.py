@@ -1,8 +1,10 @@
 import sys
 from flask import Flask, render_template
+from flask_misaka import Misaka
+
 
 app = Flask(__name__)
-#app.config.from_object(__name__)
+Misaka(app)
 
 @app.route('/')
 def home_page():

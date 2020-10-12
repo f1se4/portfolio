@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Sergi García Muñoz</h1>
-<h2>Curriculum Vitae</h2>
+{% filter markdown %}
+# Sergi García Muñoz
+## Currículm Vitae
+### Experience
+#### Technical
+#### Other Experience
+### Degrees
+### Interests
+### Languages
+### Others
+{% endfilter %}
 {% endblock %}
