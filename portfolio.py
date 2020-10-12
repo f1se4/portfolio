@@ -12,7 +12,6 @@ def home_page():
 
 @app.route('/curriculum')
 def curriculum():
-	file_path = url_for('static',filename='images/project3.jpg')
 	with open("./md/curriculum.md", "r") as file:
 		content = file.read()	
 	return render_template("curriculum.html", text=content)    
