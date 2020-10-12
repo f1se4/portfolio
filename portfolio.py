@@ -12,9 +12,9 @@ def home_page():
 
 @app.route('/curriculum')
 def curriculum():
-	with open("/md/curriculum.md", "r") as f:
-		content = f.read()	
-	return render_template("curriculum.html")    
+	with open("/md/curriculum.md", "r") as file:
+		content = file.read()	
+	return render_template("curriculum.html", text=content)    
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
