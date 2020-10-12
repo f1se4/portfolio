@@ -44,13 +44,13 @@ df = raw_data.copy()
 
 raw_data.head() #Take a look of raw_data
 ```
-|quantity|date|
-|--- |--- |
-|13|2020-01-27|
-|4|2020-01-28|
-|8|2020-01-29|
-|7|2020-01-30|
-|2|2020-01-31|
+|index|quantity|date|
+|--- |--- |--- |
+|0|13|2020-01-27|
+|1|4|2020-01-28|
+|2|8|2020-01-29|
+|3|7|2020-01-30|
+|4|2|2020-01-31|
 
 ## Data analysis and exploration
 ### Basic data statistics
