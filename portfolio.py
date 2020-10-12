@@ -4,7 +4,7 @@ from flask_misaka import Misaka
 
 
 app = Flask(__name__)
-Misaka(app)
+Misaka(app,math_explicit=True)
 
 @app.route('/')
 def home_page():
