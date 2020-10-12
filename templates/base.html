@@ -2,29 +2,50 @@
 	<head>
 		<meta charset="UTF-8">		
 		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/bootstrap.css') }}">
+		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/bootstrap.css') }}">
+        <!-- Loading mathjax macro -->
+        <!-- Load mathjax -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+        <!-- MathJax configuration -->
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            // Center justify equations in code and markdown cells. Elsewhere
+            // we use CSS to left justify single line equations in code cells.
+            displayAlign: 'center',
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}},
+                linebreaks: { automatic: true }
+            }
+        });
+        </script>
+		<!-- End of mathjax configuration -->	
 		<title>Sergi DS Portfolio</title>
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<a class="navbar-brand" href="/">DS Portfolio</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/curriculum">Curriculum Vitae</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="http://www.fisoft.es">Personal Page</a>
-				</li>
-				</ul>
-			</div>
-		</nav>
+		<div class='bs-component'>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="/">DS Portfolio</a>
+				<div class="" id="navbarColor01">
+					<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/curriculum">Curriculum Vitae</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="http://www.fisoft.es">Personal Page</a>
+					</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
         <br>
         <div class="container">
             {% block content %}

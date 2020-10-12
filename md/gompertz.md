@@ -1,3 +1,9 @@
 # IT Go-Live Study
 
-$x^2 = 3x + 4$
+### $\frac{x^2}{3x+5}$
+
+```python
+import pandas as pd
+df = pd.read_csv("archivo")
+df.head()
+```
