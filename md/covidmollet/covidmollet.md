@@ -1,4 +1,4 @@
-# Covid Mollet - Webscrapping python mini-project
+# Covid Mollet - Webscrapping
 
 ```python
 import not_lib as nt 
