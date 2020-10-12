@@ -1,3 +1,3 @@
 # IT Go-Live Study
 
-$x^2 = 3y+5$
+$$x^2 = 3y+5$$
