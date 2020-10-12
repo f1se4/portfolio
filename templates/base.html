@@ -2,7 +2,10 @@
 	<head>
 		<meta charset="UTF-8">		
 		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/bootstrap.css') }}">
-		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/bootstrap.css') }}">
+		<link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/night-owl.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
         <!-- Loading mathjax macro -->
         <!-- Load mathjax -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
@@ -25,6 +28,27 @@
         });
         </script>
 		<!-- End of mathjax configuration -->	
+		<style>
+			table { 
+				border-collapse: collapse;
+				margin: 25px 0;
+				font-size: 0.9em;
+				font-family: sans-serif;
+				min-width: 400px;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+			}
+			thead tr {
+				background-color: #009879;
+				color: #ffffff;
+				text-align: left;
+			}
+			td {
+				padding: 12px 15px;
+			}
+			tbody tr {
+				border-bottom: 1px solid #dddddd;
+			}
+		</style>
 		<title>Sergi DS Portfolio</title>
 	</head>
 	<body>
