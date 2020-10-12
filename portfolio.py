@@ -20,9 +20,19 @@ def curriculum():
 
 @app.route('/gompertz')
 def gompertz():
-	with open("./md/gompertz.md", "r") as file:
-		content = file.read()
-	return render_template("gompertz.html", text=md.convert(content))
+	with open("./md/gompertz/gompertz.md", "r") as file:
+		notebook = file.read()
+	with open("./md/gompertz/summary.md", "r") as file:
+		summary = file.read()
+	return render_template("gompertz.html", notebook=md.convert(notebook), summary=md.convert(summary))
+
+@app.route('/covidmollet')
+def covidmollet():
+	with open("./md/covidmollet/covidmollet.md", "r") as file:
+		notebook = file.read()
+	with open("./md/gompertz/summary.md", "r") as file:
+		summary = file.read()
+	return render_template("covidmollet.html", notebook=md.convert(notebook), summary=md.convert(summary))
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
