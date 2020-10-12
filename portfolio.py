@@ -17,7 +17,7 @@ def curriculum():
 	return render_template("curriculum.html", text=content)
 
 @app.route('/gompertz')
-def curriculum():
+def gompertz():
 	with open("./md/gompertz.md", "r") as file:
 		content = file.read()	
 	return render_template("gompertz.html", text=content)   	
