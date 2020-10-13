@@ -154,7 +154,7 @@ trend_alone_graf.draw()
 
 ![trendalone](/static/notebooks/gompertz/images/trendalone.png)
 
-Well, and my final 'discovery' analysis and the behaivour it's required to be modelized.
+This is smooth raw data, in the gompertz model it belongs to the 'derivate' function, we will need also the 'integration', it's bassically the summatory area of the daily ticket function. We will then do cumulative summatory of daily tickets, the result should be the 'gompertz function' of our study case.
 
 I need at first to have cumulative number of tickets:
 
@@ -261,7 +261,7 @@ test_model.draw()
 ```
 ![model](/static/notebooks/gompertz/images/test_model.png)
 
-Well, it seems that we have some type of sigmoid function running and I am quite sure that it is our particular case for gompertz sigmoid function :)
+Well, it seems that we have some type of sigmoid function running and I am quite sure that it is our particular case for gompertz sigmoid function :), please check **Fig 5** also to check similarities.
 
 Ok, it's the moment, we will use non-linear least squares regression to fit our function to our given data array (cumulative tickets by day).
 
@@ -361,3 +361,83 @@ modeld_graf.draw()
 ```
 
 ![modelreald](/static/notebooks/gompertz/images/realvsmodeld.png)
+
+I think that it's quite beautiful the way as the model fits to the real data. We are going to evaluate it with objective data, but in terms of visualization I think that Gompertz could be good way to evaluate how a project is released in production system and how confidence, stable and well tested it is, by comparing Gompertz function parameters, with objectives, or other projects you have analyzed. 
+
+### Model Accuracy and Some other possible data
+
+*Note: We will need to found roots for $y''$ so, we are going to develop it a bit*
+
+We have our derivate:
+
+(2) $y'(x) = \frac{abe^{-be^{-x/c}-x/c}}{c}$
+
+And we are going to derivate another time:
+(3) $y''(x) = - \frac{ab(e^{x/c}-b)e^{-be^{-x/c}-2x/c}}{c^2}$
+
+```python
+def gompertz_derivate2(x,a,b,c):
+    numerator = a*b*(np.exp(x/c)-b)*np.exp((-b*np.exp(-x/c))-2*x/c)
+    return -(numerator/(c*c))
+```
+We are going to calculate our accuracy through [scikit-learn](https://scikit-learn.org/stable/) statistical error/accuracy functions. And also we will try to find the 'maximum' of gompertz function, as it's also relevant data to find and to compare.
+
+```python
+x = df['DayCount'].values
+y = df['CumSum'].values
+
+y_pred = gompertz_model(x,ai,bi,ci)
+
+MSLE=sklm.mean_squared_log_error(y,y_pred)
+MSE =sklm.mean_squared_error(y,y_pred)
+print("Mean squared log error (MSLE): ", '{:.3f}'.format(MSLE))
+print("Root Mean squared error (RMSE): ", '{:.3f}'.format(np.sqrt(MSE)))
+R2 = sklm.r2_score(y,y_pred)
+print("R2 score: ", '{:.3f}'.format(R2))
+
+raw_sol = fsolve(lambda x : gompertz_derivate2(x,ai,bi,ci), 40)
+#40 is an estimation by looking graph 
+#(20-40 any number is fine, as our maximum is there and we need for solve non-linear function)
+#Check the zero.
+check_value = gompertz_derivate2(raw_sol[0],ai,bi,ci)
+print('How zero is our solution?',check_value)
+sol = int(round(raw_sol[0]))
+print('Days to the Maximum since Go-Live: ', sol)
+datesol = datetime.datetime.strftime(df.index[0] + datetime.timedelta(days=sol), ' %d, %b %Y' )
+print('Day of flattening of Post Go-Live Support: ',datesol)
+```
+```
+Mean squared log error (MSLE):  0.006
+Root Mean squared error (RMSE):  6.544
+R2 score:  0.998
+How zero is our solution? -4.0681485437308383e-17
+Days to the Maximum since Go-Live:  28
+Day of flattening of Post Go-Live Support:   24, Feb 2020
+```
+**MSLE**: Mean squared logarithmic error (MSLE) can be interpreted as a measure of the ratio between the true and predicted values, will treat small differences between small true and predicted values approximately the same as big differences between large true and predicted values. Finally, MSLE also penalizes underestimates more than overestimates, introducing an asymmetry in the error curve.
+
+In our case is fine, but it's not really significant as we have low values...
+
+**RMSE**: RMSE is the average squared difference between the estimated values and its root (the good thing is that it comes to us in the same units so it's in acumulated tickets/day and it's really good.  $RMSE = \sqrt{\frac{1}{n}\sum^n_{i=1}(Y_i - Y_i)²}$
+
+**$R^2$**: The great one, $R^2$ near to 1 means that we are really close to perfect model fit of our raw data behavior, and we have achieve $R^2=$ close to 1, it's not a surprise as we have seen in previous visualization that something has to be really wrong to don't have number near to 1.
+
+Finally some additional data, we can calculate the maximum of our derivative model to know where is the *'critical'* point of our go-live, that in this case is after 28 days, and could be good Metric for our KPI's.
+
+```python
+real_with_max = (
+    ggplot(df,aes(x='DayCount',y='TrendHP')) + 
+    geom_line(color=orange) +
+    geom_vline(xintercept = sol, linetype="dotted", 
+                color = yellow_orange, size=1.5) +
+    personal_theme +
+    labs(title='Fig 11 - Real Data with calculated maximum',x='',y='')
+
+)
+real_with_max.draw()
+```
+
+![realmax](/static/notebooks/gompertz/images/fullseriemax.png)
+
+It's really near to the real maximum of our curve.
+
