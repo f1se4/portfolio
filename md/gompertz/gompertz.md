@@ -178,7 +178,7 @@ hipo_graf = (
 )
 hipo_graf.draw()
 ```
-![trendalone](/static/notebooks/gompertz/images/hipotesis.png)
+![hipotesis](/static/notebooks/gompertz/images/hipotesis.png)
 
 ## Hypothesis
 ### Little bit of Theory
@@ -441,3 +441,53 @@ real_with_max.draw()
 
 It's really near to the real maximum of our curve.
 
+## Quick Check to another Go-Live
+
+Let me avoid some code or some explanations (steps are exactly the same as above) and go to the principal insights of the modelization.
+
+**Data Origin** We are looking for the same sqlite DB, but for different project.
+
+![hipotesis2](/static/notebooks/gompertz/images/hipotesis2.png)
+
+### Model and Analysis
+
+```
+Some data for our adjustment:
+--------------------------------
+Initial number of tickets:  1
+Current number of tickets:  382
+Number of days:             77
+```
+
+```
+Final parameters for our modeled function:
+------------------------------------------
+a = 438.471 +/- 6.288
+b = 3.633 +/- 0.087
+c = 22.655 +/- 0.625
+```
+![modelreal2](/static/notebooks/gompertz/images/realvsmodel2.png)
+
+![modelreald2](/static/notebooks/gompertz/images/realvsmodeld2.png)
+
+```
+Mean squared log error (MSLE):  0.116
+Root Mean squared error (RMSE):  7.963
+R2 score:  0.996
+How zero is our solution? -0.0
+Days to the Maximum since Go-Live:  29
+Day of flattening of Post Go-Live Support:   01, Nov 2019
+```
+![realmax2](/static/notebooks/gompertz/images/fullseriemax2.png)
+
+## Conclusions
+
+**I think that we are quite sure that our hypothesis that Gompertz Function and its study will let us to describe objective way Go-Live process in an IT department has been demonstrated ($R^2 > 0.96$ each time)**
+
+With 3 different numbers ($a,b,c$) we are able to know how Go-Live process has been executed, calculate its maximum, etc...
+
+Each IT Department will be the responsible then, that using this 3 parameters and the meaning of all of them to decide wich values are 'correct' or intervals of confidence that brings an objective way to stablish some KPI for the Go-Live projects. It could be necessary a bit of work as you need to compare through other projects of your company to be able to know which is the normal situation of a Go-Live project.
+
+For example, using only my 2 samples, it seems that in a Global Go-Live of studied company that impact all the users of the company, go-live and post-golive support should have 1 month of really hard work till the maximum of ticket creation, and then 2 month aprox of stabilization of the new functionallity. If this is usual behavior of the global projects, it will let us to standarize some type of start point to begin to improving this numbers for example for future projects, or to scalate support/project teams, etc...
+
+*Scope*: I am not sure how the model could be usefull for real-time analysis or it's only KPI/Metric values to evaluate success of Go-Live process. I think that yes, could it be possible to add alerts if current values project some not desired data (maximums, assimpthotic values, etc...)
