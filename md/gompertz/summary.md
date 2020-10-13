@@ -4,8 +4,6 @@
 |---|
 |pandas|
 |numpy|
-|matplotlib|
-|seaborn|
 |plotnine|
 |sqlite3|
 |scipy|
@@ -17,6 +15,18 @@
 |---|
 |sqlite3 Data Base|
 
-### DS Algorithm
+### DS Algorithm/Model
+
+|Model|
+|---|
+|Non-Linear Least Squares|
 
 ### Outputs
+
+|Function parameters|
+|---|
+|Gompertz-Function parameter $a$|
+|Gompertz-Function parameter $b$|
+|Gompertz-Function parameter $c$|
+|Maximum of Tickets Curve|
+|Accuracy Values|
