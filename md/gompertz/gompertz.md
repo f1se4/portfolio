@@ -20,8 +20,6 @@ from scipy.optimize import curve_fit
 from scipy.optimize import fsolve
 
 #Graphics libraries
-import matplotlib.pyplot as plt
-import seaborn as sns
 from plotnine import *
 ```
 
@@ -180,5 +178,142 @@ hipo_graf = (
 )
 hipo_graf.draw()
 ```
-
 ![trendalone](/static/notebooks/gompertz/images/hipotesis.png)
+
+## Hypothesis
+### Little bit of Theory
+
+Gopmertz function study is not something that belongs to disease world. There are some other studies that using this distribution has arrived to models that describe correctly its behaivour. (for example [vehicle saturation in a market](https://www.researchgate.net/publication/46523642_Vehicle_Ownership_and_Income_Growth_Worldwide_1960-2030)).
+
+Bassically we need to take some assumptions:
+
+1. Growth it's not simetrical, slowest at the start and at the end.
+2. Assimptotical decay when time -> $\infty$
+
+*Fig 6 - Here you can see this 2 assumptions described graphical way*
+
+![figure1](/static/notebooks/gompertz/figures/gompertzdist.jpg)
+
+These (*Fig 6*) could be described following these 2 functions:
+
+##### (1) $y(x) = a e^{-be^{-x/c}}$
+
+And its derivate
+
+##### (2) $y'(x) = \frac{abe^{-be^{-x/c}-x/c}}{c}$
+
+#### Quick parameter description
+
+- $a$ -> is an asymptote, in our case, total number of tickets created since Go-Live
+- $b$ -> sets the displacement along x-axis, in our context could be useful to know when the major part of the users have started to test our new functionallity, etc...
+- $c$ -> sets the growth rate (y scaling), in terms of our context will give us the rate in how the tickets are created, it could be useful to know how much testing is done, if there are several users using the new functionallity, etc..
+
+### What we want?
+
+We are comparing our time series trying to find some behaivour that could remember us to gomperz function. I think that comparing **Fig 6** with our exploratory dataset analysis **Fig 5** from visual point of view we have solid reasons to think that could be good hypthoteical modelization to our time dataset.
+
+**Assumptions**
+
+1. In a Go-Live it's usual that big functionallities which are tested initially don't trigger any issue (if your UAT has been done correctly XD), so you expect to have slow growth at the start of go-live, and also you expect that after testing, solving issues etc.. at the end of the go-live you have also growth tending to 0. (In fact it's the way that you know that go-live has more or less finished).
+2. For the same reason, you expect that an application that has been stabilized the issues decay asymptotically to 0.
+
+### How?
+
+We are going to fit Gompertz function that is non-linear equation using the same 'strategy' as it's used when fitting linnear regression by least squares aproximation.
+
+[SciPy](https://docs.scipy.org/doc/scipy/reference/index.html) provides function *curve_fit()* that will help us find the parameters of the gompertz function $(a,b,c)$ when variable is defined $x$.
+
+## Modeling
+
+### Creating functions 
+
+First of all we are going to create our functions (1) and (2) and check if we have created them well, with dummy data.
+
+```python
+def gompertz_model(x,a,b,c):
+    return a*np.exp(-b*np.exp(-x/c))
+
+def gompertz_derivate(x,a,b,c):
+    return (a*b*np.exp((-b*np.exp(-x/c))-x/c))/c
+
+tt= np.linspace(0,100,100)
+
+x_data = tt
+y_data = gompertz_model(tt, 400, 50, 12)
+y_data_d = gompertz_derivate(tt, 400, 50, 12)
+#Melting for ggplot
+dataset = pd.DataFrame({'Items': x_data, 'Gompertz Func.': y_data,'Gompertz Der.':y_data_d})
+data_test = pd.melt(dataset, id_vars='Items', value_vars=['Gompertz Func.','Gompertz Der.'])
+```
+And graph them to check our known functions:
+
+```python
+test_model = (
+    ggplot(data_test,aes(x='Items',y='value',color='variable')) +
+    scale_color_manual(values = personal_colors) +
+    geom_line() +
+    facet_wrap('variable',scales='free_y',nrow=2) +
+    theme_xkcd() +
+    theme_drawing +      
+    labs(title='Fig 7 - Model Testing',x='Time',y='Tickets Num.')
+)
+test_model.draw()
+```
+![model](/static/notebooks/gompertz/images/test_model.png)
+
+Well, it seems that we have some type of sigmoid function running and I am quite sure that it is our particular case for gompertz sigmoid function :)
+
+Ok, it's the moment, we will use non-linear least squares regression to fit our function to our given data array (cumulative tickets by day).
+
+## Fitting
+
+First of all we will need to change 'date' variable to sequence and this will be our $x$.
+
+```python
+df['DayCount'] = np.arange(1,df['quantity'].shape[0]+1)
+```
+So let's construct our variables:
+
+```python
+x = df['DayCount'].values  
+y = df['CumSum'].values    
+
+y0 = y[0]
+yf = y[-1]
+
+print("Some data for our adjustment:")
+print("--------------------------------")
+print("Initial number of tickets: ", y0)
+print("Current number of tickets: ", yf)
+print("Number of days:            ", x[-1])
+```
+```
+Some data for our adjustment:
+--------------------------------
+Initial number of tickets:  13
+Current number of tickets:  420
+Number of days:             88
+```
+
+Modeling
+
+```python
+#Gompertz Modelization'
+fit_i = curve_fit(gompertz_model,x,y)
+ai,bi,ci = fit_i[0]
+sigma_ai, sigma_bi, sigma_ci = np.sqrt(np.diag(fit_i[1]))
+
+print('Final parameters for our modeled function:')
+print('------------------------------------------')
+print('a = {:.3f}'.format(ai),'+/- {:.3f}'.format(sigma_ai))
+print('b = {:.3f}'.format(bi),'+/- {:.3f}'.format(sigma_bi))
+print('c = {:.3f}'.format(ci),'+/- {:.3f}'.format(sigma_ci))
+```
+```
+Final parameters for our modeled function:
+------------------------------------------
+a = 456.449 +/- 3.662
+b = 3.186 +/- 0.051
+c = 23.985 +/- 0.437
+```
+

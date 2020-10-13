@@ -3,7 +3,7 @@ from flask import Flask, render_template, render_template_string
 import markdown
 from flask_misaka import Misaka
 
-md = markdown.Markdown(extensions=['mdx_math','fenced_code','tables'])
+md = markdown.Markdown(extensions=['mdx_math','fenced_code','tables','sane_lists'])
 
 app = Flask(__name__)
 Misaka(app)
