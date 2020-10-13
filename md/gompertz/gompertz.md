@@ -111,7 +111,9 @@ month_distr.draw()
 
 Here we see that we have initial 2 month important volume of all generated tickets.
 
-And finally, the most important one, as this is the one that let us to see the real behaivour of the go-live process in a general view, by analyzing its trend. I have applied 2 trend filters, rolling mean filter and [Hodrick-Prescott](https://en.wikipedia.org/wiki/Hodrick%E2%80%93Prescott_filter) for best smoothing reasons (because in this case it's not supposed to have seasonal component).
+### Trending and Cumulative Data
+
+Finally, the most important one, as this is the one that let us to see the real behaivour of the go-live process in a general view, by analyzing its trend. I have applied 2 trend filters, rolling mean filter and [Hodrick-Prescott](https://en.wikipedia.org/wiki/Hodrick%E2%80%93Prescott_filter) for best smoothing reasons (because in this case it's not supposed to have seasonal component).
 
 ```python
 #Trend from filter Hodrick-Prescot
