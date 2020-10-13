@@ -312,8 +312,52 @@ print('c = {:.3f}'.format(ci),'+/- {:.3f}'.format(sigma_ci))
 ```
 Final parameters for our modeled function:
 ------------------------------------------
-a = 456.449 +/- 3.662
+a = 456.449 +/- 3.662   
 b = 3.186 +/- 0.051
 c = 23.985 +/- 0.437
 ```
 
+## Model Analysis
+
+We have the model, now let's compare with our data, starting with Cumulative tickets over the time. In terms of units, we will continue working with 'days'.
+
+```python
+#Creating new column using day as variable in our modelized function.
+df['Model'] = df['DayCount'].apply(lambda x:gompertz_model(x,ai,bi,ci))
+#ggplot melting
+df_model = pd.DataFrame({'Days': df['DayCount'], 'Real Data':df['CumSum'],'Gompertz Model':df['Model']})
+df_model = pd.melt(df_model, id_vars='Days', value_vars=['Real Data','Gompertz Model'])
+
+model_graf = (
+    ggplot(df_model,aes(x='Days',y='value',color='variable')) +     
+    scale_color_manual(values = personal_colors) +
+    geom_line() +
+    personal_theme +
+    labs(title='Fig 8 - Real Data vs Modeled Data',x='Days from Go-Live Start',y='Tickets Num.')
+)
+model_graf.draw()
+```
+
+![modelreal](/static/notebooks/gompertz/images/realvsmodel.png)
+
+Well it seems good.
+
+Let's check derivate function (in the real life, our smooth filtered real tickets creation), we are going to do the same as before, we are going to apply our fitted parameters, with derivate function, apply to ordered days and compare with raw_data and filtered trend.
+
+```python
+df['ModelD'] = df['DayCount'].apply(lambda x:gompertz_derivate(x,ai,bi,ci))
+#Melting for ggplot
+df_modelD = pd.DataFrame({'Days': df['DayCount'], 'Real Data':df['quantity'],'Smooth HP':df['TrendHP'],'Gompertz Model':df['ModelD']})
+df_modelD = pd.melt(df_modelD, id_vars='Days', value_vars=['Real Data','Gompertz Model','Smooth HP'])
+
+modeld_graf = (
+    ggplot(df_modelD,aes(x='Days',y='value',color='variable')) +     
+    scale_color_manual(values = personal_colors) +
+    geom_line() +
+    personal_theme +
+    labs(title='Fig 9 - Real Data/Smooth vs Modeled Data',x='Days from Go-Live Start',y='Tickets Num.')
+)
+modeld_graf.draw()
+```
+
+![modelreald](/static/notebooks/gompertz/images/realvsmodeld.png)
