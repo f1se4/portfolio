@@ -174,7 +174,7 @@ hipo_graf = (
     geom_line() +
     facet_wrap('variable',scales='free_y',nrow=2) +
     personal_theme +
-    labs(title='Raw Data and Trend Visualization',x='Weeks',y='Tickets Num.')
+    labs(title='Cumulative and Trend',x='Weeks',y='Tickets Num.')
 )
 hipo_graf.draw()
 ```
