@@ -312,5 +312,7 @@ to = 'mail@gmail.com,mail2@mail.com,...'
 send_news_mail(to,resultado)
 ```
 
+![mailsample](/static/notebooks/covidmollet/images/mail.png)
+
 
 
