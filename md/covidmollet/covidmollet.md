@@ -1,4 +1,4 @@
-# Covid Mollet - Webscrapping
+# Covid Mollet - Webscraping
 
 ## Introduction
 
@@ -106,7 +106,7 @@ def clean_web_text(text):
     return text
 ```
 
-### WebScrapping media
+### WebScraping media
 
 Ok, let's webscrap the news media one by one, as each web has it's own particular way to publish and it's own classes, etc... The most easy way it's if you find some *rss* summary that helps a lot to get a list of latest news, if not, no problem, but you have to search in the div cascade a bit more.
 
@@ -241,7 +241,7 @@ for art_item in art:
     noticias.loc[len(noticias)]=[title,link,texto,origen]
 ```
 
-The idea, is to webscrapp all the articles (header, text, link...) and fill my dataframe, then I will filter with the ones we want.
+The idea, is to webscrap all the articles (header, text, link...) and fill my dataframe, then I will filter with the ones we want.
 
 ### Cleaning and filtering
 
