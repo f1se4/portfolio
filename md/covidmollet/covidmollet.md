@@ -282,7 +282,9 @@ def send_news_mail(direccion,df):
     msg = MIMEMultipart('alternative')
     text = 'Hi All,\n'
     html = '''<h3>Últimas notícias sobre #covid #coronavirus y #Mollet.</h3><p><p>
-    Las notícias pueden estar repetidas, se busca todas las que los medios tienen publicadas en sus paginas principales<p>{}<p><p>Sergi García<p>Python Analysis Tools'''.format(df.to_html())
+    Las notícias pueden estar repetidas, se busca todas las que los medios 
+    tienen publicadas en sus paginas principales<p>{}<p><p>Sergi García
+    <p>Python Analysis Tools'''.format(df.to_html())
     # Record the MIME types of both parts - text/plain and text/html.
     part1 = MIMEText(text, 'plain')
     part2 = MIMEText(html, 'html')
