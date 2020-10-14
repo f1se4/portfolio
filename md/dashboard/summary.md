@@ -4,8 +4,9 @@
 |---|
 |pandas|
 |plotly.graph_objects|
-|plotly.plotly_figure_factory|
 |plotly.subplots|
+|plotly.figure_factory|
+|plotly.express|
 |matplotlib.pyplot|
 |seaborn|
 |dash|
