@@ -35,7 +35,7 @@ def covidmollet():
 	return render_template("covidmollet.html", notebook=md.convert(notebook), summary=md.convert(summary))
 
 @app.route('/dashboard')
-def covidmollet():
+def dashboard():
 	with open("./md/dashboard/dashboard.md", "r") as file:
 		notebook = file.read()
 	with open("./md/covidmollet/summary.md", "r") as file:
