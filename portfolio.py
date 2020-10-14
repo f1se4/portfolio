@@ -12,11 +12,11 @@ Misaka(app)
 def home_page():
 	return render_template("index.html")
 
-@app.route('/curriculum')
-def curriculum():
-	with open("./md/curriculum.md", "r") as file:
-		content = file.read()
-	return render_template("curriculum.html", text=content)
+#@app.route('/curriculum')
+#def curriculum():
+#	with open("./md/curriculum.md", "r") as file:
+#		content = file.read()
+#	return render_template("curriculum.html", text=content)
 
 @app.route('/gompertz')
 def gompertz():
@@ -33,6 +33,14 @@ def covidmollet():
 	with open("./md/covidmollet/summary.md", "r") as file:
 		summary = file.read()
 	return render_template("covidmollet.html", notebook=md.convert(notebook), summary=md.convert(summary))
+
+@app.route('/dashboard')
+def covidmollet():
+	with open("./md/dashboard/dashboard.md", "r") as file:
+		notebook = file.read()
+	with open("./md/covidmollet/summary.md", "r") as file:
+		summary = file.read()
+	return render_template("dashboard.html", notebook=md.convert(notebook), summary=md.convert(summary))	
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')

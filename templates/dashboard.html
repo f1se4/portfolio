@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#notebook">Presentation</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#summary">Summary</a>
+    </li>
+</ul>
+  <div id="myTabContent" class="tab-content">
+    <div role="tabpanel" class="tab-pane fade active show" id="notebook">
+        <div class="jumbotron">
+            {{ notebook|safe }}
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="summary">
+        <div class="jumbotron">
+            <span class="badge badge-primary">#python</span>
+            <span class="badge badge-secondary">#analytics</span>
+            <span class="badge badge-success">#dashboard</span>
+            {{ summary|safe }}
+        </div>
+    </div>
+  </div>
+{% endblock %}

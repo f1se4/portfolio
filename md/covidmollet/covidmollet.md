@@ -10,7 +10,7 @@ The intention of this notebook is to explain a python script that it's created a
 
 [Som Mollet](https://www.sommollet.cat/)
 
-[The 9nou Valles Oriental](https://el9nou.cat/valles-oriental/)
+[El 9nou Valles Oriental](https://el9nou.cat/valles-oriental/)
 
 [Mollet a Ma](https://www.clicama.cat/)
 
@@ -22,7 +22,7 @@ The intention of this notebook is to explain a python script that it's created a
 The script mainly does:
 
 1. Scrape the local medium with the address that seemed easiest to scrape.
-2. From the news content look for 2 keywords, 'covid' 'mollet', after some cleaning to let us catch these 2 words in all the article.
+2. From the news content look for 3 keywords, 'covid','coronavirus' and 'mollet', after some cleaning to let us catch these 2 words in all the article.
 3. If both are met, add the title of the news, part of the text (can be configured) and the link of the news in a data frame, which will finally be formatted as html and send by mail.
 
 ### Some little notes
@@ -91,7 +91,7 @@ def busca_mollet(noticias):
     return noticias
 ```
 
-When we have the complete string of the article to avoid any disturbing find element (uppercase, strange symbols, etc..) we are going to clean our strings and let it easy to find some word or sentence. For that this functions are defined:
+When we have the complete string of the article to avoid any disturbing find element (uppercase, strange symbols, etc..) we are going to clean our strings and let it easy to find some word or sentence. For that this function is defined:
 
 ```python
 def clean_web_text(text):
@@ -245,9 +245,9 @@ The idea, is to webscrap all the articles (header, text, link...) and fill my da
 
 ### Cleaning and filtering
 
-Saving all data in one dataframe makes me easy then to apply any function, filter or data manipulation. I have also let the filtering to the end, so I could re-use this code if I want applying different filters in the future.
+Saving all data in one dataframe makes me easy then to apply any function, filter or data manipulation. I have also let the filtering to the end, so I could re-use this code if I want to apply different filters in the future.
 
-With defined functions and our dataframe, select which articles we want it's really easy
+With defined functions and our dataframe, selecting which articles we want it's really easy
 
 ```python
 #Cleaning
