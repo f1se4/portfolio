@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The intention of this notebook is to explain a python script that it's created at the beginning of the pandemic to automatically receive (via crontab on a linux server for example) the local news (from my town) about covid collected news in different local media.
+The intention of this notebook is to explain a python script that it's created at the beginning of the pandemic to automatically receive (via crontab on a Linux server for example) the local news (from my town) about covid collected news in different local media.
 
 ## Local Media 'Scraped'
 

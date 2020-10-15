@@ -4,7 +4,7 @@
 
 For this project I'm going to do short/quick reference as it was hard work to do and there are lots of code lines implemented.
 
-Also as it was a theorical practice but using real data, I have 'blur' all references or any possible sensible data, to focus only in the context and backend technology used.
+Also as it was a theorycal practice but using real data, I have 'blur' all references or any possible sensible data, to focus only in the context and backend technology used.
 
 In fact, the 'concept' of the Dashboard it's easy:
 
@@ -16,7 +16,7 @@ In fact, the 'concept' of the Dashboard it's easy:
 
 ## Django
 
-I have used [Django](https://www.djangoproject.com/) as web framework, because it's solid, escalable python well known tool, with lots of doucmentation and big community.
+I have used [Django](https://www.djangoproject.com/) as web framework, because it's solid, scalable python well known tool, with lots of doucmentation and big community.
 
 Django works using layers for different functionalities, the basic ones are views and model layers. The views render pages and model is the connection to data base core. You can create basic django web only with views, and then you can add 'apps' and each 'app' has its own model layer, security layer is related to django app, and 'wraps' django views to connect them.
 
@@ -49,7 +49,7 @@ def handler500(request):
 
 #### urls.py
 
-The views need an additional objects that belongs to views layers which are the 'url' defintion. Here you define url path and which function view is called, here you import also dash-plotly-django references, you will also to modify some lines in setting file, and you can find all these in the documentation ([django-plotly-dash](https://github.com/GibbsConsulting/django-plotly-dash)), here you will find also django wiki add-on implemented as FAQ tool for users.
+The views need an additional objects that belongs to views layers which are the 'url' definition. Here you define url path and which function view is called, here you import also dash-plotly-django references, you will also to modify some lines in setting file, and you can find all these in the documentation ([django-plotly-dash](https://github.com/GibbsConsulting/django-plotly-dash)), here you will find also django wiki add-on implemented as FAQ tool for users.
 
 ```python
 from django.contrib import admin
@@ -139,7 +139,7 @@ Then I have defined each page rendered by the views layer like this:
 
 ### Model Layer
 
-I have used Django app to add model layer to web page, for me model layer a part that from security management of the web, has another interesting behaivour, and it's that it makes really really easy to manage the database related to the web its migration, administration, etc...  By default it uses sqlite data base and I have not changed this because in a 'training' project as it is this one it's easier to work with one-file db as sqlite does.
+I have used Django app to add model layer to web page, for me model layer a part that from security management of the web, has another interesting behavior, and it's that it makes really really easy to manage the database related to the web its migration, administration, etc...  By default it uses sqlite data base and I have not changed this because in a 'training' project as it is this one it's easier to work with one-file db as sqlite does.
 
 Here there is not much to add, as I am not going to publish the database model, but basically if you have worked with relational DB, key values, data tables, etc... you will have no issue in this part.
 
@@ -147,7 +147,7 @@ Here there is not much to add, as I am not going to publish the database model, 
 
 [Plotly Dash OpenSource](https://plotly.com/dash/) it's really good presentation solution and easy way to have dynamic on-line graphics and other web data science tools framework, multiplatform, etc...
 
-All web functionallities that are not implemented in this solution are really covered by Django, so the dual use of both of them, makes deployment of statistical, ML, Data analysis Dashboard, clear, solid and scalable.
+All web functionalities that are not implemented in this solution are really covered by Django, so the dual use of both of them, makes deployment of statistical, ML, Data analysis Dashboard, clear, solid and scalable.
 
 From here, we start with different paradigm. We could forget for now Django framework and start thinking in Plotly Dash language.
 
@@ -241,7 +241,7 @@ def dash_template_tech(tech):
 
 ## Some views
 
-Presentation page, it's done in markdown and latex for dash, It has coloured map plot with 'beauty' view of country ticket origin.
+Presentation page, it's done in markdown and latex for dash, It has colored map plot with 'beauty' view of country ticket origin.
 
 ![firstpage](/static/notebooks/dashboard/images/firstpage.png)
 
@@ -253,7 +253,7 @@ After logging, you have visibility about different service technologies managed 
 
 ![selected](/static/notebooks/dashboard/images/selectedareas.png)
 
-As said before, we have some different global filters for each technology relevants from business point of view.
+As said before, we have some different global filters for each technology relevant from business point of view.
 
 ![dinamic](/static/notebooks/dashboard/images/dinamicfilters.png)
 

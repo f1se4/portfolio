@@ -4,7 +4,7 @@
 
 At first, and looking some go-live tickets (issues) generated during some different Go-Lives I thought that classic sigmoid function could fit my model.
 
-However the real thing is that when you have release some new application in a production system, there is a gap between users starts to know/understand the functionallity of the new tool and detect issues or have questions about how it works, etc.. So at the start of the go-live (if there are not really big issues, what is expected after a good UAT) you don't expect to have several issues, so the growth at very initial point is slower than some days after, and of course, when the new application/tool/functionallity is coming more stable you should find that issues growth get slower another time.
+However the real thing is that when you have release some new application in a production system, there is a gap between users starts to know/understand the functionality of the new tool and detect issues or have questions about how it works, etc.. So at the start of the go-live (if there are not really big issues, what is expected after a good UAT) you don't expect to have several issues, so the growth at very initial point is slower than some days after, and of course, when the new application/tool/functionality is coming more stable you should find that issues growth get slower another time.
 
 This type of distribution is literally [Gompertz function](https://en.wikipedia.org/wiki/Gompertz_function), so my expectation is that I could fit this function to go-live ticketing and use its parameters as metrics and a quick knowledge of the Go-Live and Post-GoLive achievements.
 
@@ -71,7 +71,7 @@ all_tickets.draw();
 
 ![fullserie](/static/notebooks/gompertz/images/fullserie.png)
 
-We are going to take a look hoow it's distributed our tickets.
+We are going to take a look how it's distributed our tickets.
 
 ```python
 df['quantity'].describe()
@@ -86,7 +86,7 @@ min       1.000000
 75%       7.000000
 max      14.000000
 ```
-Here, we have some different data that could help us to know or define additional metrics, but they are not really describing how the process of the go-live has worked, as it's not constant process and the behaivour is different along the time.
+Here, we have some different data that could help us to know or define additional metrics, but they are not really describing how the process of the go-live has worked, as it's not constant process and the behavior is different along the time.
 
 Here the principal interesting information is that we are working over 88 days of tickets, which is good dataset for timeseries.
 
@@ -111,7 +111,7 @@ Here we see that we have initial 2 month important volume of all generated ticke
 
 ### Trending and Cumulative Data
 
-Finally, the most important one, as this is the one that let us to see the real behaivour of the go-live process in a general view, by analyzing its trend. I have applied 2 trend filters, rolling mean filter and [Hodrick-Prescott](https://en.wikipedia.org/wiki/Hodrick%E2%80%93Prescott_filter) for best smoothing reasons (because in this case it's not supposed to have seasonal component).
+Finally, the most important one, as this is the one that let us to see the real behavior of the go-live process in a general view, by analyzing its trend. I have applied 2 trend filters, rolling mean filter and [Hodrick-Prescott](https://en.wikipedia.org/wiki/Hodrick%E2%80%93Prescott_filter) for best smoothing reasons (because in this case it's not supposed to have seasonal component).
 
 ```python
 #Trend from filter Hodrick-Prescot
@@ -154,7 +154,7 @@ trend_alone_graf.draw()
 
 ![trendalone](/static/notebooks/gompertz/images/trendalone.png)
 
-This is smooth raw data, in the gompertz model it belongs to the 'derivate' function, we will need also the 'integration', it's bassically the summatory area of the daily ticket function. We will then do cumulative summatory of daily tickets, the result should be the 'gompertz function' of our study case.
+This is smooth raw data, in the gompertz model it belongs to the 'derivate' function, we will need also the 'integration', it's basically the summatory area of the daily ticket function. We will then do cumulative summatory of daily tickets, the result should be the 'gompertz function' of our study case.
 
 I need at first to have cumulative number of tickets:
 
@@ -183,12 +183,12 @@ hipo_graf.draw()
 ## Hypothesis
 ### Little bit of Theory
 
-Gopmertz function study is not something that belongs to disease world. There are some other studies that using this distribution has arrived to models that describe correctly its behaivour. (for example [vehicle saturation in a market](https://www.researchgate.net/publication/46523642_Vehicle_Ownership_and_Income_Growth_Worldwide_1960-2030)).
+Gopmertz function study is not something that belongs to disease world. There are some other studies that using this distribution has arrived to models that describe correctly its behavior. (for example [vehicle saturation in a market](https://www.researchgate.net/publication/46523642_Vehicle_Ownership_and_Income_Growth_Worldwide_1960-2030)).
 
-Bassically we need to take some assumptions:
+Basically we need to take some assumptions:
 
-1. Growth it's not simetrical, slowest at the start and at the end.
-2. Assimptotical decay when time -> $\infty$
+1. Growth it's not symmetrical, slowest at the start and at the end.
+2. Asymptotical decay when time -> $\infty$
 
 *Fig 6 - Here you can see this 2 assumptions described graphical way*
 
@@ -205,21 +205,21 @@ And its derivate
 #### Quick parameter description
 
 - $a$ -> is an asymptote, in our case, total number of tickets created since Go-Live
-- $b$ -> sets the displacement along x-axis, in our context could be useful to know when the major part of the users have started to test our new functionallity, etc...
-- $c$ -> sets the growth rate (y scaling), in terms of our context will give us the rate in how the tickets are created, it could be useful to know how much testing is done, if there are several users using the new functionallity, etc..
+- $b$ -> sets the displacement along x-axis, in our context could be useful to know when the major part of the users have started to test our new functionality, etc...
+- $c$ -> sets the growth rate (y scaling), in terms of our context will give us the rate in how the tickets are created, it could be useful to know how much testing is done, if there are several users using the new functionality, etc..
 
 ### What we want?
 
-We are comparing our time series trying to find some behaivour that could remember us to gomperz function. I think that comparing **Fig 6** with our exploratory dataset analysis **Fig 5** from visual point of view we have solid reasons to think that could be good hypthoteical modelization to our time dataset.
+We are comparing our time series trying to find some behavior that could remember us to gompertz function. I think that comparing **Fig 6** with our exploratory dataset analysis **Fig 5** from visual point of view we have solid reasons to think that could be good hypthoteical modelization to our time dataset.
 
 **Assumptions**
 
-1. In a Go-Live it's usual that big functionallities which are tested initially don't trigger any issue (if your UAT has been done correctly XD), so you expect to have slow growth at the start of go-live, and also you expect that after testing, solving issues etc.. at the end of the go-live you have also growth tending to 0. (In fact it's the way that you know that go-live has more or less finished).
+1. In a Go-Live it's usual that big functionalities which are tested initially don't trigger any issue (if your UAT has been done correctly XD), so you expect to have slow growth at the start of go-live, and also you expect that after testing, solving issues etc.. at the end of the go-live you have also growth tending to 0. (In fact it's the way that you know that go-live has more or less finished).
 2. For the same reason, you expect that an application that has been stabilized the issues decay asymptotically to 0.
 
 ### How?
 
-We are going to fit Gompertz function that is non-linear equation using the same 'strategy' as it's used when fitting linnear regression by least squares aproximation.
+We are going to fit Gompertz function that is non-linear equation using the same 'strategy' as it's used when fitting linear regression by least squares approximation.
 
 [SciPy](https://docs.scipy.org/doc/scipy/reference/index.html) provides function *curve_fit()* that will help us find the parameters of the gompertz function $(a,b,c)$ when variable is defined $x$.
 
@@ -418,7 +418,7 @@ Day of flattening of Post Go-Live Support:   24, Feb 2020
 
 In our case is fine, but it's not really significant as we have low values...
 
-**RMSE**: RMSE is the average squared difference between the estimated values and its root (the good thing is that it comes to us in the same units so it's in acumulated tickets/day and it's really good.  $RMSE = \sqrt{\frac{1}{n}\sum^n_{i=1}(Y_i - Y_i)²}$
+**RMSE**: RMSE is the average squared difference between the estimated values and its root (the good thing is that it comes to us in the same units so it's in accumulated tickets/day and it's really good.  $RMSE = \sqrt{\frac{1}{n}\sum^n_{i=1}(Y_i - Y_i)²}$
 
 **$R^2$**: The great one, $R^2$ near to 1 means that we are really close to perfect model fit of our raw data behavior, and we have achieve $R^2=$ close to 1, it's not a surprise as we have seen in previous visualization that something has to be really wrong to don't have number near to 1.
 
@@ -486,8 +486,8 @@ Day of flattening of Post Go-Live Support:   01, Nov 2019
 
 With 3 different numbers ($a,b,c$) we are able to know how Go-Live process has been executed, calculate its maximum, etc...
 
-Each IT Department will be the responsible then, that using this 3 parameters and the meaning of all of them to decide wich values are 'correct' or intervals of confidence that brings an objective way to stablish some KPI for the Go-Live projects. It could be necessary a bit of work as you need to compare through other projects of your company to be able to know which is the normal situation of a Go-Live project.
+Each IT Department will be the responsible then, that using this 3 parameters and the meaning of all of them to decide which values are 'correct' or intervals of confidence that brings an objective way to stablish some KPI for the Go-Live projects. It could be necessary a bit of work as you need to compare through other projects of your company to be able to know which is the normal situation of a Go-Live project.
 
-For example, using only my 2 samples, it seems that in a Global Go-Live of studied company that impact all the users of the company, go-live and post-golive support should have 1 month of really hard work till the maximum of ticket creation, and then 2 month aprox of stabilization of the new functionallity. If this is usual behavior of the global projects, it will let us to standarize some type of start point to begin to improving this numbers for example for future projects, or to scalate support/project teams, etc...
+For example, using only my 2 samples, it seems that in a Global Go-Live of studied company that impact all the users of the company, go-live and post-golive support should have 1 month of really hard work till the maximum of ticket creation, and then 2 month aprox of stabilization of the new functionality. If this is usual behavior of the global projects, it will let us to standardize some type of start point to begin to improving this numbers for example for future projects, or to escalate support/project teams, etc...
 
-*Scope*: I am not sure how the model could be usefull for real-time analysis or it's only KPI/Metric values to evaluate success of Go-Live process. I think that yes, could it be possible to add alerts if current values project some not desired data (maximums, assimpthotic values, etc...)
+*Scope*: I am not sure how the model could be useful for real-time analysis or it's only KPI/Metric values to evaluate success of Go-Live process. I think that yes, could it be possible to add alerts if current values project some not desired data (maximums, asymptotic values, etc...)
