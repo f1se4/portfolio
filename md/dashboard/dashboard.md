@@ -4,7 +4,7 @@
 
 For this project I'm going to do short/quick reference as it was hard work to do and there are lots of code lines implemented.
 
-Also as it was a theorycal practice but using real data, I have 'blur' all references or any possible sensible data, to focus only in the context and backend technology used.
+Also as it was a theorycal practice but using real data, I have 'blur' all references or any possible sensible data, to focus only in the context and technology used.
 
 In fact, the 'concept' of the Dashboard it's easy:
 
@@ -16,7 +16,7 @@ In fact, the 'concept' of the Dashboard it's easy:
 
 ## Django
 
-I have used [Django](https://www.djangoproject.com/) as web framework, because it's solid, scalable python well known tool, with lots of doucmentation and big community.
+I have used [Django](https://www.djangoproject.com/) as web framework, because it's solid, scalable python well known tool, with lots of documentation and big community.
 
 Django works using layers for different functionalities, the basic ones are views and model layers. The views render pages and model is the connection to data base core. You can create basic django web only with views, and then you can add 'apps' and each 'app' has its own model layer, security layer is related to django app, and 'wraps' django views to connect them.
 
@@ -24,9 +24,9 @@ Django works using layers for different functionalities, the basic ones are view
 
 #### views.py
 
-Views are the first objects to be called. Here sample of the first page, and quick look to security wrapper, and also server error handlers where you could personalize them at your own.
+Views are the first objects to be called. Below you will find sample of the views page, quick look to security wrapper, and also server error handlers where you could personalize them at your own.
 
-Login class and view are pre-defined, and you only need a bit of html/css to re-use and adapt to your web theme.
+Login class view is pre-defined, and you only need to use a bit of html/css to re-use and adapt to your web theme.
 
 ```python
 def initial_page(request):
@@ -49,7 +49,7 @@ def handler500(request):
 
 #### urls.py
 
-The views need an additional objects that belongs to views layers which are the 'url' definition. Here you define url path and which function view is called, here you import also dash-plotly-django references, you will also to modify some lines in setting file, and you can find all these in the documentation ([django-plotly-dash](https://github.com/GibbsConsulting/django-plotly-dash)), here you will find also django wiki add-on implemented as FAQ tool for users.
+The views need an additional objects that belongs also to views layers which are the 'urls' definition. Here you define url path and which function view is called. Import also dash-plotly-django references, you will also need to modify some lines in settings file (*Find all these in the documentation [django-plotly-dash](https://github.com/GibbsConsulting/django-plotly-dash))*. You will find also [django wiki](https://www.transifex.com/django-wiki/django-wiki/) add-on implemented as FAQ tool for users.
 
 ```python
 from django.contrib import admin
@@ -82,9 +82,7 @@ urlpatterns = [
 
 I have 1 base template that defines nav bar, footer and calls all css/js scripts/etc.. that are common for all web pages.
 
-Quick summary to have an idea of base.
-
-Here it's important to take a look to security class "user" that is the logged session, and also mandatory {} for plotly dash to connect the page to any dash application page defined.
+Quick summary to have an idea of base. Here it's important to take a look to security class "user" that is the logged session, and also mandatory {} for plotly dash to connect the page to any DjangoDash application page defined.
 
 ```html
 {% load static %}
@@ -147,9 +145,9 @@ Here there is not much to add, as I am not going to publish the database model, 
 
 [Plotly Dash OpenSource](https://plotly.com/dash/) it's really good presentation solution and easy way to have dynamic on-line graphics and other web data science tools framework, multiplatform, etc...
 
-All web functionalities that are not implemented in this solution are really covered by Django, so the dual use of both of them, makes deployment of statistical, ML, Data analysis Dashboard, clear, solid and scalable.
+All web functionalities that are not implemented in this solution are really covered by Django, so the dual use of both of them, makes deployment of statistical, ML, Data analysis Web Dashboard, clear, solid and scalable.
 
-From here, we start with different paradigm. We could forget for now Django framework and start thinking in Plotly Dash language.
+From here, we start working with different paradigm. We could forget for now Django framework and start thinking in Plotly Dash framework.
 
 The clue are this brackets in our templates.
 
@@ -160,25 +158,27 @@ The clue are this brackets in our templates.
 ...
 {% plotly_footer %}
 ```
-**plotly_direct_name** will call and embed our plotly-dash by calling *xxx.py* which has to have dash app defined inside.
+**plotly_direct_name** will call and embed our plotly-dash by calling *xxx.py* which has to have dash app defined inside (DjangoDash).
 
 ### Plotly-Dash Apps
 
-As all the pages are the same, except first page, all them are calling 'template' that uses *xxx* name as parameter to trigger all the filters related to each technology.
+As all the pages are the same, except first page, all them are calling 'template' that uses *xxx* name as parameter to trigger all the initial filters related to each technology.
+
+**DashBoard.Dash_Apps.Dash_Tech_Base** it's custom module inside DashBoard Django app inside Dash_Apps directory.
 
 ```python
 from DashBoard.Dash_Apps.Dash_Tech_Base import dash_template_tech
 
 app = dash_template_tech('xxx')
 ```
-And then all my dashboard logic is implemented in *dash_template_tech()* function, which in fact is returning DjangoDash application. I'm not going to do plotly-dash course ^^ and paste 1000 code lines its principal file and lots more in customized modules with data filtering/transformation/etc... :S, so I will explain what have this plotly dash application.
+And then all my dashboard logic is implemented in *dash_template_tech()* function, which in fact is returning DjangoDash application. I'm not going to do plotly-dash course ^^ or paste 1000 code lines that exists in the principal file and lots more in customized modules with data filtering/transformation/etc... :S, so I will explain what have been developed in this plotly dash application:
 
 1. Connects to sqlite database
 2. Apply initial filters depending on *xxx*
 3. Dash Layout, plotly dash has its own functions to call html elements, that are customizable through wrappers that will let using dynamic filters in the app.
    1. You can call 'styles classes' so it's possible to use bootstrap also in dash html elements, and continue with responsive web.
 4. Callback functions (the plotly-dash wrappers), it defines an input and output, input are filters to be used and outputs are layout elements.
-5. Each callback function is related to one metric from the dashboard and has different functions to re-filter, re-calculate data, etc... also, callback functions are called initially.
+5. Each callback function is related to one metric from the dashboard and has different functions to re-filter, re-calculate data, etc...also, callback functions are called initially.
 6. Different filters to calculate and work with data, here pandas and sql are on fire.
 
 Shortened code with one sample of callback and layout:
@@ -187,12 +187,9 @@ Shortened code with one sample of callback and layout:
 def dash_template_tech(tech):
     connection.commit()
 
-    now = datetime.date.today()
-    yesterday = now - datetime.timedelta(days=1)
-
    get_data(connection,sql_list,tech,now)
 
-    app = DjangoDash(nombre_app)
+    app = DjangoDash(tech)
 
     # Bootstrap CSS.
     app.css.append_css({'external_url': 'https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'})
@@ -237,7 +234,9 @@ def dash_template_tech(tech):
                     return func_df.me_table_link(df_ag_dt_all)
 ```
 
-"And that's all", the rest are more callbacks functions, pandas working... I have also added some matplotlib and seaborn graphics for testing and to check if it's possible to add some graphic don't affordable by plotly.
+"And that's all", the rest are more callbacks functions, pandas working... I have also added some matplotlib and seaborn graphics for testing and to check if it's possible to add some graphic don't affordable by plotly. When you have clear all the structure of the application, the hard work starts having all data correctly in your DB, and then how you get it and transform to be able to use any graphical library (in this case 99% plotly) correctly.
+
+![summaryimage](/static/notebooks/dashboard/images/DashBoardWeb.png)
 
 ## Some views
 
@@ -245,7 +244,7 @@ Presentation page, it's done in markdown and latex for dash, It has colored map 
 
 ![firstpage](/static/notebooks/dashboard/images/firstpage.png)
 
-To be able to see data, you need to be logged in, as said before, authorization managing, session, etc... is wrapped by django app authorization module.
+To be able to see data, you need to be logged in, authorization managing, session, etc... is wrapped by django app authorization module.
 
 ![security](/static/notebooks/dashboard/images/djangosecurity.png)
 
@@ -253,7 +252,7 @@ After logging, you have visibility about different service technologies managed 
 
 ![selected](/static/notebooks/dashboard/images/selectedareas.png)
 
-As said before, we have some different global filters for each technology relevant from business point of view.
+We have some different global filters for each technology relevant from business point of view.
 
 ![dinamic](/static/notebooks/dashboard/images/dinamicfilters.png)
 
