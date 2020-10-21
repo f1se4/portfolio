@@ -12,11 +12,11 @@ Misaka(app)
 def home_page():
 	return render_template("index.html")
 
-#@app.route('/curriculum')
-#def curriculum():
-#	with open("./md/curriculum.md", "r") as file:
-#		content = file.read()
-#	return render_template("curriculum.html", text=content)
+@app.route('/airbnb')
+def airbnb():
+	with open("./md/airbnb/part1.md", "r") as file:
+		part1 = file.read()
+	return render_template("airbnb.html", part1=md.convert(part1))
 
 @app.route('/gompertz')
 def gompertz():
