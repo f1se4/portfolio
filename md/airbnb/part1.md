@@ -1,16 +1,18 @@
 # Barcelona Airbnb DS analysis (1st part)
 ## Source of data
-[Inside Airbnb](http://insideairbnb.com/get-the-data.html)
+[Inside Airbnb](http://insideairbnb.com/get-the-data.html) --> **Barcelona**
 
-Date: *12/09/2020* 
+Date from the Data: *12/09/2020* 
 ```
 \
 |--Airbnb_Barcelona.ipynb
 |--data
     |-calendarBarcelona.csv
     |-listingsBarcelona.csv
+    |->> output.csv --> result file from part 1.
 ```
 
+## Libraries and Importing Raw Data
 
 ```python
 #Datamining library
@@ -29,6 +31,7 @@ airbnb_pub = raw_data.copy()
 
 ## General Exploration and Data Adjustment
 
+Take a look at first in how much data and how is that data.
 
 ```python
 print("Shape: ",airbnb_pub.shape)
@@ -120,15 +123,16 @@ print("Column Information:",airbnb_pub.info())
     Column Information: None
     
 
-here it's going to be detected/reviewed/changed:
+The dataset has 20337 lines with 74 different columns and types.
 
-- Aggregated columns, could be images, hashtags, datasets inside principal dataset, etc..
+Here it's going to be detected/reviewed/changed:
+
+- Aggregated columns, could be images, hashtags, datasets inside principal dataset, etc...
 - *Types* that for our interest should be changed.
     - False/True Values to boolean ones
-    - String types that are numerics
+    - String types that are numeric
     - Manage Nan Values
-    - Resize using analytical and functional logic
-   
+    - Resize using analytical and functional logic   
 
 ### Currency detected as string (object) in spite of numbers (float)
 
@@ -143,9 +147,6 @@ Let's take a look to the column
 airbnb_pub['price'].head(2)
 ```
 
-
-
-
     0     $80.00
     1    $200.00
     Name: price, dtype: object
@@ -157,24 +158,12 @@ It has been selected to string because it has *$* symbol. So we will need to mod
 
 ```python
 airbnb_pub['price'] = airbnb_pub['price'].str.replace("$","").str.replace(",","").astype(float)
-airbnb_pub['price'].dtype
 ```
-
-
-
-
-    dtype('float64')
-
-
-
+Now as this is going to be the variable that we would like to predict and study, let's take a look to the distribution of the data, as we want to have it cleaned, without strange values or nonsense values, and from statistical point of view, relevant data so we could predict the usual cases of the dataset.
 
 ```python
 airbnb_pub.price.describe()
 ```
-
-
-
-
     count    20337.00000
     mean        84.79339
     std        210.66629
@@ -199,12 +188,9 @@ If we 'graph' them it will become more obvious.
     orange_dark_theme
 ).draw(); #raw
 ```
-
-
     
 ![png](/static/notebooks/airbnb/images/output_14_0.png)
-    
-
+ 
 
 Now the price filter is going to be changed till we have some values that belongs to the 'normal' expected price, to try to avoid in our future model any inconsistence because outliers. Here you have the last result, I have let some outliers to let the future model to detect some trend or non obvious behaivour.
 
@@ -241,16 +227,10 @@ There are some data that is composed by different other data, we want to use the
 ```python
 airbnb_pub.amenities.head(3)
 ```
-
-
-
-
     0    ["Carbon monoxide alarm", "Fire extinguisher",...
     3    ["Stove", "Microwave", "Refrigerator", "Oven",...
     4    ["Refrigerator", "Microwave", "Carbon monoxide...
     Name: amenities, dtype: object
-
-
 
 
 ```python
@@ -275,9 +255,6 @@ for index, item in enumerate(columns):
 df_amenities = pd.DataFrame(amenities.toarray(),columns=columns)
 df_amenities.head(2)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -323,8 +300,6 @@ df_amenities.head(2)
 <p>2 rows x 206 columns</p>
 </div>
 
-
-
 ### Boolean literals to binary literals
 
 In the visual exploration (most different possibilities excel/csviewer/spyder/vscode....) we have seen that some columns have 'T' for True and 'F' for false, we need to transform them in a way that we could use in future model.
@@ -343,9 +318,6 @@ for col in airbnb_pub.columns:
             boolean_list.append(col)
 boolean_list
 ```
-
-
-
 
     ['host_is_superhost',
      'host_has_profile_pic',
@@ -392,7 +364,7 @@ We will also add our amenities dataset as we found them relevant for price deter
 
 ```python
 #Small script to let me select in the next step the columns in an easy way using notebook :P
-#I have cleared the output to readability reasons.
+#I have cleared the output because readability reasons.
 for c in airbnb_pub.columns:
     print('"',c,'",',sep="")
 ```
