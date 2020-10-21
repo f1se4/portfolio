@@ -2,7 +2,7 @@
 ## Source of data
 [Inside Airbnb](http://insideairbnb.com/get-the-data.html)
 
-Date: *12/09/2020*
+Date: *12/09/2020* 
 ```
 \
 |--Airbnb_Barcelona.ipynb
