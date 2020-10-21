@@ -176,9 +176,9 @@ airbnb_pub.price.describe()
 
 
 
-Looking at percentiles we could see that more or less all values are in a range near 100, and then it seems that we have some outliers, we will try to 'catch' the normal behaivour so we want to use and truncate data with most usual values.
+Looking at percentiles we could see that more or less all values are in a range near 100, and then it seems that we have some outliers, we will try to 'catch' the normal behavior so we want to use and truncate data with most usual values.
 
-If we 'graph' them it will become more obvious.
+If we 'graph' them it will help us to understand distribution.
 
 
 ```python
@@ -192,8 +192,7 @@ If we 'graph' them it will become more obvious.
 ![png](/static/notebooks/airbnb/images/output_14_0.png)
  
 
-Now the price filter is going to be changed till we have some values that belongs to the 'normal' expected price, to try to avoid in our future model any inconsistence because outliers. Here you have the last result, I have let some outliers to let the future model to detect some trend or non obvious behaivour.
-
+Now we need to filter the price to delete statistical outliers, to try to avoid in our future model any inconsistence because outliers.
 
 ```python
 airbnb_pub = airbnb_pub.loc[(airbnb_pub.price <=150) & (airbnb_pub.price>0)]
@@ -218,10 +217,10 @@ print(airbnb_pub.price.describe())
    
 ![png](/static/notebooks/airbnb/images/output_16_1.png)
 
-After that we have now smaller data collection without outliers, so we could think that we are going to take the usual behaivor of the dataset in 95% of confidence.
+After that we have now smaller data collection without outliers, so we could think that we are going to take the usual behavior of the dataset in 95% of confidence.
 
 ### Extracting additional data from 'complex' fields
-There are some data that is composed by different other data, we want to use them, so we need to transform these information in new columns.
+There are some data that is composed by different other data, we want to use them as it seems important for price determination, so we need to transform this information in new columns, we will start by creating data frame with all these data.
 
 
 ```python
@@ -300,17 +299,19 @@ df_amenities.head(2)
 <p>2 rows x 206 columns</p>
 </div>
 
+We will use at the end and add them to the dataset.
+
 ### Boolean literals to binary literals
 
-In the visual exploration (most different possibilities excel/csviewer/spyder/vscode....) we have seen that some columns have 'T' for True and 'F' for false, we need to transform them in a way that we could use in future model.
+In the first visual exploration (different possibilities excel/csviewer/spyder/vscode....) we have seen that some columns have 't' for True and 'f' for false, we need to transform them in a way that we could use when modeling.
 
 
 ```python
 # I'm going to 'catch' all possible columns to be transformed.
 boolean_list = []
 for col in airbnb_pub.columns:
-    if airbnb_pub[col].unique().size == 3:
-        column_array_values = np.delete(airbnb_pub[col].unique(),2,0)
+    if airbnb_pub[col].unique().size == 3: # we could have 't','f' or nan values
+        column_array_values = np.delete(airbnb_pub[col].unique(),2,0) #nan is always the last value
         if set(column_array_values)==set(['t','f']):
             boolean_list.append(col)
     if airbnb_pub[col].unique().size == 2:
@@ -324,8 +325,6 @@ boolean_list
      'host_identity_verified',
      'has_availability',
      'instant_bookable']
-
-
 
 
 ```python
@@ -344,12 +343,13 @@ We want to know if they are completed or have *Nan* values, if *Nan* then we wan
 
 ```python
 for c in airbnb_pub:
-    if ((airbnb_pub[c].dtype=='float64') | (airbnb_pub[c].dtype=='int64')):
-        if airbnb_pub[c].isnull().any():
+    if ((airbnb_pub[c].dtype=='float64') | (airbnb_pub[c].dtype=='int64')): #only numeric
+        if airbnb_pub[c].isnull().any(): #columns with nan/null values
             airbnb_pub[c] = airbnb_pub[c].fillna(airbnb_pub[c].median())
 ```
 
 ### Creating our final output dataset to start with analytics
+
 **Summary**
 - We have detected some pricing data that initially was selected as string and we have changed it to numeric format.
 - Resize our dataset by clearing all negative prizes and outliers prizes.
@@ -363,12 +363,11 @@ We will also add our amenities dataset as we found them relevant for price deter
 
 
 ```python
-#Small script to let me select in the next step the columns in an easy way using notebook :P
+#Small script to let me select in the next step the columns easily using notebook :P
 #I have cleared the output because readability reasons.
 for c in airbnb_pub.columns:
     print('"',c,'",',sep="")
 ```
-
     "id",
     "listing_url",
     "scrape_id",
@@ -398,7 +397,7 @@ airbnb_pub = airbnb_pub[[
 
 
 ```python
-airbnb_data = pd.concat([airbnb_pub,df_amenities],axis=1,join='inner')
+airbnb_data = pd.concat([airbnb_pub,df_amenities],axis=1,join='inner')#inner, only existing values
 airbnb_data.to_csv("./data/output.csv")
 print("Final output dataset Shape: ",airbnb_data.shape)
 ```
@@ -406,4 +405,4 @@ print("Final output dataset Shape: ",airbnb_data.shape)
     Final output dataset Shape:  (16732, 221)
     
 
-And that's all, airbnb data cleaning has been done and we are ready for analyze the data that we 'feel' that is relevant for pricing, of course, using the same pipeline we could test/check and recatch all the steps that we have done to review or try or remove some data with the results we have when modelizing or analyzing the data.
+And that's all, airbnb data cleaning has been done and we are ready for analyze the data that we 'feel' that is relevant for pricing, of course, using the same pipeline we could test/check and re-catch all the steps that we have done to review or try or remove some data with the results we have when modeling or analyzing the data.
