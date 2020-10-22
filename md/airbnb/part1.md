@@ -390,6 +390,8 @@ airbnb_pub = airbnb_pub[[
 "host_listings_count",
 "host_total_listings_count",
 "minimum_nights",
+"latitude",
+"longitude",
 "review_scores_rating",
 "price"
 ]]
@@ -402,7 +404,7 @@ airbnb_data.to_csv("./data/output.csv")
 print("Final output dataset Shape: ",airbnb_data.shape)
 ```
 
-    Final output dataset Shape:  (16732, 221)
+    Final output dataset Shape:  (16732, 225)
     
 
 And that's all, airbnb data cleaning has been done and we are ready for analyze the data that we 'feel' that is relevant for pricing, of course, using the same pipeline we could test/check and re-catch all the steps that we have done to review or try or remove some data with the results we have when modeling or analyzing the data.

@@ -24,19 +24,10 @@ airbnb_data.drop(['Unnamed: 0','Unnamed: 225'],axis=1,inplace=True)
 
 # Viewing/Understanding the data
 
-We will start trying to find correlations/aggrupations in a visual way, for that we have an excelent tool from seaborn:
+We will start trying to find correlations/aggrupations in a visual way, for that we have an excelent tool from seaborn (location will be analyzed at the end):
 
 
 ```python
-plt.figure(figsize=(20,40))
-sns.set(rc={
-    'axes.facecolor':'#303030', 
-    'figure.facecolor':'#303030',
-    'text.color':light_white,
-    'axes.labelcolor':light_white,
-    'xtick.color':light_white,
-    'ytick.color':light_white,
-})
 sns.pairplot(airbnb_data[[
 "bedrooms",
 "room_type",
