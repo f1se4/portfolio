@@ -16,7 +16,16 @@ def home_page():
 def airbnb():
 	with open("./md/airbnb/part1.md", "r") as file:
 		part1 = file.read()
-	return render_template("airbnb.html", part1=md.convert(part1))
+	with open("./md/airbnb/part2.md", "r") as file:
+		part2 = file.read()		
+	return render_template("airbnb.html", 
+							part1=md.convert(part1),
+							part2=md.convert(part2)
+							)
+
+@app.route('/mapairbnb')
+def mapairbnb():
+	return render_template("mapairbnb.html")
 
 @app.route('/gompertz')
 def gompertz():

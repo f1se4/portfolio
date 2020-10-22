@@ -5,6 +5,8 @@
 		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/ownstyle.css') }}">
 		<!-- 2. GOOGLE JQUERY JS v3.2.1  JS !-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		{% block head %}
+		{% endblock %}		
 		<!-- 3. BOOTSTRAP v4.0.0         JS !-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<link rel="stylesheet"
@@ -65,4 +67,6 @@
             {% endblock %}
         </div> <!-- container -->
 	</body>
+	{% block scripts %}
+	{% endblock %}	
 </html>
