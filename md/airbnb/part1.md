@@ -189,7 +189,7 @@ If we 'graph' them it will help us to understand distribution.
 ).draw(); #raw
 ```
     
-![png](/static/notebooks/airbnb/images/output_14_0.png)
+![png](/static/notebooks/airbnb/part1/output_14_0.png)
  
 
 Now we need to filter the price to delete statistical outliers, to try to avoid in our future model any inconsistence because outliers.
@@ -215,7 +215,7 @@ print(airbnb_pub.price.describe())
     Name: price, dtype: float64
     
    
-![png](/static/notebooks/airbnb/images/output_16_1.png)
+![png](/static/notebooks/airbnb/part1/output_16_1.png)
 
 After that we have now smaller data collection without outliers, so we could think that we are going to take the usual behavior of the dataset in 95% of confidence.
 
@@ -351,6 +351,7 @@ for c in airbnb_pub:
 ### Creating our final output dataset to start with analytics
 
 **Summary**
+
 - We have detected some pricing data that initially was selected as string and we have changed it to numeric format.
 - Resize our dataset by clearing all negative prizes and outliers prizes.
 - All string boolean values have been changed to numeric ones.
