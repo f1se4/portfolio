@@ -137,7 +137,7 @@ sorted_by_price = airbnb_data.groupby(by='property_type')['price'].median().sort
     
 
 
-And we could check also see which is the top 10 types of our dataset.
+And we could check also which is the top 10 types of our dataset.
 
 
 ```python
