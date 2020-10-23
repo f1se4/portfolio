@@ -51,17 +51,17 @@ plt.suptitle("Fig 1 - Correlation between principal variables",  y=1.06, size = 
     
 
 
-In this type of graphs, we are trying to find some logic that helps us understand how our data is distributed, if there is some correlation, and also if it's obvoius some aggrupation. To follow the discussion, I encourage to see this graphic in a separate window and maximized. [Pairplot image](/static/notebooks/airbnb/part2/output_8_0.png)
+In this type of graphs, we are trying to find some logic that helps us understand how our data is distributed, if there is some correlation, and also if it's obvoius some aggrupation. To follow the discussion, I encourage to see this graphic in a separate window and maximized. <a href="/static/notebooks/airbnb/part2/output_8_0.png" target="_blank">Pairplot Image</a>
 
 We have 2 types of graphics:
 - Crossed characteristics: plot graphic with the relation with the 2 variables.
-- Diagonal charecteristics: As we have the same 2 characteristics, here we found distribution plot of our characteristics.
+- Diagonal characteristics: As we have the same 2 characteristics, here we found distribution plot of our characteristics.
 
 All of them are colored by property type, as it's clear that is an important aggregation characteristic which I will try to highlight in any graphic so we could analyze all data with this dimension disaggregated.
 
 Some conclusions:
 
-- 'host_total_listing_count' and 'host_listing_count' are dependant so when going to construct our model we will have to discard one of them, and the dependency that we could have with the price will be shared with these 2 variables.
+- 'host_total_listing_count' and 'host_listing_count' are dependent so when going to construct our model we will have to discard one of them, and the dependency that we could have with the price will be shared with these 2 variables.
 - The properties which have more reviews usually have also best scores.
 - Score rating doesn't seem clear that impacts over the price, as we have lots of different prices distributed the same way in all the score range.
 - We have several 1 bedroom with 1 bed publication.
@@ -71,7 +71,7 @@ Some conclusions:
 
 Let's see one particular distribution, scores rating, you will see in *Fig 2* that we have more or less always 80-100 rating with really few scores under that. It could mean that people that doesn't like some property it's not giving any comment, and who has enjoyed the property usually scores it.
 
-It's not clear how could affect to our predicted price and if there are some other categories most relevant. The relation with score and price exists, because you found more expensive properties when looking for best scores, but there are also inexpensive ones. *Fig 3*
+It's not clear how could affect to our predicted price and if there are some other categories most relevant. The relation with score and price exists, because you find more expensive properties when looking for best scores, but there are also inexpensive ones. *Fig 3*
 
 
 ```python
@@ -110,7 +110,7 @@ It's not clear how could affect to our predicted price and if there are some oth
 
 ### Property Type
 
-We are working all the time disaggregating by property_type, this is because from an intituive pont of view, it's clear that room it's not the same as house, so it's variable that it's clear that will be relevant in price determination. We can see which is the price distribution for each property type, to confirm our intuitive interpretation.
+We are working all the time disaggregating by property_type, this is because from an intuitive point of view, it's clear that room it's not the same as house, so this variable is clear that will be relevant in price determination. We can see which is the price distribution for each property type, to confirm our intuitive interpretation.
 
 
 ```python
@@ -137,7 +137,7 @@ sorted_by_price = airbnb_data.groupby(by='property_type')['price'].median().sort
     
 
 
-And we could check also which is the top 10 types of our dataset.
+And we could check also see which is the top 10 types of our dataset.
 
 
 ```python
