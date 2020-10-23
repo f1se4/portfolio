@@ -301,7 +301,7 @@ privateArr = airbnb_data[['latitude', 'longitude']].values
 m.add_children(HeatMap(privateArr, radius=12))
 ```
 
-### Link to the [Barcelona Airbnb Map](/mapairbnb)
+### Link to the <a href="/mapairbnb" target="_blank">Airbnb Map</a>
 
 ![png](/static/notebooks/airbnb/part2/general.png)
 
