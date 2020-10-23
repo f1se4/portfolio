@@ -168,7 +168,7 @@ Now we are going to check all the correlations from our dataset, so we could avo
 ```python
 df_corr = airbnb_data.corr()
 df_corr = df_corr[(df_corr>0.8) | (df_corr<-0.8)] #I want only most relevant correlations.
-# For visualization I don't whant all nan values expect diagonal = 1
+# For visualization I don't want all nan values expect diagonal = 1
 # So I will clear all not relevant ones.
 df_corr = df_corr.abs()
 df_corr['Corr'] = df_corr.sum()
