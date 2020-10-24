@@ -53,11 +53,11 @@ airbnb_data = pd.get_dummies(airbnb_data)
 
 ## Random Forest Model
 We are going to do regression model based on Random Forest algorithm. We are going to use this model based on:
+
 - We have several columns/characteristics to be evaluated and this model it's good one to lots of columns regression (independent variables).
 
 ### Independent variable vs dependent variables
-We are going to separate our independent variable (the one we want to predict) from the dependent values. We are going to drop also the values we have found in *part2* that are dependents between each other.
-
+We are going to separate our dependent variable (the one we want to predict) from the independent values.
 
 ```python
 X = airbnb_data.drop(['price'],axis=1).astype('float').values
@@ -201,7 +201,38 @@ result_df = pd.melt(result_df,id_vars='id', value_vars=['Test Data','Predicted D
 
 Well $R^2=0,52$ It's not a good result, but it's not the worst. Comparing predicted and testing data it seems that it has good behavior around the mean price of the dataset and it's not so good with the prices that are down in the table and up in the table.
 
-### Save the model
+## Conclusions
+
+We have found when using filter options, that there are some features that impacts over the price:
+
+*Validation and Comparison*
+```
+'host_is_superhost'(1)
+'host_identity_verified'
+'number_of_reviews'
+'host_listings_count'
+```
+*Basic Requirements*
+```
+'instant_bookable',
+'bedrooms' 
+'beds'
+'minimum_nights'
+'hot water'
+```
+*Baby Requirements*
+'high chair'
+'pack play/travel crib'
+*Others*
+```
+'host greets you'
+```
+The other are related to property 'type' but they are not top 10 relevant as we suppose initially. In fact the price is much sensible to the reputation and requirements than which type of property is the publication. So, laws of supply and demand seems to be the 'clue' for price determination.
+
+
+*$(1)$ The "superhost" designation on Airbnb is a sign that an Airbnb host has gotten consistently good reviews over at least a year of hosting. Airbnb checks the status of hosts four times a year to ensure that a superhost badge is still relevant for each host.*
+
+## Save the model
 
 
 ```python

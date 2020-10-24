@@ -31,12 +31,12 @@ We will start trying to find correlations/aggrupations in a visual way, for that
 ```python
 sns.pairplot(airbnb_data[[
 "bedrooms",
-"room_type",
 "beds",
+"host_is_superhost",
+"instant_bookable",
 "property_type",
 "number_of_reviews",
 "host_listings_count",
-"host_total_listings_count",
 "minimum_nights",
 "review_scores_rating",
 "price"
@@ -59,13 +59,15 @@ We have 2 types of graphics:
 
 All of them are colored by property type, as it's clear that is an important aggregation characteristic which I will try to highlight in any graphic so we could analyze all data with this dimension disaggregated.
 
-Some conclusions:
+Some conclusions, from visual interpretation:
 
-- 'host_total_listing_count' and 'host_listing_count' are dependent so when going to construct our model we will have to discard one of them, and the dependency that we could have with the price will be shared with these 2 variables.
+- You will have best reviews if you are superhost $^(1)$
 - The properties which have more reviews usually have also best scores.
 - Score rating doesn't seem clear that impacts over the price, as we have lots of different prices distributed the same way in all the score range.
 - We have several 1 bedroom with 1 bed publication.
 - It seems in general that people review and rate similar way...
+
+*$(1)$ The "superhost" designation on Airbnb is a sign that an Airbnb host has gotten consistently good reviews over at least a year of hosting. Airbnb checks the status of hosts four times a year to ensure that a superhost badge is still relevant for each host.*
 
 ### Review Scores Rating
 
