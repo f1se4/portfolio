@@ -1,6 +1,12 @@
 # Barcelona Airbnb DS analysis (2nd part) 
 We are going now to try to understand our data a bit more.
 
+\
+|--Airbnb_Barcelona.ipynb
+|--data
+|   |-output.csv
+```
+
 ## Importing Libraries
 
 

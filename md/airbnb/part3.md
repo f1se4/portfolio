@@ -221,8 +221,10 @@ We have found when using filter options, that there are some features that impac
 'hot water'
 ```
 *Baby Requirements*
+```
 'high chair'
 'pack play/travel crib'
+```
 *Others*
 ```
 'host greets you'
