@@ -17,10 +17,13 @@ def airbnb():
 	with open("./md/airbnb/part1.md", "r") as file:
 		part1 = file.read()
 	with open("./md/airbnb/part2.md", "r") as file:
-		part2 = file.read()		
+		part2 = file.read()	
+	with open("./md/airbnb/part3.md", "r") as file:
+		part3 = file.read()		
 	return render_template("airbnb.html", 
 							part1=md.convert(part1),
-							part2=md.convert(part2)
+							part2=md.convert(part2),
+							part3=md.convert(part3)
 							)
 
 @app.route('/mapairbnb')
