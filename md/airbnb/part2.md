@@ -65,7 +65,7 @@ All of them are colored by property type, as it's clear that is an important agg
 
 Some conclusions:
 
-- 'host_total_listing_count' and 'host_listing_count' are dependent so when going to construct our model we will have to discard one of them, and the dependency that we could have with the price will be shared with these 2 variables.
+- There are some features that have different distribution related to the price, it's not clear the relation and how important it is, but for example number of reviews vs price, you could see that it's not rectangle (normal distribution) it has some values when you have lots of reviews that seems to 'change' the price or some relation exists.
 - The properties which have more reviews usually have also best scores.
 - Score rating doesn't seem clear that impacts over the price, as we have lots of different prices distributed the same way in all the score range.
 - We have several 1 bedroom with 1 bed publication.
