@@ -176,7 +176,6 @@ sorted_by_price = airbnb_data.groupby(by='neighbourhood_cleansed')['price'].medi
         )
 )
 ```
-
    
 ![png](/static/notebooks/airbnb/part2/output_19_0.png)
     
@@ -351,6 +350,6 @@ m.add_children(HeatMap(privateArr, radius=12))
 
 <h3>Link to the <a href="/mapairbnb" target="_blank">Airbnb Map</a></h3>
 
-![png](/static/notebooks/airbnb/part2/images/general.png)
+![png](/static/notebooks/airbnb/part2/general.png)
 
-![png](/static/notebooks/airbnb/images/part2/detalles.png)
+![png](/static/notebooks/airbnb/part2/detalles.png)
