@@ -155,6 +155,7 @@ sorted_by_price_top10 = airbnb_data.groupby(by='property_type')['price'].count()
 ![png](/static/notebooks/airbnb/part2/output_16_0.png)
     
 
+### Neighbourhood
 
 And what about the neighbourhoods? Let's take a look.
 
