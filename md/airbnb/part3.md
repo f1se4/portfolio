@@ -518,7 +518,7 @@ graph_obj.view()
 
 ![image.png](/static/notebooks/airbnb/part3/tree.png)
 
-link to full tree *pdf* [tree.pdf](/static/notebook/airbnb/part3/airbnbBCN.pdf)
+<h5>link to full tree *pdf* Link to the <a href="/static/notebooks/airbnb/part3/airbnbBCN.pdf" target="_blank">Tree PDF</a></h5>
 
 ## Model Comparison
 
