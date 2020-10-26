@@ -218,15 +218,6 @@ feat_imp=pd.DataFrame(random_forest_regression.feature_importances_,
                       columns=['Importance'])
 feat_imp['feature'] = feat_imp.index
 feat_imp_top10 = feat_imp.loc[feat_imp['Importance'].nlargest(10).index]
-plt.figure(figsize=(20,15))
-sns.set(rc={
-    'axes.facecolor':'#303030', 
-    'figure.facecolor':'#303030',
-    'text.color':light_white,
-    'axes.labelcolor':light_white,
-    'xtick.color':light_white,
-    'ytick.color':light_white,
-})
 ax = sns.barplot(x="Importance", y="feature", data=feat_imp_top10,palette="Oranges")
 # Title 
 plt.suptitle("Fig 3 - Random Forest Top10 Features",y=0.93, size = 24);
