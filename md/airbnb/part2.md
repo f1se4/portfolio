@@ -110,7 +110,7 @@ It's not clear how could affect to our predicted price and if there are some oth
 
 ### Property Type
 
-We are working all the time disaggregating by property_type, this is because from an intuitive point of view, it's clear that room it's not the same as house, so it's variable that it's clear that will be relevant in price determination. We can see which is the price distribution for each property type, to confirm our intuitive interpretation.
+We are working all the time disaggregating by property_type, this is because from an intuitive point of view, it's clear that room it's not the same as house, so this variable will be relevant in price determination. We can see which is the price distribution for each property type, to confirm our intuitive interpretation.
 
 
 ```python
@@ -210,7 +210,7 @@ Now we are going to check all the correlations from our dataset, so we could avo
 ```python
 df_corr = airbnb_data.corr()
 df_corr = df_corr[(df_corr>0.8) | (df_corr<-0.8)] #I want only most relevant correlations.
-# For visualization I don't whant all nan values expect diagonal = 1
+# For visualization I don't want all nan values expect diagonal = 1
 # So I will clear all not relevant ones.
 df_corr = df_corr.abs()
 df_corr['Corr'] = df_corr.sum()
@@ -221,15 +221,6 @@ df_corr.dropna(1,how='all',inplace=True) #All full nan columns
 
 
 ```python
-plt.figure(figsize=(20,15))
-sns.set(rc={
-    'axes.facecolor':'#303030', 
-    'figure.facecolor':'#303030',
-    'text.color':light_white,
-    'axes.labelcolor':light_white,
-    'xtick.color':light_white,
-    'ytick.color':light_white,
-})
 sns.heatmap(df_corr,cmap='magma');
 plt.suptitle("Fig 8 - Correlation Dependencies between principal variables", size = 24);
 ```
