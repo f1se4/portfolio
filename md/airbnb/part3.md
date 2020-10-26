@@ -520,7 +520,7 @@ graph_obj.view()
 
 <h5>Link to the <a href="/static/notebooks/airbnb/part3/airbnbBCN.pdf" target="_blank">Tree PDF</a></h5>
 
-## Model Comparison
+## Model Comparison 
 
 
 ```python
