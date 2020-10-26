@@ -272,6 +272,8 @@ Is possible that other types follow the same behavior 'Private room in house' fo
 
 In fact, the impact over the price it's going to be very little because the big density of the other prices which are more or less distributed randomly so it makes us think that other variables will be much relevant for price determination.
 
+--------
+
 #### (BONUS) We will focus on the most usual publication and take a more detailed view
 
 
