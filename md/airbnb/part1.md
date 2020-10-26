@@ -296,7 +296,7 @@ for col in df_amenities.columns:
             df_repeated = df_repeated.applymap(lambda x: 1 if x else 0)        
             df_amenities.drop(col,axis=1,inplace=True)
 df_amenities = pd.concat([df_amenities,df_repeated],axis=1,join='inner')
-df_amenities.replace(' ', '_', regex=True, inplace=True)
+df_amenities.columns = df_amenities.columns.str.replace(' ', '_')
 print('Final amenities files, columns: ',df_amenities.shape)
 ```
 
