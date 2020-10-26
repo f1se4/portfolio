@@ -296,6 +296,7 @@ for col in df_amenities.columns:
             df_repeated = df_repeated.applymap(lambda x: 1 if x else 0)        
             df_amenities.drop(col,axis=1,inplace=True)
 df_amenities = pd.concat([df_amenities,df_repeated],axis=1,join='inner')
+df_amenities.replace(' ', '_', regex=True, inplace=True)
 print('Final amenities files, columns: ',df_amenities.shape)
 ```
 
@@ -328,11 +329,11 @@ df_amenities.head(2)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>baby bath</th>
-      <th>baby monitor</th>
+      <th>baby_bath</th>
+      <th>baby_monitor</th>
       <th>...</th>
-      <th>smart lock</th>
-      <th>smoke alarm</th>
+      <th>smart_lock</th>
+      <th>smoke_alarm</th>
       <th>waterfront</th>
       <th>wifi</th>
       <th>window guards</th>
