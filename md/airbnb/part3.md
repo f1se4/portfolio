@@ -256,6 +256,42 @@ result_df = pd.melt(result_df,id_vars='id', value_vars=['Test Data','Predicted D
 
 Well $R^2=0,52$ It's not a good result, but it's not the worst. Comparing predicted and testing data it seems that it has good behavior around the mean price of the dataset and it's not so good with the prices that are down in the table and up in the table.
 
+#### GridSearch for Random Forest
+To do that we are going to use GridSearch as metaparameter searching function, that could also do K-cross validation.
+
+```python
+#Grid model object
+rf_grid = RandomForestRegressor()
+
+#ROUND4
+param_grid = {
+    'n_estimators':[1000], 
+    #'max_leaf_nodes':[3,6,9],
+    'ccp_alpha':[0.9,0.8,0.7], 
+}
+
+optimal_params = GridSearchCV(
+             estimator = rf_grid,
+             param_grid=param_grid,
+             verbose=2, # NOTE: If you want to see what Grid Search is doing, set verbose=2
+             n_jobs = 3,
+             cv = 3 
+            )
+
+optimal_params.fit(X_train, 
+                    y_train)
+
+print(optimal_params.best_score_)
+print(optimal_params.best_params_)
+```
+    Fitting 3 folds for each of 3 candidates, totalling 9 fits
+           [Parallel(n_jobs=3)]: Using backend LokyBackend with 3 concurrent workers.
+           [Parallel(n_jobs=3)]: Done   9 out of   9 | elapsed:   47.1s remaining:    0.0s
+           [Parallel(n_jobs=3)]: Done   9 out of   9 | elapsed:   47.1s finished
+           0.41617763258918616
+           {'ccp_alpha': 0.7, 'n_estimators': 1000}
+
+After trying some rounds modifying different parameters it seems that best result has raised with default values for Random Forest Regression, so we will let all calculations as we have done.
 
 ## Decision Tree
 
