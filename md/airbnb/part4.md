@@ -130,4 +130,4 @@ if __name__ == "__main__":
 ```
 ## Some Screenshots
 
-[!screenshot](/static/notebooks/airbnb/part4/screenshot.png)
+![screenshot](/static/notebooks/airbnb/part4/screenshot.png)
