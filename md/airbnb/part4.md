@@ -18,10 +18,9 @@ I have re-executed random forest regression with KBaseFilter of 7. Some of these
 
 Of course, if this web application is interesting for someone, we could improve a lot it, using full model, and adding some other features (neighbor comparison, error of the price predicted, etc...)
 
-## DashBoard
-<h3>Link to the <a href="http://www.fisoft.es:8501" target="_blank">Airbnb BCN Price DashBoard</a></h3> 
+## DashBoard Code
 
-## Code
+### Import Libraries
 
 ```python
 import streamlit as st
@@ -31,10 +30,13 @@ import joblib
 
 from pathlib import Path
 path_directory = str(Path().absolute())
+```
 
-from plotnine import *
-from plotnine.data import mtcars
+### Define Title and constants
+Here we will start main() function. I use streamlit title widget and then I define my 'selection' values.
+I have taken them from unique values from original dataset. (```df.column.unique```).
 
+```python
 def main():
 
     st.title('Airbnb Barcelona Advanced Analytics')
@@ -51,6 +53,12 @@ def main():
                                                         "Entire Apartment",
                                                         "Private Room in apartment",
                                                         "Another"))
+    host_listing_mean = 18.108853910477126
+```
+
+Then the logic of the widgets of selection and fill the array to use with the model.
+
+```python
     if Property_type == 'Private Room':
         room_type_Private_room = 1
         bedrooms_num = ( 1., np.nan)        
@@ -94,8 +102,11 @@ def main():
         property_type_Private_room_in_apartment]]
 
     y_predict = rf_model.predict(X)
+```
 
+Last aspects, some disclaimers and presentation.
 
+```python
     st.sidebar.markdown("""
         #### Notes
         For this explotation sample, random forest model has been reduced to 7 most important features.
@@ -109,15 +120,14 @@ def main():
     # validation
     result = "{:.2f}".format(y_predict[0])
     st.success(f"Predicted Price= {result} $")
+```
 
-    graf1 = (
-        ggplot(mtcars, aes("wt", "mpg")) + 
-        geom_point(color=orange) +
-        orange_dark_theme
-    )
-    st.pyplot(ggplot.draw(graf1))    
+And usual execution function to package managing, etc...
 
+```python
 if __name__ == "__main__":
     main()
 ```
 ## Some Screenshots
+
+[!screenshot](/static/notebooks/airbnb/part4/screenshot.png)
