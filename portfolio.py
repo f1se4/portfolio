@@ -41,6 +41,14 @@ def gompertz():
 		summary = file.read()
 	return render_template("gompertz.html", notebook=md.convert(notebook), summary=md.convert(summary))
 
+@app.route('/molletweather')
+def molletweather():
+	with open("./md/molletweather/MolletWeather.md", "r") as file:
+		notebook = file.read()
+	with open("./md/gompertz/summary.md", "r") as file:
+		summary = file.read()
+	return render_template("gompertz.html", notebook=md.convert(notebook), summary=md.convert(summary))
+
 @app.route('/covidmollet')
 def covidmollet():
 	with open("./md/covidmollet/covidmollet.md", "r") as file:
