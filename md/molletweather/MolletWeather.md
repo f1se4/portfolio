@@ -253,7 +253,7 @@ We have done before model without balancing data and we had bad recall for raini
 sns.heatmap(df_result.corr()>0.7,cmap='magma')
 ```
     
-![png](output_27_1.png)
+![png](/static/notebooks/molletweather/output_27_1.png)
     
 
 ```python
