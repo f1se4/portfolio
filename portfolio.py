@@ -45,7 +45,7 @@ def gompertz():
 def molletweather():
 	with open("./md/molletweather/MolletWeather.md", "r") as file:
 		notebook = file.read()
-	with open("./md/gompertz/summary.md", "r") as file:
+	with open("./md/molletweather/summary.md", "r") as file:
 		summary = file.read()
 	return render_template("gompertz.html", notebook=md.convert(notebook), summary=md.convert(summary))
 
