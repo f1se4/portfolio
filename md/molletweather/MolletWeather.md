@@ -330,18 +330,6 @@ model_xg.fit(X_train,y_train)
 y_pred = model_xg.predict(X_test)
 ```
 
-
-```python
-# Error and Variance scores
-print("Mean squared error: %.2f" % metrics.mean_squared_error(y_test, y_pred))
-print('Variance score: %.2f'%metrics.r2_score(y_test,y_pred))
-```
-
-    Mean squared error: 0.22
-    Variance score: 0.11
-    
-
-
 ```python
 conf_matrix = metrics.confusion_matrix(y_test,y_pred)
 sns.heatmap(conf_matrix,annot=True, cmap="Oranges" ,fmt='g')

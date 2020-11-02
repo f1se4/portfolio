@@ -521,8 +521,6 @@ plt.suptitle("Fig 8 - XGBoost Top10 Features",y=0.93, size = 24);
 import os
 import graphviz
 
-file_path = r'C:/Users/f1se4/Google Drive/DataScience/PyProjects/Librerias/Graphviz/bin'
-os.environ["PATH"] += os.pathsep + file_path
 bst = xg.get_booster()
 
 node_params = {'shape': 'box', ## make the nodes fancy
