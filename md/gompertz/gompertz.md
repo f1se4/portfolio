@@ -4,7 +4,7 @@
 
 At first, and looking some go-live tickets (issues) generated during some different Go-Lives I thought that classic sigmoid function could fit my model.
 
-However the real thing is that when you have release some new application in a production system, there is a gap between users starts to know/understand the functionality of the new tool and detect issues or have questions about how it works, etc.. So at the start of the go-live (if there are not really big issues, what is expected after a good UAT) you don't expect to have several issues, so the growth at very initial point is slower than some days after, and of course, when the new application/tool/functionality is coming more stable you should find that issues growth get slower another time.
+However, the real thing is that when you have release some new application in a production system, there is a gap between users starts to know/understand the functionality of the new tool and detect issues or have questions about how it works, etc.. So at the start of the go-live (if there are not really big issues, what is expected after a good UAT) you don't expect to have several issues, so the growth at very initial point is slower than some days after, and of course, when the new application/tool/functionality is coming more stable you should find that issues growth get slower another time.
 
 This type of distribution is literally [Gompertz function](https://en.wikipedia.org/wiki/Gompertz_function), so my expectation is that I could fit this function to go-live ticketing and use its parameters as metrics and a quick knowledge of the Go-Live and Post-GoLive achievements.
 
