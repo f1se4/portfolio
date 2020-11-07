@@ -283,37 +283,37 @@ for col in df_result.drop(['Precipitació'],axis=1).columns:
 
 
     
-![png](/static/notebooks/molletweather/output_30_0.png)
+![png](/static/notebooks/molletweather/output_33_0.png)
     
 
 
 
     
-![png](/static/notebooks/molletweather/output_30_1.png)
+![png](/static/notebooks/molletweather/output_33_1.png)
     
 
 
 
     
-![png](/static/notebooks/molletweather/output_30_2.png)
+![png](/static/notebooks/molletweather/output_33_2.png)
     
 
 
 
     
-![png](/static/notebooks/molletweather/output_30_3.png)
+![png](/static/notebooks/molletweather/output_33_3.png)
     
 
 
 
     
-![png](/static/notebooks/molletweather/output_30_4.png)
+![png](/static/notebooks/molletweather/output_33_4.png)
     
 
 
 
     
-![png](/static/notebooks/molletweather/output_30_5.png)
+![png](/static/notebooks/molletweather/output_33_5.png)
     
 
 We have not find any important outlier or non-sense value so we are ready to start our modeling
