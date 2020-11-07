@@ -582,13 +582,13 @@ ax = sns.barplot(x="Importance", y="feature", data=feat_imp_top10,palette="Orang
     
 
 
-### Support Vecotr Machine (SVM)
+### Support Vector Machine (SVM)
 
 We will use 'rbf' kernel **Radial Basis Function (RBF)**, It seems the best to use from standard sklearn models.
 
-We have different parameters for *rbf* kernel, depends on our distribution. We will use gamma=1 and C=1, as we have clear differentiation and not big distribution for our features, as we have seen in *Fig 9*.
+We have different parameters for *rbf* kernel, depends on our distribution. It's going to be used gamma=1 and C=1, as we have clear differentiation and not big distribution for our features, as we have seen in *Fig 9*.
 
-![image.png](attachment:image.png)
+![image.png](/static/notebooks/molletweather/image.png)
 
 #### Split into train and testing data
 
