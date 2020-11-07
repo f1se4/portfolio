@@ -251,7 +251,7 @@ sns.heatmap(df_result.corr()>0.7,cmap='magma')
 plt.title("Fig 1 - Correlation Matrix")
 ```
     
-![png](/static/notebooks/molletweather/output_27_1.png)
+![png](/static/notebooks/molletweather/output_27_0.png)
     
 After visual check we will drop:
 
@@ -333,7 +333,7 @@ plt.suptitle("Fig 8 - Relation Plot between all features",  y=1.02, size = 28);
 
 
     
-![png](/static/notebooks/molletweather/pairplot.png)
+![png](/static/notebooks/molletweather/output_38_0.png)
     
 
 
@@ -356,7 +356,7 @@ df_graf['Precipitació'] = df_graf['Precipitació'].apply(lambda x:str(x)) #to g
 
 
     
-![png](/static/notebooks/molletweather/output_35_0.png)
+![png](/static/notebooks/molletweather/output_40_0.png)
     
 
 
@@ -419,7 +419,7 @@ print(metrics.classification_report(y_test,y_pred))
 
 
     
-![png](/static/notebooks/molletweather/output_42_0.png)
+![png](/static/notebooks/molletweather/output_47_0.png)
     
 
 
@@ -449,7 +449,7 @@ ax = sns.barplot(x="Importance", y="feature", data=feat_imp_top10,palette="Orang
 
 
     
-![png](/static/notebooks/molletweather/output_44_0.png)
+![png](/static/notebooks/molletweather/output_49_0.png)
     
 
 
@@ -494,7 +494,7 @@ print(metrics.classification_report(y_test,y_pred))
 ```
 
     
-![png](/static/notebooks/molletweather/output_52_0.png)
+![png](/static/notebooks/molletweather/output_57_0.png)
     
 
 
@@ -548,7 +548,7 @@ print(metrics.classification_report(y_test,y_pred))
 ```
 
     
-![png](/static/notebooks/molletweather/output_59_0.png)
+![png](/static/notebooks/molletweather/output_64_0.png)
     
 
 
@@ -578,7 +578,7 @@ ax = sns.barplot(x="Importance", y="feature", data=feat_imp_top10,palette="Orang
 
 
     
-![png](/static/notebooks/molletweather/output_61_0.png)
+![png](/static/notebooks/molletweather/output_66_0.png)
     
 
 
@@ -625,7 +625,7 @@ plt.show()
 print(metrics.classification_report(y_test,y_pred))
 ```
     
-![png](/static/notebooks/molletweather/output_70_0.png)
+![png](/static/notebooks/molletweather/output_75_0.png)
     
 
 
@@ -637,4 +637,144 @@ print(metrics.classification_report(y_test,y_pred))
         accuracy                           0.86       784
        macro avg       0.86      0.85      0.86       784
     weighted avg       0.86      0.86      0.86       784
+
+## Comparing Models with K-Fold Cross Validation
+We have studied different models individually, by checking that recall data is balanced, and we get good accuracy values, and also have checked different metaparameters for the different models. So we have defined different models with the best values by executing them one by one.
+
+Now, we are going to compare all the models we have created, through K-Fold Cross validation to avoid overfitting as far as we could and most realistic accuracy for our models.
+
+### Selecting independent and dependent Variable
+
+
+```python
+df_result = df_raw_data.copy()
+scaler = StandardScaler() #Logistic regression variable weigh is relevant so we will scale it
+X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
+y = df_result['Precipitació']
+```
+
+### Adding our models to be compared
+
+
+```python
+# prepare models
+models = []
+models.append(('LR', model_lr))
+models.append(('RF', model_rf))
+models.append(('Xgb', model_xg))
+models.append(('SVM', model_svm))
+```
+
+### Evaluate each model by turn and get accuracy and $\sigma$
+
+
+```python
+# prepare configuration for cross validation test harness
+seed = 666 #random number
+k = 10 #K fold cross-validation number
+# evaluate each model in turn
+results = []
+names = []
+scoring = 'accuracy'
+for name, model in models:
+	kfold = model_selection.KFold(n_splits=k, random_state=seed)
+	cv_results = model_selection.cross_val_score(model, X, y, cv=kfold, scoring=scoring)
+	results.append(cv_results)
+	names.append(name)
+	msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
+	print(msg)
+```
+
+    LR: 0.736345 (0.089678)
+    RF: 0.749395 (0.081619)
+    Xgb: 0.733360 (0.067553)
+    SVM: 0.735055 (0.073272)
+    
+
+#### Visual Comparision
+
+
+```python
+# boxplot algorithm comparison
+fig = plt.figure(figsize=(12,8))
+fig.suptitle('Fig 16 - Algorithm Comparison')
+ax = fig.add_subplot(111)
+plt.boxplot(results, widths = 0.6,
+            patch_artist=True,
+            boxprops=dict(facecolor=orange, color=yellow_orange),
+            capprops=dict(color=orange),
+            whiskerprops=dict(color=orange),
+            flierprops=dict(color=orange, markeredgecolor=orange),
+            medianprops=dict(color=yellow_orange))
+plt.grid(color=light_white, linestyle='--', linewidth=0.5,alpha=0.1)
+ax.set_xticklabels(names)
+plt.show();
+```
+
+
+    
+![png](/static/notebooks/molletweather/output_84_0.png)
+    
+
+
+## Automated tool - Tpot
+We are going to use an automated tool to compare our score with automated score tool.
+We are going to use [Tpot](http://epistasislab.github.io/tpot/) tool. In terms of score comparision we should know that by default k-fold cross validation for Tpot is *10* the same as we have used when comparing models.
+
+
+```python
+from tpot import TPOTClassifier
+```
+
+
+```python
+df_result = df_raw_data.copy()
+scaler = StandardScaler() #Logistic regression variable weigh is relevant so we will scale it
+X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
+y = df_result['Precipitació']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+```
+
+
+```python
+tpot = TPOTClassifier(generations=5,population_size=50, verbosity=2, n_jobs=3)
+tpot.fit(X_train, y_train)
+```
+
+
+    HBox(children=(HTML(value='Optimization Progress'), FloatProgress(value=0.0, max=300.0), HTML(value='')))
+
+
+    
+    Generation 1 - Current best internal CV score: 0.7954486836101027
+    
+    Generation 2 - Current best internal CV score: 0.8055195127274171
+    
+    Generation 3 - Current best internal CV score: 0.8055195127274171
+    
+    Generation 4 - Current best internal CV score: 0.8055195127274171
+    
+    Generation 5 - Current best internal CV score: 0.8055195127274171
+    
+    Best pipeline: MLPClassifier(OneHotEncoder(input_matrix, minimum_fraction=0.25, sparse=False, threshold=10), alpha=0.1, learning_rate_init=0.001)
+    
+
+
+
+
+    TPOTClassifier(generations=5, n_jobs=3, population_size=50, verbosity=2)
+
+
+```python
+print(tpot.score(X_test, y_test))
+```
+
+    0.7946428571428571
+    
+Using this automated tool we have arrived to an accuracy of *0.79* and our best result by modeling one by one has been *0.75*, which is a really good result.
+
+The algorithm that recommends Tpot is MLPClassifier it's Multi-layer Perceptron classifier. Neural network with *100* layers by default, and 'relu' activation function.
+
+I think that an accuracy difference of *0.04* it's not so relevant for us than understanding or explaining the statistical model. Models done one by one could help much more how to explain or understand the dataset.
+
     
