@@ -786,9 +786,8 @@ for name, clf in models:
     i += 1
 ```
 
-
-    
-![png]((/static/notebooks/molletweather/output_86_0.png)
+  
+![png](/static/notebooks/molletweather/output_86_0.png)
 
 ## Automated tool - Tpot
 We are going to use an automated tool to compare our score with automated score tool.
