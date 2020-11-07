@@ -990,9 +990,9 @@ I think that an accuracy difference of *0.04* it's not so relevant for us than u
 
 If we should get only one model to our predictions we would get **Support Vector Machine**.
 
-1- It has the best score in usual train/test validations, for *recall*, *f1 score* and *accuracy*
-2- When doing K-Fold cross validation, all models have perform similar *accuracy*, standard deviation overlaps all the other model results.
-3- It has far away the best *ROC Curve* and *AUC* value.
-4- The way as describe different probabilities for raining days fits with the correlation.
-5- Compared with other models there are no difference between confusion matrix results. (McNeman)
-6- It's close also to *accuracy* from the model used by ML automation tool.
+- It has the best score in usual train/test validations, for *recall*, *f1 score* and *accuracy*
+- When doing K-Fold cross validation, all models have perform similar *accuracy*, standard deviation overlaps all the other model results.
+- It has far away the best *ROC Curve* and *AUC* value.
+- The way as describe different probabilities for raining days fits with the correlation.
+- Compared with other models there are no difference between confusion matrix results. (McNeman)
+- It's close also to *accuracy* from the model used by ML automation tool.
