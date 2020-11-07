@@ -333,7 +333,7 @@ plt.suptitle("Fig 8 - Relation Plot between all features",  y=1.02, size = 28);
 
 
     
-![png](/static/notebooks/molletweather/output_33_0.png)
+![png](/static/notebooks/molletweather/pairplot.png)
     
 
 
