@@ -986,4 +986,13 @@ The algorithm that recommends Tpot is MLPClassifier it's Multi-layer Perceptron 
 
 I think that an accuracy difference of *0.04* it's not so relevant for us than understanding or explaining the statistical model. Models done one by one could help much more how to explain or understand the dataset.
 
-    
+## Conclusions
+
+If we should get only one model to our predictions we would get **Support Vector Machine**.
+
+1- It has the best score in usual train/test validations, for *recall*, *f1 score* and *accuracy*
+2- When doing K-Fold cross validation, all models have perform similar *accuracy*, standard deviation overlaps all the other model results.
+3- It has far away the best *ROC Curve* and *AUC* value.
+4- The way as describe different probabilities for raining days fits with the correlation.
+5- Compared with other models there are no difference between confusion matrix results. (McNeman)
+6- It's close also to *accuracy* from the model used by ML automation tool.
