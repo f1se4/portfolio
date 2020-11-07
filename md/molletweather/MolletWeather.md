@@ -812,6 +812,8 @@ for name, model in models:
     p-value: 1.140271075004485e-10
     Null hypthoesis cannot be rejected, No significant difference
     
+In fact, models are so near that this result could be something obvious, but now we can confirm in an objective way that there is no difference in terms of McNeman test using other models than SVM.
+
 #### Model visualization (using 2 principal features)
 We are going to use 'Humitat relativa' and 'Pressió atmosfèrica' as they are 2 principal features in classification models, to take a look on how the classification models are working in the 'backend'.
 
