@@ -241,9 +241,9 @@ print("Normal days proportion : %.2f %%"%normal_days)
     Normal days proportion : 54.78 %
     
 
-We have done before model without balancing data and we had bad recall for raining days, so we prefer to have model with some wrong positives and improve our accuracy to raining days.
+Before balancing the dataset, we have done some model without balancing data and we had bad recall for raining days, so we prefer to have model with some wrong positives and improve our accuracy to raining days.
 
-## Dropping correlated variables
+### Dropping correlated variables
 
 
 ```python
@@ -253,8 +253,7 @@ plt.title("Fig 1 - Correlation Matrix")
     
 ![png](/static/notebooks/molletweather/output_27_1.png)
     
-
-
+After visual check we will drop:
 
 ```python
 df_result.drop(['Temperatura mínima',
@@ -264,11 +263,14 @@ df_result.drop(['Temperatura mínima',
                 'Pressió atmosfèrica màxima'],axis=1,inplace=True)
 ```
 
+### Dealing with *NaN* values
+In this case we will apply mean value from column to the correspondence *Nan* value.
 
 ```python
 df_result = df_result.apply(lambda x: x.fillna(x.mean()),axis=0)
 ```
 
+### Validating data Distribution and outliers
 
 ```python
 n=2
@@ -314,7 +316,7 @@ for col in df_result.drop(['Precipitació'],axis=1).columns:
 ![png](/static/notebooks/molletweather/output_30_5.png)
     
 
-
+We have not find any important outlier or non-sense value so we are ready to start our modeling
 
 ```python
 df_raw_data = df_result.copy() #we will save our cleaned data
@@ -322,6 +324,7 @@ df_raw_data = df_result.copy() #we will save our cleaned data
 
 ## Quick view of raining days characteristics
 
+We are going to plot 2 different graphics, summary relation plot of all features with our predicted value (rain yes/rain no) to see if we will find some relevant classification issue, or something to deal before modeling.
 
 ```python
 sns.pairplot(df_result,hue='Precipitació')
@@ -334,7 +337,9 @@ plt.suptitle("Fig 8 - Relation Plot between all features",  y=1.02, size = 28);
     
 
 
-Some details about one relation
+Well, it seems that when raining there are always some frontier that would be classify raining days vs not.
+
+Some details about one relation to check this.
 
 
 ```python
