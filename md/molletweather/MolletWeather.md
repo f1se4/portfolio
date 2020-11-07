@@ -966,10 +966,6 @@ tpot.fit(X_train, y_train)
     Best pipeline: 
     MLPClassifier(OneHotEncoder(input_matrix, minimum_fraction=0.25, sparse=False, threshold=10), 
     alpha=0.1, learning_rate_init=0.001)
-    
-
-
-
 
     TPOTClassifier(generations=5, n_jobs=3, population_size=50, verbosity=2)
 
