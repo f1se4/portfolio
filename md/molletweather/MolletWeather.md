@@ -638,10 +638,11 @@ print(metrics.classification_report(y_test,y_pred))
        macro avg       0.86      0.85      0.86       784
     weighted avg       0.86      0.86      0.86       784
 
-## Comparing Models with K-Fold Cross Validation
+## Comparing Models
+###  Accuracy from K-Fold Cross Validation
 We have studied different models individually, by checking that recall data is balanced, and we get good accuracy values, and also have checked different metaparameters for the different models. So we have defined different models with the best values by executing them one by one.
 
-Now, we are going to compare all the models we have created, through K-Fold Cross validation to avoid overfitting as far as we could and most realistic accuracy for our models.
+Now, we are going to compare all the models we have created, through K-Fold Cross validation to avoid overfitting as far as we could get most realistic accuracy for our models.
 
 ### Selecting independent and dependent Variable
 
@@ -686,7 +687,7 @@ for name, model in models:
 ```
 
     LR: 0.736345 (0.089678)
-    RF: 0.749395 (0.081619)
+    RF: 0.747291 (0.083891)
     Xgb: 0.733360 (0.067553)
     SVM: 0.735055 (0.073272)
     
@@ -697,7 +698,7 @@ for name, model in models:
 ```python
 # boxplot algorithm comparison
 fig = plt.figure(figsize=(12,8))
-fig.suptitle('Fig 16 - Algorithm Comparison')
+fig.suptitle('Fig 16 - Algorithm Comparison',y=0.95,size=20)
 ax = fig.add_subplot(111)
 plt.boxplot(results, widths = 0.6,
             patch_artist=True,
@@ -714,6 +715,37 @@ plt.show();
 
     
 ![png](/static/notebooks/molletweather/output_84_0.png)
+    
+
+
+Another point of view of the same data
+
+
+```python
+# Density Plot and Histogram of all arrival delays
+i = 0
+plt.figure(figsize=(12,8))
+for res in results:
+    # Draw the density plot
+    sns.set_palette("Oranges")
+    sns.distplot(res, hist = False, kde = True,
+                 kde_kws = {'linewidth': 2},
+                 label = names[i])
+    i+=1  
+# Plot formatting
+plt.legend(prop={'size': 12})
+plt.grid(color=light_white, linestyle='--', linewidth=0.5,alpha=0.1)
+plt.title('Fig 17 - Density Plot for accuracy Distribution',size=20)
+plt.xlabel('Accuracy')
+plt.ylabel('Density')
+plt.show();
+```
+
+
+    
+![png](/static/notebooks/molletweather/output_86_0.png)
+    
+
 
 ### Roc Curves for different models
 
@@ -738,7 +770,7 @@ for name, model in models:
     fpr, tpr, thresholds = metrics.roc_curve(y_test, probs)
     plt.plot(fpr, tpr, color=dark_theme_colors[i], label=name)
     i+=1
-plt.title('Fig 17 - Receiver Operating Characteristic (ROC) Curve')
+plt.title('Fig 18 - Receiver Operating Characteristic (ROC) Curve',size=20)
 plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--',alpha=0.8)
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
@@ -746,15 +778,15 @@ plt.legend()
 plt.show();
 ```
 
-    LR  AUC: 0.86
-    RF  AUC: 0.57
-    Xgb  AUC: 0.86
-    SVM  AUC: 0.93
+    LR  AUC: 0.84
+    RF  AUC: 0.80
+    Xgb  AUC: 0.80
+    SVM  AUC: 0.81
     
 
 
     
-![png](/static/notebooks/molletweather/output_87_1.png)
+![png](/static/notebooks/molletweather/output_89_1.png)
     
 
 
@@ -795,7 +827,7 @@ for name, model in models:
         if p > 0.05:
             print("We can reject null-hypothesis, Models performs different")
         else:
-            print("Null hypothesis cannot be rejected, No significant difference")
+            print("Null hypthoesis cannot be rejected, No significant difference")
     
 ```
 
@@ -812,9 +844,10 @@ for name, model in models:
     p-value: 1.140271075004485e-10
     Null hypthoesis cannot be rejected, No significant difference
     
+
 In fact, models are so near that this result could be something obvious, but now we can confirm in an objective way that there is no difference in terms of McNeman test using other models than SVM.
 
-#### Model visualization (using 2 principal features)
+### Model visualization (using 2 principal features)
 We are going to use 'Humitat relativa' and 'Pressió atmosfèrica' as they are 2 principal features in classification models, to take a look on how the classification models are working in the 'backend'.
 
 For that I will use sklearn sample that I have found [here](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html) that it's really interesant.
@@ -836,7 +869,7 @@ xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
 
 # just plot the dataset first
 plt.figure(figsize=(20,15))
-plt.suptitle("Fig 17 - Intuitive Classification by Model",  y=1, size = 28)
+plt.suptitle("Fig 19 - Classification Intiutive Visualization by Model",  y=0.95, size = 28)
 cm = plt.cm.coolwarm
 cm_bright = ListedColormap(['#10D0EE',orange])
 ax = plt.subplot(1, len(models) + 1, 1)
@@ -885,11 +918,13 @@ for name, clf in models:
     i += 1
 ```
 
-  
-![png](/static/notebooks/molletweather/output_94_0.png)
+
+    
+![png](/static/notebooks/molletweather/output_96_0.png)
+    
 
 
-## Automated tool - Tpot
+### Automated tool - Tpot
 We are going to use an automated tool to compare our score with automated score tool.
 We are going to use [Tpot](http://epistasislab.github.io/tpot/) tool. In terms of score comparision we should know that by default k-fold cross validation for Tpot is *10* the same as we have used when comparing models.
 
