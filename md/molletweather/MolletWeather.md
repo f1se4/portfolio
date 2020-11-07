@@ -714,6 +714,103 @@ plt.show();
 
     
 ![png](/static/notebooks/molletweather/output_84_0.png)
+
+### Roc Curves for different models
+
+
+```python
+df_result = df_raw_data.copy()
+scaler = StandardScaler()
+X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
+y = df_result['Precipitació']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+```
+
+
+```python
+i = 0
+plt.figure(figsize=(12,8))
+for name, model in models:
+    probs = model.predict_proba(X_test)
+    probs = probs[:, 1] #only positive class
+    auc = metrics.roc_auc_score(y_test, probs)
+    print(name,' AUC: %.2f' % auc)
+    fpr, tpr, thresholds = metrics.roc_curve(y_test, probs)
+    plt.plot(fpr, tpr, color=dark_theme_colors[i], label=name)
+    i+=1
+plt.title('Fig 17 - Receiver Operating Characteristic (ROC) Curve')
+plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--',alpha=0.8)
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.legend()
+plt.show();
+```
+
+    LR  AUC: 0.86
+    RF  AUC: 0.57
+    Xgb  AUC: 0.86
+    SVM  AUC: 0.93
+    
+
+
+    
+![png](/static/notebooks/molletweather/output_87_1.png)
+    
+
+
+### McNemar Comparision Between models
+We are going to get 1 model, the one that has best results in different testing (however in k-fold validation it's bit lower) the Support Vector Machine. And we are going to apply McNemar comparision with the other models.
+
+It uses null-hypothesis assuming that $P(1)$ and $P(2)$ are the same, so the alternative is that models are different, and we could evaluate *p-value* and compare.
+
+To test the null hypothesis that the predictive performance of two models are equal (using a significance level of α=0.05)
+
+
+```python
+from mlxtend.evaluate import mcnemar_table, mcnemar
+```
+
+
+```python
+df_result = df_raw_data.copy()
+scaler = StandardScaler()
+X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
+y = df_result['Precipitació']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+```
+
+
+```python
+y_pred_svm = models[3][1].predict(X_test)
+for name, model in models:
+    if name != 'SVM':
+        y_pred2 = model.predict(X_test)
+        tb = mcnemar_table(y_target=y_test, 
+                   y_model1=y_pred_svm, 
+                   y_model2=y_pred2)
+        chi2, p = mcnemar(ary=tb, corrected=True)
+        print('************************** ',name,' ****************************')
+        print('chi-squared:', chi2)
+        print('p-value:', p)
+        if p > 0.05:
+            print("We can reject null-hypothesis, Models performs different")
+        else:
+            print("Null hypothesis cannot be rejected, No significant difference")
+    
+```
+
+    **************************  LR  ****************************
+    chi-squared: 45.92391304347826
+    p-value: 1.2293611985907385e-11
+    Null hypthoesis cannot be rejected, No significant difference
+    **************************  RF  ****************************
+    chi-squared: 184.0255591054313
+    p-value: 6.405157725947537e-42
+    Null hypthoesis cannot be rejected, No significant difference
+    **************************  Xgb  ****************************
+    chi-squared: 41.56481481481482
+    p-value: 1.140271075004485e-10
+    Null hypthoesis cannot be rejected, No significant difference
     
 #### Model visualization (using 2 principal features)
 We are going to use 'Humitat relativa' and 'Pressió atmosfèrica' as they are 2 principal features in classification models, to take a look on how the classification models are working in the 'backend'.
@@ -787,7 +884,8 @@ for name, clf in models:
 ```
 
   
-![png](/static/notebooks/molletweather/output_86_0.png)
+![png](/static/notebooks/molletweather/output_94_0.png)
+
 
 ## Automated tool - Tpot
 We are going to use an automated tool to compare our score with automated score tool.
