@@ -46,7 +46,6 @@ df_station[df_station['CODI_ESTACIO']=='XG'].head()
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th></th>
       <th>CODI_ESTACIO</th>
       <th>NOM_ESTACIO</th>
       <th>LATITUD</th>
