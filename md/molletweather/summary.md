@@ -22,7 +22,7 @@
 |xgboost|
 |logistic regression|
 |random forest|
-|decision tree|
+|Support Vector Machine|
 
 ### Outputs
 
