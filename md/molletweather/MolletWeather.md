@@ -53,13 +53,11 @@ df_station[df_station['CODI_ESTACIO']=='XG'].head()
       <th>EMPLACAMENT</th>
       <th>ALTITUD</th>
       <th>NOM_MUNICIPI</th>
-      <th>CODI_COMARCA</th>
       <th>NOM_COMARCA</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>33</th>
       <td>XG</td>
       <td>Parets del Vallès</td>
       <td>41.56734</td>
