@@ -756,7 +756,9 @@ tpot.fit(X_train, y_train)
     
     Generation 5 - Current best internal CV score: 0.8055195127274171
     
-    Best pipeline: MLPClassifier(OneHotEncoder(input_matrix, minimum_fraction=0.25, sparse=False, threshold=10), alpha=0.1, learning_rate_init=0.001)
+    Best pipeline: 
+    MLPClassifier(OneHotEncoder(input_matrix, minimum_fraction=0.25, sparse=False, threshold=10), 
+    alpha=0.1, learning_rate_init=0.001)
     
 
 
