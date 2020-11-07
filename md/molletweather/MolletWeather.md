@@ -778,10 +778,10 @@ plt.legend()
 plt.show();
 ```
 
-    LR  AUC: 0.84
-    RF  AUC: 0.80
-    Xgb  AUC: 0.80
-    SVM  AUC: 0.81
+    LR  AUC: 0.86
+    RF  AUC: 0.61
+    Xgb  AUC: 0.86
+    SVM  AUC: 0.93
     
 
 
