@@ -2,13 +2,16 @@
 
 ## Libraries
 
+
 ```python
 # Data library
 import pandas as pd
+import numpy as np
 
 # Graphic libraries
 import seaborn as sns
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 from plotnine import *
 
 # Date Libraries
@@ -16,18 +19,21 @@ from datetime import datetime
 
 # Machine Learning Libraries
 from sklearn.model_selection import train_test_split
+from sklearn import model_selection
 from sklearn.preprocessing import StandardScaler
 import xgboost as xg #Algorithm, we will take classifier.
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn import svm
 from sklearn import metrics
+from mlxtend.evaluate import mcnemar_table, mcnemar
 ```
+
 ## Reading Data
 We are going to read 3 different Data from [Meteocat Opendata](https://www.meteo.cat/wpweb/serveis/cataleg-de-serveis/serveis-oberts/dades-obertes/):
 
 - **Stations information:** id and name of all Catalonian weather stations, it will let us to filter by the nearest station to my town, in this case 'Parets del Vallès'.
-- **Raw data by time:** Each day in different time there lots of measurment, this table have all the data saved in *'VALOR_LECTURA'* and which is the units of this measurement comes from *'CODI_VARIABLE'*. This file has been filtered from origin, because when saving all station data the file was coming to big... and if fact I only want 1 station.
+- **Raw data by time:** Each day in different time there lots of measurement, this table have all the data saved in *'VALOR_LECTURA'* and which is the units of this measurement comes from *'CODI_VARIABLE'*. This file has been filtered from origin, because when saving all station data the file was coming to big... and if fact I only want 1 station.
 - **Measurement data:** From *'CODI_VARIABLE'* you have which is the measurement, units, description, etc...
 
 First one, is only for validate that our *'CODI_ESTACIO'* is the one that we have pre-filtered in the origin (with meteocat filter options).
@@ -72,7 +78,6 @@ df_station[df_station['CODI_ESTACIO']=='XG'].head()
 </div>
 
 
-
 ## Data cleaning and adjustments
 
 
@@ -95,9 +100,9 @@ print('Variables identifier type: ',df_var.CODI_VARIABLE.dtype)
 
 Our value 'VALOR_LECTURA' it's in the correct type, we will have to check that it's the same in all the process, 'CODI_VARIABLE' will have to be the same type as 'CODI_VARIABLE' of *df_var*, as it is, so we could merge in the next steps.
 
-'DATA_LECUTRA' is a date which will help us to simplify the model by days, and help us to eliminate some hours non-mesured data, but in the future we will try to do hourly as for raining reasons microstate of the weather could be really important.
+'DATA_LECUTRA' is a date which will help us to simplify the model by days, and help us to eliminate some hours non-measured data.
 
-### Joining measure information detail with measurement value
+### Joining mesure information detail with mesurement value
 
 We are going to Merge both datasets using 'CODI_VARIABLE' as key element.
 
@@ -202,7 +207,7 @@ df_result['Precipitació'] = df_result['Precipitació'].apply(rained)
 
 ### Balancing data
 
-In my region Mediterranian climate we have some raining days, but the usual is that we have sunny days. So we will check if we have balanced data as initial hypothesis is that not.
+In my region Mediterranean climate we have some raining days, but the usual is that we have sunny days. So we will check if we have balanced data as initial hypothesis is that not.
 
 
 ```python
@@ -247,13 +252,18 @@ Before balancing the dataset, we have done some model without balancing data and
 
 
 ```python
-sns.heatmap(df_result.corr()>0.7,cmap='magma')
 plt.title("Fig 1 - Correlation Matrix")
+sns.heatmap(df_result.corr()>0.7,cmap='magma');
 ```
+
+
     
 ![png](/static/notebooks/molletweather/output_27_0.png)
     
+
+
 After visual check we will drop:
+
 
 ```python
 df_result.drop(['Temperatura mínima',
@@ -266,17 +276,26 @@ df_result.drop(['Temperatura mínima',
 ### Dealing with *NaN* values
 In this case we will apply mean value from column to the correspondence *Nan* value.
 
+### Validating data Distribution and outliers
+
+
 ```python
 df_result = df_result.apply(lambda x: x.fillna(x.mean()),axis=0)
 ```
 
-### Validating data Distribution and outliers
 
 ```python
 n=2
 for col in df_result.drop(['Precipitació'],axis=1).columns:
-    sns.boxplot(data=df_result[col])
+    plt.boxplot(df_result[col], widths = 0.6,
+                patch_artist=True,
+                boxprops=dict(facecolor=orange, color=yellow_orange),
+                capprops=dict(color=orange),
+                whiskerprops=dict(color=orange),
+                flierprops=dict(color=orange, markeredgecolor=orange),
+                medianprops=dict(color=yellow_orange))
     plt.title('Fig '+str(n)+' - '+str(col))
+    plt.grid(color=light_white, linestyle='--', linewidth=0.5,alpha=0.1)
     plt.show()
     n+=1
 ```
@@ -316,15 +335,22 @@ for col in df_result.drop(['Precipitació'],axis=1).columns:
 ![png](/static/notebooks/molletweather/output_33_5.png)
     
 
-We have not find any important outlier or non-sense value so we are ready to start our modeling
+
+We have not found any important outlier or non-sense value so we are ready to start our modeling
+
+### Saving Data and shuffle
+Date index has helped for resampling data (by day), but now it's not more necessary, we are going to drop this index to avoid any interference, and we will 
+
 
 ```python
+df_result.reset_index(drop=True,inplace=True)
+df_result.sample(frac=1)
 df_raw_data = df_result.copy() #we will save our cleaned data
 ```
 
 ## Quick view of raining days characteristics
+We are going to plot 2 different graphics, summary relation plot of all features with our predicted value (rain yes/rain no) to see if we will find some relevant classification issue, or something to deal before modeling. And one detailed case for completion.
 
-We are going to plot 2 different graphics, summary relation plot of all features with our predicted value (rain yes/rain no) to see if we will find some relevant classification issue, or something to deal before modeling.
 
 ```python
 sns.pairplot(df_result,hue='Precipitació')
@@ -337,7 +363,7 @@ plt.suptitle("Fig 8 - Relation Plot between all features",  y=1.02, size = 28);
     
 
 
-Well, it seems that when raining there are always some frontier that would be classify raining days vs not.
+Well, it seems that when raining there are always some frontier that would classify raining days vs not.
 
 Some details about one relation to check this.
 
@@ -362,9 +388,7 @@ df_graf['Precipitació'] = df_graf['Precipitació'].apply(lambda x:str(x)) #to g
 
 ## Modeling our classification Algorithm
 
-### XGBoost
-
-#### Split into train and testing data
+### Split into train and testing data
 
 
 ```python
@@ -374,6 +398,8 @@ X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
 y = df_result['Precipitació']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 ```
+
+### XGBoost
 
 #### Creating and fitting our model
 
@@ -419,14 +445,14 @@ print(metrics.classification_report(y_test,y_pred))
 
 
     
-![png](/static/notebooks/molletweather/output_47_0.png)
+![png](/static/notebooks/molletweather/output_48_0.png)
     
 
 
                   precision    recall  f1-score   support
     
-               0       0.76      0.82      0.79       420
-               1       0.77      0.71      0.74       364
+               0       0.78      0.81      0.79       420
+               1       0.77      0.74      0.75       364
     
         accuracy                           0.77       784
        macro avg       0.77      0.77      0.77       784
@@ -449,22 +475,11 @@ ax = sns.barplot(x="Importance", y="feature", data=feat_imp_top10,palette="Orang
 
 
     
-![png](/static/notebooks/molletweather/output_49_0.png)
+![png](/static/notebooks/molletweather/output_50_0.png)
     
 
 
 ### Logistic Regression
-
-#### Split into train and testing data and scaling data
-
-
-```python
-df_result = df_raw_data.copy()
-scaler = StandardScaler()
-X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
-y = df_result['Precipitació']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-```
 
 #### Creating and fitting our model
 
@@ -472,9 +487,15 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random
 ```python
 model_lr = LogisticRegression()
 model_lr.fit(X_train,y_train)
+params = model_lr.get_params()
+print('Linear Regression: ',params)
 ```
 
+    Linear Regression:  {'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': None, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'l2', 'random_state': None, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}
+    
+
 #### Accuracy and Confusion Matrix
+
 
 ```python
 y_pred = model_lr.predict(X_test)
@@ -493,31 +514,24 @@ plt.show()
 print(metrics.classification_report(y_test,y_pred))
 ```
 
+
     
-![png](/static/notebooks/molletweather/output_57_0.png)
+![png](/static/notebooks/molletweather/output_56_0.png)
     
 
 
                   precision    recall  f1-score   support
     
-               0       0.76      0.86      0.81       420
-               1       0.81      0.68      0.74       364
+               0       0.75      0.81      0.78       420
+               1       0.76      0.69      0.72       364
     
-        accuracy                           0.78       784
-       macro avg       0.78      0.77      0.77       784
-    weighted avg       0.78      0.78      0.78       784
+        accuracy                           0.75       784
+       macro avg       0.75      0.75      0.75       784
+    weighted avg       0.75      0.75      0.75       784
     
     
 
 ### Random Forest
-#### Split into train and testing data and scaling data
-
-
-```python
-X = df_result.drop('Precipitació',axis=1)
-y = df_result['Precipitació']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-```
 
 #### Creating and fitting our model
 
@@ -525,7 +539,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random
 ```python
 model_rf = RandomForestClassifier()
 model_rf.fit(X_train,y_train)
+params = model_rf.get_params()
+print('Random Forest: ',params)
 ```
+
+    Random Forest:  {'bootstrap': True, 'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': 'auto', 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_impurity_split': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'n_estimators': 100, 'n_jobs': None, 'oob_score': False, 'random_state': None, 'verbose': 0, 'warm_start': False}
+    
 
 #### Accuracy and Confusion Matrix
 
@@ -547,19 +566,20 @@ plt.show()
 print(metrics.classification_report(y_test,y_pred))
 ```
 
+
     
-![png](/static/notebooks/molletweather/output_64_0.png)
+![png](/static/notebooks/molletweather/output_62_0.png)
     
 
 
                   precision    recall  f1-score   support
     
-               0       0.76      0.85      0.80       420
-               1       0.80      0.68      0.74       364
+               0       0.76      0.83      0.80       420
+               1       0.78      0.70      0.74       364
     
         accuracy                           0.77       784
-       macro avg       0.78      0.77      0.77       784
-    weighted avg       0.78      0.77      0.77       784
+       macro avg       0.77      0.77      0.77       784
+    weighted avg       0.77      0.77      0.77       784
     
     
 
@@ -578,36 +598,31 @@ ax = sns.barplot(x="Importance", y="feature", data=feat_imp_top10,palette="Orang
 
 
     
-![png](/static/notebooks/molletweather/output_66_0.png)
+![png](/static/notebooks/molletweather/output_64_0.png)
     
 
 
-### Support Vector Machine (SVM)
+### Support Vecotr Machine (SVM)
 
 We will use 'rbf' kernel **Radial Basis Function (RBF)**, It seems the best to use from standard sklearn models.
 
-We have different parameters for *rbf* kernel, depends on our distribution. It's going to be used gamma=1 and C=1, as we have clear differentiation and not big distribution for our features, as we have seen in *Fig 9*.
+We have different parameters for *rbf* kernel, depends on our distribution. We will use gamma=1 and C=1, as we have clear differentiation and not big distribution for our features, as we have seen in *Fig 9*.
 
 ![image.png](/static/notebooks/molletweather/image.png)
-
-#### Split into train and testing data
-
-
-```python
-df_result = df_raw_data.copy()
-scaler = StandardScaler() #Logistic regression variable weigh is relevant so we will scale it
-X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
-y = df_result['Precipitació']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-```
 
 #### Creating and fitting our model
 
 
 ```python
-model_svm = svm.SVC(kernel='rbf',gamma=1,C=1)
+model_svm = svm.SVC(kernel='rbf',gamma=1,C=1,probability=True)
 model_svm.fit(X,y)
+params = model_svm.get_params()
+print('Support Vector Machine: ',params)
 ```
+
+    Support Vector Machine:  {'C': 1, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovr', 'degree': 3, 'gamma': 1, 'kernel': 'rbf', 'max_iter': -1, 'probability': True, 'random_state': None, 'shrinking': True, 'tol': 0.001, 'verbose': False}
+    
+
 #### Accuracy and Confusion Matrix
 
 
@@ -624,35 +639,25 @@ plt.xlabel('Predicted label')
 plt.show()
 print(metrics.classification_report(y_test,y_pred))
 ```
+
+
     
-![png](/static/notebooks/molletweather/output_75_0.png)
+![png](/static/notebooks/molletweather/output_71_0.png)
     
 
 
                   precision    recall  f1-score   support
     
-               0       0.84      0.91      0.87       420
-               1       0.89      0.79      0.84       364
+               0       0.85      0.89      0.87       420
+               1       0.87      0.82      0.84       364
     
         accuracy                           0.86       784
        macro avg       0.86      0.85      0.86       784
     weighted avg       0.86      0.86      0.86       784
+    
+    
 
 ## Comparing Models
-###  Accuracy from K-Fold Cross Validation
-We have studied different models individually, by checking that recall data is balanced, and we get good accuracy values, and also have checked different metaparameters for the different models. So we have defined different models with the best values by executing them one by one.
-
-Now, we are going to compare all the models we have created, through K-Fold Cross validation to avoid overfitting as far as we could get most realistic accuracy for our models.
-
-### Selecting independent and dependent Variable
-
-
-```python
-df_result = df_raw_data.copy()
-scaler = StandardScaler() #Logistic regression variable weigh is relevant so we will scale it
-X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
-y = df_result['Precipitació']
-```
 
 ### Adding our models to be compared
 
@@ -666,7 +671,12 @@ models.append(('Xgb', model_xg))
 models.append(('SVM', model_svm))
 ```
 
-### Evaluate each model by turn and get accuracy and $\sigma$
+### Accuracy from K-Fold Cross Validation
+We have studied different models individually, by checking that recall data is balanced, and we get good accuracy values, and also have checked different metaparameters for the different models. So we have defined different models with the best values by executing them one by one.
+
+Now, we are going to compare all the models we have created, through K-Fold Cross validation to avoid overfitting as far as we could and most realistic accuracy for our models.
+
+#### Evaluate each model by turn and get accuracy and $\sigma$
 
 
 ```python
@@ -686,13 +696,13 @@ for name, model in models:
 	print(msg)
 ```
 
-    LR: 0.736345 (0.089678)
-    RF: 0.747291 (0.083891)
-    Xgb: 0.733360 (0.067553)
-    SVM: 0.735055 (0.073272)
+    LR: 0.724545 (0.089277)
+    RF: 0.727921 (0.088092)
+    Xgb: 0.723678 (0.075765)
+    SVM: 0.714410 (0.077524)
     
 
-#### Visual Comparision
+#### Visual Comparison
 
 
 ```python
@@ -714,7 +724,7 @@ plt.show();
 
 
     
-![png](/static/notebooks/molletweather/output_84_0.png)
+![png](/static/notebooks/molletweather/output_79_0.png)
     
 
 
@@ -743,20 +753,11 @@ plt.show();
 
 
     
-![png](/static/notebooks/molletweather/output_86_0.png)
+![png](/static/notebooks/molletweather/output_81_0.png)
     
 
 
 ### Roc Curves for different models
-
-
-```python
-df_result = df_raw_data.copy()
-scaler = StandardScaler()
-X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
-y = df_result['Precipitació']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-```
 
 
 ```python
@@ -778,15 +779,15 @@ plt.legend()
 plt.show();
 ```
 
-    LR  AUC: 0.86
-    RF  AUC: 0.61
-    Xgb  AUC: 0.86
+    LR  AUC: 0.84
+    RF  AUC: 0.85
+    Xgb  AUC: 0.85
     SVM  AUC: 0.93
     
 
 
     
-![png](/static/notebooks/molletweather/output_89_1.png)
+![png](/static/notebooks/molletweather/output_83_1.png)
     
 
 
@@ -796,20 +797,6 @@ We are going to get 1 model, the one that has best results in different testing 
 It uses null-hypothesis assuming that $P(1)$ and $P(2)$ are the same, so the alternative is that models are different, and we could evaluate *p-value* and compare.
 
 To test the null hypothesis that the predictive performance of two models are equal (using a significance level of α=0.05)
-
-
-```python
-from mlxtend.evaluate import mcnemar_table, mcnemar
-```
-
-
-```python
-df_result = df_raw_data.copy()
-scaler = StandardScaler()
-X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
-y = df_result['Precipitació']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-```
 
 
 ```python
@@ -828,20 +815,19 @@ for name, model in models:
             print("We can reject null-hypothesis, Models performs different")
         else:
             print("Null hypthoesis cannot be rejected, No significant difference")
-    
 ```
 
     **************************  LR  ****************************
-    chi-squared: 45.92391304347826
-    p-value: 1.2293611985907385e-11
+    chi-squared: 64.64646464646465
+    p-value: 8.961694634394557e-16
     Null hypthoesis cannot be rejected, No significant difference
     **************************  RF  ****************************
-    chi-squared: 184.0255591054313
-    p-value: 6.405157725947537e-42
+    chi-squared: 47.86813186813187
+    p-value: 4.558715474204364e-12
     Null hypthoesis cannot be rejected, No significant difference
     **************************  Xgb  ****************************
-    chi-squared: 41.56481481481482
-    p-value: 1.140271075004485e-10
+    chi-squared: 37.57798165137615
+    p-value: 8.783035418793241e-10
     Null hypthoesis cannot be rejected, No significant difference
     
 
@@ -858,27 +844,26 @@ For that I will use sklearn sample that I have found [here](https://scikit-learn
 h = .02  # step size in the mesh
 df_result = df_raw_data.copy()
 scaler = StandardScaler() #Logistic regression variable weigh is relevant so we will scale it
-y = df_result['Precipitació']
 Xvalues = df_result.drop('Precipitació',axis=1)
-X = scaler.fit_transform(Xvalues[['Humitat relativa','Pressió atmosfèrica']])
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.4, random_state=42)
-x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
-y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+Xvis = scaler.fit_transform(Xvalues[['Humitat relativa','Pressió atmosfèrica']])
+Xvis_train, Xvis_test, yvis_train, yvis_test = train_test_split(Xvis, y, test_size=.4, random_state=42)
+x_min, x_max = Xvis[:, 0].min() - .5, Xvis[:, 0].max() + .5
+y_min, y_max = Xvis[:, 1].min() - .5, Xvis[:, 1].max() + .5
 xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
                      np.arange(y_min, y_max, h))
 
 # just plot the dataset first
 plt.figure(figsize=(20,15))
-plt.suptitle("Fig 19 - Classification Intiutive Visualization by Model",  y=0.95, size = 28)
+plt.suptitle("Fig 19 - Classification Intiutive by Model",  y=1, size = 28)
 cm = plt.cm.coolwarm
 cm_bright = ListedColormap(['#10D0EE',orange])
 ax = plt.subplot(1, len(models) + 1, 1)
 ax.set_title("Input data")
 # Plot the training points
-ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright,
+ax.scatter(Xvis_train[:, 0], Xvis_train[:, 1], c=yvis_train, cmap=cm_bright,
            edgecolors=darked)
 # Plot the testing points
-ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cm_bright, alpha=0.6,
+ax.scatter(Xvis_test[:, 0], Xvis_test[:, 1], c=yvis_test, cmap=cm_bright, alpha=0.6,
            edgecolors=darked)
 ax.set_xlim(xx.min(), xx.max())
 ax.set_ylim(yy.min(), yy.max())
@@ -888,8 +873,8 @@ ax.set_yticks(())
 i = 2
 for name, clf in models:
     ax = plt.subplot(1, len(models) + 1, i)
-    clf.fit(X_train, y_train)
-    score = clf.score(X_test, y_test)
+    clf.fit(Xvis_train, yvis_train)
+    score = clf.score(Xvis_test, yvis_test)
     # Plot the decision boundary. For that, we will assign a color to each
     # point in the mesh [x_min, x_max]x[y_min, y_max].
     if hasattr(clf, "decision_function"):
@@ -902,10 +887,10 @@ for name, clf in models:
     ax.contourf(xx, yy, Z, cmap=cm, alpha=.7)
 
     # Plot the training points
-    ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright,
+    ax.scatter(Xvis_train[:, 0], Xvis_train[:, 1], c=yvis_train, cmap=cm_bright,
                edgecolors=darked)
     # Plot the testing points
-    ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cm_bright,
+    ax.scatter(Xvis_test[:, 0], Xvis_test[:, 1], c=yvis_test, cmap=cm_bright,
                edgecolors=darked, alpha=0.6)
 
     ax.set_xlim(xx.min(), xx.max())
@@ -920,7 +905,7 @@ for name, clf in models:
 
 
     
-![png](/static/notebooks/molletweather/output_96_0.png)
+![png](/static/notebooks/molletweather/output_88_0.png)
     
 
 
@@ -935,60 +920,55 @@ from tpot import TPOTClassifier
 
 
 ```python
-df_result = df_raw_data.copy()
-scaler = StandardScaler() #Logistic regression variable weigh is relevant so we will scale it
-X = scaler.fit_transform(df_result.drop('Precipitació',axis=1))
-y = df_result['Precipitació']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-```
-
-
-```python
 tpot = TPOTClassifier(generations=5,population_size=50, verbosity=2, n_jobs=3)
 tpot.fit(X_train, y_train)
 ```
+HBox(children=(HTML(value='Optimization Progress'), FloatProgress(value=0.0, max=300.0), HTML(value='')))
 
 
-    HBox(children=(HTML(value='Optimization Progress'), FloatProgress(value=0.0, max=300.0), HTML(value='')))
 
+Generation 1 - Current best internal CV score: 0.7954486836101027
 
-    
-    Generation 1 - Current best internal CV score: 0.7954486836101027
-    
-    Generation 2 - Current best internal CV score: 0.8055195127274171
-    
-    Generation 3 - Current best internal CV score: 0.8055195127274171
-    
-    Generation 4 - Current best internal CV score: 0.8055195127274171
-    
-    Generation 5 - Current best internal CV score: 0.8055195127274171
-    
-    Best pipeline: 
-    MLPClassifier(OneHotEncoder(input_matrix, minimum_fraction=0.25, sparse=False, threshold=10), 
-    alpha=0.1, learning_rate_init=0.001)
+Generation 2 - Current best internal CV score: 0.8055195127274171
 
-    TPOTClassifier(generations=5, n_jobs=3, population_size=50, verbosity=2)
+Generation 3 - Current best internal CV score: 0.8055195127274171
+
+Generation 4 - Current best internal CV score: 0.8055195127274171
+
+Generation 5 - Current best internal CV score: 0.8055195127274171
+
+Best pipeline: 
+MLPClassifier(OneHotEncoder(input_matrix, minimum_fraction=0.25, sparse=False, threshold=10), 
+alpha=0.1, learning_rate_init=0.001)
+
+TPOTClassifier(generations=5, n_jobs=3, population_size=50, verbosity=2)
 
 
 ```python
 print(tpot.score(X_test, y_test))
 ```
 
-    0.7946428571428571
+    0.764030612244898
     
-Using this automated tool we have arrived to an accuracy of *0.79* and our best result by modeling one by one has been *0.75*, which is a really good result.
+
+Using this automated tool we have arrived to an accuracy of *0.76* and our best result by modeling one by one has been *0.73*, which is a really good result.
 
 The algorithm that recommends Tpot is MLPClassifier it's Multi-layer Perceptron classifier. Neural network with *100* layers by default, and 'relu' activation function.
 
-I think that an accuracy difference of *0.04* it's not so relevant for us than understanding or explaining the statistical model. Models done one by one could help much more how to explain or understand the dataset.
+I think that an accuracy difference of *0.03* it's not so relevant for us than understanding or explaining the statistical model. Models done one by one could help much more how to explain or understand the dataset.
 
 ## Conclusions
 
 If we should get only one model to our predictions we would get **Support Vector Machine**.
 
-- It has the best score in usual train/test validations, for *recall*, *f1 score* and *accuracy*
-- When doing K-Fold cross validation, all models have perform similar *accuracy*, standard deviation overlaps all the other model results.
-- It has far away the best *ROC Curve* and *AUC* value.
-- The way as describe different probabilities for raining days fits with the correlation.
-- Compared with other models there are no difference between confusion matrix results. (McNeman)
-- It's close also to *accuracy* from the model used by ML automation tool.
+1- It has the best score in usual train/test validations, for *recall*, *f1 score* and *accuracy*
+
+2- When doing K-Fold cross validation, all models have perform similar *accuracy*, standard deviation overlaps all the other model results.
+
+3- It has far away the best *ROC Curve* and *AUC* value.
+
+4- The way as describe different probabilities for raining days fits with the correlation.
+
+5- Compared with other models there are no difference between confusion matrix results. (McNeman)
+
+6- It's close also to *accuracy* from the model used by ML automation tool.
