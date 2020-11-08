@@ -491,7 +491,9 @@ params = model_lr.get_params()
 print('Linear Regression: ',params)
 ```
 
-    Linear Regression:  {'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': None, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 'penalty': 'l2', 'random_state': None, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}
+    Linear Regression:  {'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 
+    'intercept_scaling': 1, 'l1_ratio': None, 'max_iter': 100, 'multi_class': 'auto', 'n_jobs': None, 
+    'penalty': 'l2', 'random_state': None, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}
     
 
 #### Accuracy and Confusion Matrix
@@ -543,7 +545,11 @@ params = model_rf.get_params()
 print('Random Forest: ',params)
 ```
 
-    Random Forest:  {'bootstrap': True, 'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': 'auto', 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_impurity_split': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'n_estimators': 100, 'n_jobs': None, 'oob_score': False, 'random_state': None, 'verbose': 0, 'warm_start': False}
+    Random Forest:  {'bootstrap': True, 'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 
+    'max_depth': None, 'max_features': 'auto', 'max_leaf_nodes': None, 'max_samples': None, 
+    'min_impurity_decrease': 0.0, 'min_impurity_split': None, 'min_samples_leaf': 1, 
+    'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'n_estimators': 100, 
+    'n_jobs': None, 'oob_score': False, 'random_state': None, 'verbose': 0, 'warm_start': False}
     
 
 #### Accuracy and Confusion Matrix
@@ -620,7 +626,10 @@ params = model_svm.get_params()
 print('Support Vector Machine: ',params)
 ```
 
-    Support Vector Machine:  {'C': 1, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 'coef0': 0.0, 'decision_function_shape': 'ovr', 'degree': 3, 'gamma': 1, 'kernel': 'rbf', 'max_iter': -1, 'probability': True, 'random_state': None, 'shrinking': True, 'tol': 0.001, 'verbose': False}
+    Support Vector Machine:  {'C': 1, 'break_ties': False, 'cache_size': 200, 'class_weight': None, 
+    'coef0': 0.0, 'decision_function_shape': 'ovr', 'degree': 3, 'gamma': 1, 
+    'kernel': 'rbf', 'max_iter': -1, 'probability': True, 'random_state': None, 
+    'shrinking': True, 'tol': 0.001, 'verbose': False}
     
 
 #### Accuracy and Confusion Matrix
