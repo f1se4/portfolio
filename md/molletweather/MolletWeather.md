@@ -932,6 +932,7 @@ from tpot import TPOTClassifier
 tpot = TPOTClassifier(generations=5,population_size=50, verbosity=2, n_jobs=3)
 tpot.fit(X_train, y_train)
 ```
+```
 HBox(children=(HTML(value='Optimization Progress'), FloatProgress(value=0.0, max=300.0), HTML(value='')))
 
 
@@ -951,7 +952,7 @@ MLPClassifier(OneHotEncoder(input_matrix, minimum_fraction=0.25, sparse=False, t
 alpha=0.1, learning_rate_init=0.001)
 
 TPOTClassifier(generations=5, n_jobs=3, population_size=50, verbosity=2)
-
+```
 
 ```python
 print(tpot.score(X_test, y_test))
