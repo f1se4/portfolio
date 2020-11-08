@@ -796,7 +796,7 @@ plt.show();
 
 
     
-![png](/static/notebooks/molletweather/output_83_1.png)
+![png](/static/notebooks/molletweather/output_83_1b.png)
     
 
 
