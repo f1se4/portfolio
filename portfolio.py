@@ -1,9 +1,19 @@
+from flask import Flask, render_template, request, session, escape,\
+                    redirect, url_for, flash, g, send_from_directory, abort,\
+					render_template_string
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+
+import os
 import sys
-from flask import Flask, render_template, render_template_string
+import urllib.parse, hashlib
+
 import markdown
 from flask_misaka import Misaka
 
 md = markdown.Markdown(extensions=['mdx_math','fenced_code','tables','sane_lists'])
+ALLOWED_EXTENSIONS = set(["png", "jpg", "jpge", "gif", "pdf"])
 
 app = Flask(__name__)
 Misaka(app)
