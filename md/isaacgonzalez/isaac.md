@@ -1,5 +1,5 @@
-# Creation of Machine Learning Model (Logistics Regression)
-### *Course done by Isaac González Course*
+# Creation of Machine Learning Model (Logistic Regression)
+### *Course done by Isaac González*
  <br>
  
 
@@ -8,12 +8,12 @@ This notebook has been made in parallel to Isaac González Machine learning chal
 
 This course is highly recommended both for people who are just starting out and for people who know but have not touched *R* and want to see a complete flow with developed in *R* with the RStudio IDE. It has helped me to know what differences are between *R* and *Python*, and above all for adding to my knowledge a brushstroke of the methodology that a professional follows when facing an ML problem.
 
-I have been following the course by ussing *Python* language and seeing its parallel capabilities, since all the scripts ,more or less, have a 'translation' to *python* from *R*
+I have been following the course by using *Python* language and seeing its parallel capabilities, since all the scripts, more or less, have a 'translation' to *python* from *R*
 
-I leave you therefore, if someone gives with this link a summary of the 3 classes of Isaac González developed in python instead of R, for completeness. Fervently recommending to take his course and follow his classes (approx 3h) of pure learning.
+I leave you therefore, if someone gives with this link a summary of the 3 classes of Isaac González developed in python instead of R, for completeness. Fervently I encourage to take his course and follow his classes (approx. 3h) of pure learning.
 
 ### Course objective
-The objective is to analyze a data set of a machine that can fail suddenly, it has a whole series of instruments attached to it to monitor temperature, humidity and different measurements, we will analyse raw data and finally modeling it which will allow with input data to know if the machine can fail or not, or what is the possibility of failure.
+The objective is to analyze a data set of a machine that can fail suddenly, it has a whole series of instruments attached to it to monitor temperature, humidity and different measurements, we will analyze raw data and finally modeling it which will allow with input data to know if the machine can fail or not, or what is the possibility of failure.
 
 Those of you who follow Isaac González's course: You will see that I try to avoid as much as possible 'spoilers' of the course, but I have to explain something so that the notebook makes some sense, you will also see that it has some additions because I found it interesting.
 
@@ -239,7 +239,7 @@ plt.show()
 
 More visual elements that can lead us to understand the behavior of variables, their distribution functions, outliers, whether or not they are continuous or categorical variables, etc ...
 
-I will not add some much comments, if you are interested follow Isaac Gonzalez Course.
+I will not add so many comments, if you are interested follow Isaac Gonzalez Course.
 
 
 ```python
@@ -630,7 +630,7 @@ df.drop('Measure3',axis=1,inplace=True)
 
 ```python
 #Concatenate
-df.reset_index(drop=True, inplace=True) #reseteamos indices para que la concatenación sea exitosa (técnico)
+df.reset_index(drop=True, inplace=True) #reset index for succesful concat.
 df_Operators.reset_index(drop=True, inplace=True)
 df_ms2.reset_index(drop=True, inplace=True)
 df_ms3.reset_index(drop=True, inplace=True)
