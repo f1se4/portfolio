@@ -73,7 +73,15 @@ def dashboard():
 		notebook = file.read()
 	with open("./md/dashboard/summary.md", "r") as file:
 		summary = file.read()
-	return render_template("dashboard.html", notebook=md.convert(notebook), summary=md.convert(summary))	
+	return render_template("dashboard.html", notebook=md.convert(notebook), summary=md.convert(summary))
+
+@app.route('/isaac')
+def isaac():
+	with open("./md/isaacgonzalez/isaac.md", "r") as file:
+		notebook = file.read()
+	with open("./md/isaacgonzalez/summary.md", "r") as file:
+		summary = file.read()
+	return render_template("isaac.html", notebook=md.convert(notebook), summary=md.convert(summary))		
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
