@@ -601,7 +601,7 @@ df_backup = df.copy()
 df = df_res.copy()
 ```
 
-### Segregamos los valores categóricos en columnas diferenciadas (nuevas variables)
+### One-Hot encoder for categorical values
 
 
 ```python
