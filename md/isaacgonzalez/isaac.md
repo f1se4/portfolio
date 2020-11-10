@@ -217,7 +217,7 @@ plt.show()
 
 
     
-![png](/static/notebooks/notebooks/isaac/output_12_0.png)
+![png](/static/notebooks/isaac/output_12_0.png)
     
 
 
