@@ -163,7 +163,7 @@ for val in df_res['NOM_VARIABLE'].unique():
 
 We will drop features <> 4320 observations.
 
-Then we will get the other features and create new dataframe, resampled to Day/Mean value and with non NaN values with 4320 samples.
+Then we will get the other features and create new dataframe, resampled to Day/Mean value and with non NaN values with 4320 samples. So we could avoid NaN validation.
 
 
 ```python
@@ -197,7 +197,7 @@ df_result.index = t_day.index
 
 ### Boolean result feature
 
-We will also for fit our classification model going to transform our precipitation feature from measure to yes|not has rained feature, 1 to has rained and 0 to not.
+To fit our classification model we are going to transform our precipitation feature from measure to yes|not has rained to integer feature, 1 to has rained and 0 to not.
 
 
 ```python
@@ -272,9 +272,6 @@ df_result.drop(['Temperatura mínima',
                 'Humitat relativa mínima',
                 'Pressió atmosfèrica màxima'],axis=1,inplace=True)
 ```
-
-### Dealing with *NaN* values
-In this case we will apply mean value from column to the correspondence *Nan* value.
 
 ### Validating data Distribution and outliers
 
