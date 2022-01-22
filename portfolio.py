@@ -17,6 +17,7 @@ ALLOWED_EXTENSIONS = set(["png", "jpg", "jpge", "gif", "pdf"])
 
 app = Flask(__name__)
 Misaka(app)
+#app.config['APPLICATION_ROOT'] = '/portfolio'
 
 @app.route('/')
 def home_page():
