@@ -31,52 +31,53 @@
 </div>
 <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#part3">Business Analytics/Discovery</a>
+      <a class="nav-link active" data-toggle="tab" href="#part1">Business Analytics/Discovery</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#part2">Classification Projects</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#part1">Regression Projects</a>
+      <a class="nav-link" data-toggle="tab" href="#part3">Regression Projects</a>
     </li>
 	<li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#part4">DashBoards/Webscrapping/Others</a>
     </li>
 </ul>
   <div id="myTabContent" class="tab-content">
-    <div role="tabpanel" class="tab-pane fade active show" id="part3">
+    <div role="tabpanel" class="tab-pane fade active show" id="part1">
         <div class="jumbotron">
 			<div class ='row'>
-				<div class="card-deck">	
-					<!-- col1 init -->
+				<div class="card-deck">
+						<!-- col1 init -->
 						<div class="card mb-3">
-							<h3 class="card-header">Airbnb - Barcelona Price prediction </h3>
+							<h3 class="card-header">Airbnb - Madrid Discovery Project</h3>
+							<div class="card-body">
+								<h5 class="card-title">Discovery project from Airbnb data related to Madrid</h5>
+								<h6 class="card-subtitle text-muted"></h6>
+							</div>
+						<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project4.jpg') }}" alt="airbnb">
 						<div class="card-body">
-							<h5 class="card-title">Full DS project, from datacleaning till explotation using Public Data from Airbnb of the city of Barcelona</h5>
-							<h6 class="card-subtitle text-muted"></h6>
-						</div>
-						<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project4.jpg') }}" alt="Gompertz Project">
-						<div class="card-body">
-							<p class="card-text">Airbnb data information from Insider Airbnb page. We want to know how prices are determined and which factors are most relevant for the airbnb users in the city of Barcelona</p>
+							<p class="card-text">Airbnb data information from Insider Airbnb page. We will try to discover impact insights from Madrid Airbnb data, then all these insights will be presented in a correct way</p>
 						</div>
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item">#MachineLearning</li>
-							<li class="list-group-item">#RandomForest #LinearRegression</li>
+							<li class="list-group-item">#Business Analytics</li>
+							<li class="list-group-item">#Proxy variables</li>
 							<li class="list-group-item">#Data-Cleaning #Data-Analysis #Pandas</li>
 						</ul>
 						<div class="card-body">
-						  <a href="/portfolio{{ url_for('airbnb') }}" class="card-link">Notebook</a>
+						<a href="/portfolio{{ url_for('airbnb') }}" class="card-link">Notebook</a>
 						</div>
 						<div class="card-footer text-muted">
-							Developed on October 2020
+							Developed on August 2022
 						</div>
 					</div>					
-					<!-- col1 end-->	
+					<!-- col1 end-->
+									<!-- col1 end-->	
 					<div class="card mb-3">
 						<!-- project info -->
 					</div>					
 				<!-- col1 end-->
-					<!-- col1 end-->	
+									<!-- col1 end-->	
 					<div class="card mb-3">
 						<!-- project info -->
 					</div>					
@@ -152,12 +153,12 @@
 				<div class="card-deck">
 						<!-- col1 init -->
 						<div class="card mb-3">
-							<h3 class="card-header">Airbnb - Madrid Analysis </h3>
+							<h3 class="card-header">Airbnb - Barcelona Price Prediction</h3>
 						<div class="card-body">
 							<h5 class="card-title">Full DS project, from datacleaning till explotation using Public Data from Airbnb of the city of Barcelona</h5>
 							<h6 class="card-subtitle text-muted"></h6>
 						</div>
-						<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project4.jpg') }}" alt="Gompertz Project">
+						<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project4.jpg') }}" alt="airbnb">
 						<div class="card-body">
 							<p class="card-text">Airbnb data information from Insider Airbnb page. We want to know how prices are determined and which factors are most relevant for the airbnb users in the city of Barcelona</p>
 						</div>
@@ -167,7 +168,7 @@
 							<li class="list-group-item">#Data-Cleaning #Data-Analysis #Pandas</li>
 						</ul>
 						<div class="card-body">
-						<a href="/portfolio{{ url_for('airbnbds4') }}" class="card-link">Notebook</a>
+						<a href="/portfolio{{ url_for('airbnb') }}" class="card-link">Notebook</a>
 						</div>
 						<div class="card-footer text-muted">
 							Developed on October 2022
@@ -269,32 +270,6 @@
         </div>
     </div>
   </div>
-<div class ='row'> <!-- second row -->
-	<div class='card-deck'>		
-	</div>
-</div> <!-- second row of projects -->
-<!--paginación-->
-<!-- <div class='row'>
-	<div class="col-lg-5"></div>
-	<div class="col-lg-2"> 
-		<ul class="pagination">
-			<li class="page-item disabled">
-			<a class="page-link" href="#">&laquo;</a>
-			</li>
-			<li class="page-item active">
-			<a class="page-link" href="#">1</a>
-			</li>
-			<li class="page-item">
-			<a class="page-link" href="#">2</a>
-			</li> 
-			<li class="page-item">
-			<a class="page-link" href="#">&raquo;</a>
-			</li>
-		</ul>
-	</div>
-	<div class="col-lg-5"></div>
-</div> -->
-<br>
 <div class ='row'>
 	<div class="col-lg-12">
 		<h2 id='framework'>Projects Frameworks</h2>
