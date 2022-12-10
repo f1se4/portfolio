@@ -39,6 +39,29 @@ def airbnb():
 							part3=md.convert(part3),
 							part4=md.convert(part4)
 							)
+    
+@app.route('/airbnbds4')
+def airbnbds4():
+	with open("./md/airbnbds4/part1.md", "r") as file:
+		part1 = file.read()
+	with open("./md/airbnbds4/part2.md", "r") as file:
+		part2 = file.read()	
+	with open("./md/airbnbds4/part3.md", "r") as file:
+		part3 = file.read()
+	with open("./md/airbnbds4/part4.md", "r") as file:
+		part4 = file.read()		
+	with open("./md/airbnbds4/part5.md", "r") as file:
+		part5 = file.read()
+	with open("./md/airbnbds4/part6.md", "r") as file:
+		part6 = file.read()		
+	return render_template("airbnbds4.html", 
+							part1=md.convert(part1),
+							part2=md.convert(part2),
+							part3=md.convert(part3),
+							part4=md.convert(part4),
+							part5=md.convert(part5),
+							part6=md.convert(part6)
+							)
 
 @app.route('/mapairbnb')
 def mapairbnb():
@@ -85,4 +108,4 @@ def isaac():
 	return render_template("isaac.html", notebook=md.convert(notebook), summary=md.convert(summary))		
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0')
+	app.run(host='0.0.0.0', debug=True)

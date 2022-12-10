@@ -31,23 +31,23 @@
 </div>
 <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#part1">Regression Projects</a>
+      <a class="nav-link active" data-toggle="tab" href="#part3">Business Analytics/Discovery</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#part2">Classification Projects</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#part3">Business Analytics/Discovery</a>
+      <a class="nav-link" data-toggle="tab" href="#part1">Regression Projects</a>
     </li>
 	<li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#part4">DashBoards/Webscrapping/Others</a>
     </li>
 </ul>
   <div id="myTabContent" class="tab-content">
-    <div role="tabpanel" class="tab-pane fade active show" id="part1">
+    <div role="tabpanel" class="tab-pane fade active show" id="part3">
         <div class="jumbotron">
 			<div class ='row'>
-				<div class="card-deck">
+				<div class="card-deck">	
 					<!-- col1 init -->
 						<div class="card mb-3">
 							<h3 class="card-header">Airbnb - Barcelona Price prediction </h3>
@@ -148,7 +148,44 @@
     </div>
     <div role="tabpanel" class="tab-pane fade" id="part3">
         <div class="jumbotron">
-             In progress...
+			<div class ='row'>
+				<div class="card-deck">
+						<!-- col1 init -->
+						<div class="card mb-3">
+							<h3 class="card-header">Airbnb - Madrid Analysis </h3>
+						<div class="card-body">
+							<h5 class="card-title">Full DS project, from datacleaning till explotation using Public Data from Airbnb of the city of Barcelona</h5>
+							<h6 class="card-subtitle text-muted"></h6>
+						</div>
+						<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='images/project4.jpg') }}" alt="Gompertz Project">
+						<div class="card-body">
+							<p class="card-text">Airbnb data information from Insider Airbnb page. We want to know how prices are determined and which factors are most relevant for the airbnb users in the city of Barcelona</p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">#MachineLearning</li>
+							<li class="list-group-item">#RandomForest #LinearRegression</li>
+							<li class="list-group-item">#Data-Cleaning #Data-Analysis #Pandas</li>
+						</ul>
+						<div class="card-body">
+						<a href="/portfolio{{ url_for('airbnbds4') }}" class="card-link">Notebook</a>
+						</div>
+						<div class="card-footer text-muted">
+							Developed on October 2022
+						</div>
+					</div>					
+					<!-- col1 end-->
+									<!-- col1 end-->	
+					<div class="card mb-3">
+						<!-- project info -->
+					</div>					
+				<!-- col1 end-->
+									<!-- col1 end-->	
+					<div class="card mb-3">
+						<!-- project info -->
+					</div>					
+				<!-- col1 end-->
+				</div> <!-- group card -->	
+			</div> <!-- first row of projects -->
         </div>
     </div>
 	    <div role="tabpanel" class="tab-pane fade" id="part4">
@@ -257,6 +294,19 @@
 	</div>
 	<div class="col-lg-5"></div>
 </div> -->
+<br>
+<div class ='row'>
+	<div class="col-lg-12">
+		<h2 id='framework'>Projects Frameworks</h2>
+		<br>
+		<h4 id='framework1'>Business Analytics/Discovery</h4> 
+		<img style="height: 500px; width: 100%; display: block;" src="{{ url_for('static',filename='images/BAframework.png') }}" alt="ba framework">
+		<br>
+		<h4 id='framework2'>Machine Learning Framework</h4> 
+		<img style="height: 500px; width: 100%; display: block;" src="{{ url_for('static',filename='images/MLframework.png') }}" alt="ml framework">
+		<br>
+	</div>
+</div>
 <div class="progress">
 	<div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
