@@ -1754,7 +1754,6 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -2305,6 +2304,7 @@ pd.crosstab(listings_det.bedrooms, listings_det.accommodates)
       <th></th>
       <th></th>
       <th></th>
+	  <th></th>
     </tr>
   </thead>
   <tbody>
@@ -2976,6 +2976,7 @@ listings_det
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>18904</th>
@@ -3299,21 +3300,7 @@ df
       <th>neighbourhood_group</th>
       <th>neighbourhood</th>
       <th>latitude</th>
-      <th>longitude</th>
-      <th>room_type</th>
-      <th>price</th>
-      <th>minimum_nights</th>
       <th>...</th>
-      <th>availability_365</th>
-      <th>description</th>
-      <th>host_is_superhost</th>
-      <th>accommodates</th>
-      <th>bedrooms</th>
-      <th>beds</th>
-      <th>number_of_reviews</th>
-      <th>review_scores_rating</th>
-      <th>review_scores_communication</th>
-      <th>review_scores_location</th>
     </tr>
   </thead>
   <tbody>
@@ -3325,21 +3312,8 @@ df
       <td>Chamartín</td>
       <td>Hispanoamérica</td>
       <td>40.457240</td>
-      <td>-3.676880</td>
-      <td>Private room</td>
-      <td>60</td>
-      <td>1</td>
       <td>...</td>
-      <td>180</td>
-      <td>Excellent connection with the AIRPORT and EXHI...</td>
-      <td>t</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>80</td>
-      <td>4.87</td>
-      <td>4.89</td>
-      <td>4.77</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3349,21 +3323,7 @@ df
       <td>Latina</td>
       <td>Cármenes</td>
       <td>40.403810</td>
-      <td>-3.741300</td>
-      <td>Private room</td>
-      <td>31</td>
-      <td>4</td>
-      <td>...</td>
-      <td>364</td>
-      <td>We have a quiet and sunny room with a good vie...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>33</td>
-      <td>4.58</td>
-      <td>4.82</td>
-      <td>4.21</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -3373,21 +3333,7 @@ df
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.388400</td>
-      <td>-3.695110</td>
-      <td>Entire home/apt</td>
-      <td>50</td>
-      <td>15</td>
-      <td>...</td>
-      <td>222</td>
-      <td>Apartamento de tres dormitorios dobles, gran s...</td>
-      <td>f</td>
-      <td>6</td>
-      <td>3.0</td>
-      <td>5.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -3397,21 +3343,7 @@ df
       <td>Centro</td>
       <td>Universidad</td>
       <td>40.421830</td>
-      <td>-3.705290</td>
-      <td>Entire home/apt</td>
-      <td>92</td>
-      <td>5</td>
-      <td>...</td>
-      <td>115</td>
-      <td>Studio located 50 meters from Gran Via, next t...</td>
-      <td>f</td>
-      <td>3</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>12</td>
-      <td>4.92</td>
-      <td>5.00</td>
-      <td>5.00</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -3421,38 +3353,10 @@ df
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.389750</td>
-      <td>-3.690180</td>
-      <td>Private room</td>
-      <td>26</td>
-      <td>2</td>
-      <td>...</td>
-      <td>349</td>
-      <td>Nice and cozy roon for one person with a priva...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>149</td>
-      <td>4.68</td>
-      <td>4.71</td>
-      <td>4.70</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -3469,21 +3373,7 @@ df
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424384</td>
-      <td>-3.691216</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>...</td>
-      <td>358</td>
-      <td>ROOM - 8 sqm. • 1st Floor &lt;br /&gt; &lt;br /&gt;cozy ro...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>17706</th>
@@ -3493,21 +3383,7 @@ df
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424447</td>
-      <td>-3.691309</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>...</td>
-      <td>358</td>
-      <td>ROOM - 10 sqm. • 4th Floor &lt;br /&gt; &lt;br /&gt;cozy r...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>17707</th>
@@ -3517,21 +3393,7 @@ df
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424989</td>
-      <td>-3.691783</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>...</td>
-      <td>358</td>
-      <td>ROOM &lt;br /&gt; &lt;br /&gt;cozy room in madrid centro i...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>17708</th>
@@ -3541,21 +3403,7 @@ df
       <td>Salamanca</td>
       <td>Recoletos</td>
       <td>40.424352</td>
-      <td>-3.690211</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>...</td>
-      <td>358</td>
-      <td>ROOM -9 sqm. • 1st Floor &lt;br /&gt; &lt;br /&gt;cozy roo...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>17709</th>
@@ -3565,21 +3413,7 @@ df
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.425670</td>
-      <td>-3.691727</td>
-      <td>Private room</td>
-      <td>33</td>
-      <td>1</td>
-      <td>...</td>
-      <td>358</td>
-      <td>ROOM - 10 sqm. • 1st Floor &lt;br /&gt; &lt;br /&gt;cozy r...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
   </tbody>
 </table>
@@ -3854,21 +3688,7 @@ df
       <th>neighbourhood_group</th>
       <th>neighbourhood</th>
       <th>latitude</th>
-      <th>longitude</th>
-      <th>room_type</th>
-      <th>price</th>
-      <th>minimum_nights</th>
       <th>...</th>
-      <th>host_is_superhost</th>
-      <th>accommodates</th>
-      <th>bedrooms</th>
-      <th>beds</th>
-      <th>number_of_reviews</th>
-      <th>review_scores_rating</th>
-      <th>review_scores_communication</th>
-      <th>review_scores_location</th>
-      <th>precio_m2</th>
-      <th>distrito</th>
     </tr>
   </thead>
   <tbody>
@@ -3880,21 +3700,7 @@ df
       <td>Chamartín</td>
       <td>Hispanoamérica</td>
       <td>40.457240</td>
-      <td>-3.676880</td>
-      <td>Private room</td>
-      <td>60</td>
-      <td>1</td>
-      <td>...</td>
-      <td>t</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>80</td>
-      <td>4.87</td>
-      <td>4.89</td>
-      <td>4.77</td>
-      <td>5098</td>
-      <td>Chamartín</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3904,21 +3710,7 @@ df
       <td>Latina</td>
       <td>Cármenes</td>
       <td>40.403810</td>
-      <td>-3.741300</td>
-      <td>Private room</td>
-      <td>31</td>
-      <td>4</td>
-      <td>...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>33</td>
-      <td>4.58</td>
-      <td>4.82</td>
-      <td>4.21</td>
-      <td>2267</td>
-      <td>Latina</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -3928,21 +3720,7 @@ df
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.388400</td>
-      <td>-3.695110</td>
-      <td>Entire home/apt</td>
-      <td>50</td>
-      <td>15</td>
-      <td>...</td>
-      <td>f</td>
-      <td>6</td>
-      <td>3.0</td>
-      <td>5.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>4085</td>
-      <td>Arganzuela</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -3952,21 +3730,7 @@ df
       <td>Centro</td>
       <td>Universidad</td>
       <td>40.421830</td>
-      <td>-3.705290</td>
-      <td>Entire home/apt</td>
-      <td>92</td>
-      <td>5</td>
-      <td>...</td>
-      <td>f</td>
-      <td>3</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>12</td>
-      <td>4.92</td>
-      <td>5.00</td>
-      <td>5.00</td>
-      <td>4827</td>
-      <td>Centro</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -3976,38 +3740,10 @@ df
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.389750</td>
-      <td>-3.690180</td>
-      <td>Private room</td>
-      <td>26</td>
-      <td>2</td>
-      <td>...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>149</td>
-      <td>4.68</td>
-      <td>4.71</td>
-      <td>4.70</td>
-      <td>4085</td>
-      <td>Arganzuela</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -4024,21 +3760,7 @@ df
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424384</td>
-      <td>-3.691216</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>4827</td>
-      <td>Centro</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>17706</th>
@@ -4048,21 +3770,7 @@ df
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424447</td>
-      <td>-3.691309</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>4827</td>
-      <td>Centro</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>17707</th>
@@ -4072,21 +3780,7 @@ df
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424989</td>
-      <td>-3.691783</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>4827</td>
-      <td>Centro</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>17708</th>
@@ -4096,21 +3790,7 @@ df
       <td>Salamanca</td>
       <td>Recoletos</td>
       <td>40.424352</td>
-      <td>-3.690211</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>6114</td>
-      <td>Salamanca</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>17709</th>
@@ -4120,21 +3800,7 @@ df
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.425670</td>
-      <td>-3.691727</td>
-      <td>Private room</td>
-      <td>33</td>
-      <td>1</td>
-      <td>...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>4827</td>
-      <td>Centro</td>
+	  <td>...</td>
     </tr>
   </tbody>
 </table>
