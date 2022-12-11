@@ -2138,9 +2138,9 @@ sns.scatterplot(data = df.loc[df.distrito.isin(seleccion)], x = 'pdi_sol', y = '
     
 
 
-No parece haber una relación tan directa como sería esperable entre la distancia a la Puerta del Sol y el precio de alquiler.
+There does not seem to be as direct a relationship as would be expected between the distance to Puerta del Sol and the rental price.
 
-**Insight 5: estando dentro del distrito parece que la cercanía a puntos de interés no tiene tanto impacto como sería esperable. Eso abre la puerta a buscar inmuebles que estando en un distrito céntrico no estén justo al lado del PdI y por tanto esperablmente tengan un precio de compra menor**
+**Insight 5: being within the district it seems that the proximity to points of interest does not have as much impact as would be expected. This opens the door to looking for properties that, being in a central district, are not right next to the PoI and therefore hopefully have a lower purchase price**
 
 ### Analysis of occupation
 
