@@ -31,7 +31,7 @@ import sqlalchemy as sa
 
 ### Internal data
 
-Create the connection to the database## DATA IMPORT
+Create the connection to the database
 
 ### Internal data
 
@@ -77,7 +77,7 @@ In our data we do not have the purchase price of a property, but we had seen tha
 
 Therefore we are going to look for that data externally.
 
-On this page we have exactly the information we need: https://www.idealista.com/sala-de-prensa/informes-precio-vivienda/venta/madrid-comunidad/madrid-provincia/madrid/
+On this page we have exactly the information we need: [idealista](https://www.idealista.com/sala-de-prensa/informes-precio-vivienda/venta/madrid-comunidad/madrid-provincia/madrid/)
 
 We can easily extract it with the Chrome instant data scraper plugin, and save it in our Data folder with the name 'prices_idealista.csv'
 
@@ -228,7 +228,7 @@ precio_m2
 
 
 
-We clean the price:
+Cleaning the price:
     
 1. removing the drive
 2. removing the thousands separator points
@@ -414,7 +414,6 @@ listings.head()
       <th>host_id</th>
       <th>host_name</th>
       <th>neighbourhood_group</th>
-      <th>neighbourhood</th>
       <th>...</th>
     </tr>
   </thead>
