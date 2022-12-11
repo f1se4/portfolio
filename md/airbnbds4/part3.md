@@ -71,17 +71,17 @@ for cada in tablas:
     listings_det: (18909, 75)
 
 
-### Datos Externos
+### External Data
 
-En nuestros datos no tenemos el precio de compra de un inmueble, pero habíamos visto que es una de las palancas principales.
+In our data we do not have the purchase price of a property, but we had seen that it is one of the main levers.
 
-Por tanto vasos a buscar esos datos de forma externa.
+Therefore we are going to look for that data externally.
 
-En esta página tenemos justo la info que necesitamos: https://www.idealista.com/sala-de-prensa/informes-precio-vivienda/venta/madrid-comunidad/madrid-provincia/madrid/
+On this page we have exactly the information we need: https://www.idealista.com/sala-de-prensa/informes-precio-vivienda/venta/madrid-comunidad/madrid-provincia/madrid/
 
-Podemos extraerla de forma sencilla con el plugin instant data scraper de Chrome, y guardarla en nuestra carpeta Datos con el nombre 'precios_idealista.csv'
+We can easily extract it with the Chrome instant data scraper plugin, and save it in our Data folder with the name 'prices_idealista.csv'
 
-Cargamos los datos, quitamos el primer registro y seleccionamos solo las columnas de precio y distrito
+We load the data, remove the first record and select only the price and district columns
 
 
 ```python
@@ -228,11 +228,11 @@ precio_m2
 
 
 
-Limpiamos el precio:
+We clean the price:
     
-1. quitando la unidad
-2. quitando los puntos de separador de miles
-3. cambiando el tipo a entero
+1. removing the drive
+2. removing the thousands separator points
+3. changing the type to integer
 
 
 ```python
@@ -377,12 +377,11 @@ precio_m2
 
 
 
-## CALIDAD DE DATOS
+## DATA QUALITY
 
-### Tabla listings
+### listings table
 
-#### Visión general
-
+#### Overview
 
 ```python
 listings.head()
@@ -416,18 +415,7 @@ listings.head()
       <th>host_name</th>
       <th>neighbourhood_group</th>
       <th>neighbourhood</th>
-      <th>latitude</th>
-      <th>longitude</th>
-      <th>room_type</th>
-      <th>price</th>
-      <th>minimum_nights</th>
-      <th>number_of_reviews</th>
-      <th>last_review</th>
-      <th>reviews_per_month</th>
-      <th>calculated_host_listings_count</th>
-      <th>availability_365</th>
-      <th>number_of_reviews_ltm</th>
-      <th>license</th>
+      <th>...</th>
     </tr>
   </thead>
   <tbody>
@@ -439,19 +427,7 @@ listings.head()
       <td>13660</td>
       <td>Simon</td>
       <td>Chamartín</td>
-      <td>Hispanoamérica</td>
-      <td>40.45724</td>
-      <td>-3.67688</td>
-      <td>Private room</td>
-      <td>60</td>
-      <td>1</td>
-      <td>80</td>
-      <td>2019-05-14</td>
-      <td>1.21</td>
-      <td>2</td>
-      <td>180</td>
-      <td>4</td>
-      <td>None</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>1</th>
@@ -461,19 +437,7 @@ listings.head()
       <td>83531</td>
       <td>Abdel</td>
       <td>Latina</td>
-      <td>Cármenes</td>
-      <td>40.40381</td>
-      <td>-3.74130</td>
-      <td>Private room</td>
-      <td>31</td>
-      <td>4</td>
-      <td>33</td>
-      <td>2018-05-29</td>
-      <td>0.39</td>
-      <td>2</td>
-      <td>364</td>
-      <td>0</td>
-      <td>None</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>2</th>
@@ -483,19 +447,7 @@ listings.head()
       <td>82175</td>
       <td>Jesus</td>
       <td>Arganzuela</td>
-      <td>Legazpi</td>
-      <td>40.38840</td>
-      <td>-3.69511</td>
-      <td>Entire home/apt</td>
-      <td>50</td>
-      <td>15</td>
-      <td>0</td>
-      <td>None</td>
-      <td>NaN</td>
-      <td>5</td>
-      <td>222</td>
-      <td>0</td>
-      <td>None</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>3</th>
@@ -505,19 +457,7 @@ listings.head()
       <td>346366726</td>
       <td>A</td>
       <td>Centro</td>
-      <td>Universidad</td>
-      <td>40.42183</td>
-      <td>-3.70529</td>
-      <td>Entire home/apt</td>
-      <td>92</td>
-      <td>5</td>
-      <td>12</td>
-      <td>2020-03-01</td>
-      <td>0.51</td>
-      <td>1</td>
-      <td>115</td>
-      <td>2</td>
-      <td>None</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>4</th>
@@ -527,19 +467,7 @@ listings.head()
       <td>114340</td>
       <td>Agustina</td>
       <td>Arganzuela</td>
-      <td>Legazpi</td>
-      <td>40.38975</td>
-      <td>-3.69018</td>
-      <td>Private room</td>
-      <td>26</td>
-      <td>2</td>
-      <td>149</td>
-      <td>2018-05-15</td>
-      <td>1.65</td>
-      <td>1</td>
-      <td>349</td>
-      <td>0</td>
-      <td>None</td>
+      <th>...</th>
     </tr>
   </tbody>
 </table>
@@ -580,9 +508,9 @@ listings.info()
     memory usage: 2.7+ MB
 
 
-#### Variables y tipos
+#### Variables and Types
 
-Vamos a eliminar aquellas variables que no necesitaremos directamente para nuestros objetivos.
+We are going to eliminate those variables that we will not need directly for our objectives.
 
 
 ```python
@@ -627,12 +555,7 @@ listings
       <th>neighbourhood_group</th>
       <th>neighbourhood</th>
       <th>latitude</th>
-      <th>longitude</th>
-      <th>room_type</th>
-      <th>price</th>
-      <th>minimum_nights</th>
-      <th>calculated_host_listings_count</th>
-      <th>availability_365</th>
+      <th>...</th>
     </tr>
   </thead>
   <tbody>
@@ -644,12 +567,7 @@ listings
       <td>Chamartín</td>
       <td>Hispanoamérica</td>
       <td>40.457240</td>
-      <td>-3.676880</td>
-      <td>Private room</td>
-      <td>60</td>
-      <td>1</td>
-      <td>2</td>
-      <td>180</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>1</th>
@@ -659,12 +577,7 @@ listings
       <td>Latina</td>
       <td>Cármenes</td>
       <td>40.403810</td>
-      <td>-3.741300</td>
-      <td>Private room</td>
-      <td>31</td>
-      <td>4</td>
-      <td>2</td>
-      <td>364</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>2</th>
@@ -674,12 +587,7 @@ listings
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.388400</td>
-      <td>-3.695110</td>
-      <td>Entire home/apt</td>
-      <td>50</td>
-      <td>15</td>
-      <td>5</td>
-      <td>222</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>3</th>
@@ -689,12 +597,7 @@ listings
       <td>Centro</td>
       <td>Universidad</td>
       <td>40.421830</td>
-      <td>-3.705290</td>
-      <td>Entire home/apt</td>
-      <td>92</td>
-      <td>5</td>
-      <td>1</td>
-      <td>115</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>4</th>
@@ -702,14 +605,7 @@ listings
       <td>Single Room whith private Bathroom</td>
       <td>114340</td>
       <td>Arganzuela</td>
-      <td>Legazpi</td>
-      <td>40.389750</td>
-      <td>-3.690180</td>
-      <td>Private room</td>
-      <td>26</td>
-      <td>2</td>
-      <td>1</td>
-      <td>349</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>...</th>
@@ -717,14 +613,7 @@ listings
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
+	  <th>...</th>
     </tr>
     <tr>
       <th>18904</th>
@@ -734,12 +623,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424384</td>
-      <td>-3.691216</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>18905</th>
@@ -749,12 +633,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424447</td>
-      <td>-3.691309</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>18906</th>
@@ -764,12 +643,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424989</td>
-      <td>-3.691783</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>18907</th>
@@ -779,12 +653,7 @@ listings
       <td>Salamanca</td>
       <td>Recoletos</td>
       <td>40.424352</td>
-      <td>-3.690211</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+      <th>...</th>
     </tr>
     <tr>
       <th>18908</th>
@@ -794,12 +663,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.425670</td>
-      <td>-3.691727</td>
-      <td>Private room</td>
-      <td>33</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+      <th>...</th>
     </tr>
   </tbody>
 </table>
