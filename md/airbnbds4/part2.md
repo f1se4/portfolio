@@ -194,7 +194,6 @@ listings_det.head()
       <th>last_scraped</th>
       <th>name</th>
       <th>description</th>
-      <th>neighborhood_overview</th>
       <th>...</th>
     </tr>
   </thead>
@@ -207,7 +206,6 @@ listings_det.head()
       <td>2021-09-11</td>
       <td>Rooftop terrace room ,  ensuite bathroom</td>
       <td>Excellent connection with the AIRPORT and EXHI...</td>
-      <td>NaN</td>
       <td>...</td>
     </tr>
     <tr>
@@ -218,7 +216,6 @@ listings_det.head()
       <td>2021-09-11</td>
       <td>Bright and airy room</td>
       <td>We have a quiet and sunny room with a good vie...</td>
-      <td>We live in a leafy neighbourhood with plenty o...</td>
       <td>...</td>
     </tr>
     <tr>
@@ -229,7 +226,6 @@ listings_det.head()
       <td>2021-09-11</td>
       <td>Apartmento Arganzuela- Madrid Rio</td>
       <td>Apartamento de tres dormitorios dobles, gran s...</td>
-      <td>Barrio Arganzuela, junto a Madrid Rio, zonas c...</td>
       <td>...</td>
     </tr>
     <tr>
@@ -240,7 +236,6 @@ listings_det.head()
       <td>2021-09-11</td>
       <td>Gran Via Studio Madrid</td>
       <td>Studio located 50 meters from Gran Via, next t...</td>
-      <td>The area is next to the Gran Via, so people li...</td>
       <td>...</td>
     </tr>
     <tr>
@@ -251,7 +246,6 @@ listings_det.head()
       <td>2021-09-11</td>
       <td>Single Room whith private Bathroom</td>
       <td>Nice and cozy roon for one person with a priva...</td>
-      <td>Es un barrio muy tranquilo, en una zona de Mad...</td>
       <td>...</td>
     </tr>
   </tbody>

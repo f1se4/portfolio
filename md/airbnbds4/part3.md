@@ -1183,12 +1183,6 @@ listings
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
     </tr>
     <tr>
       <th>18904</th>
@@ -1198,12 +1192,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424384</td>
-      <td>-3.691216</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>18905</th>
@@ -1228,12 +1217,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424989</td>
-      <td>-3.691783</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18907</th>
@@ -1243,12 +1227,7 @@ listings
       <td>Salamanca</td>
       <td>Recoletos</td>
       <td>40.424352</td>
-      <td>-3.690211</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18908</th>
@@ -1258,12 +1237,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.425670</td>
-      <td>-3.691727</td>
-      <td>Private room</td>
-      <td>33</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+	  <td>...</td>
     </tr>
   </tbody>
 </table>
@@ -1277,7 +1251,7 @@ For minimum_nights and alculated_host_listings_count you would have to do a simi
 However, it is not something that is core in our analysis and therefore I leave it as homework for you to practice.
 
 ### Table listings_det
-
+	
 #### Overview
 
 
@@ -1312,21 +1286,7 @@ listings_det.head()
       <th>scrape_id</th>
       <th>last_scraped</th>
       <th>name</th>
-      <th>description</th>
-      <th>neighborhood_overview</th>
-      <th>picture_url</th>
-      <th>host_id</th>
       <th>...</th>
-      <th>review_scores_communication</th>
-      <th>review_scores_location</th>
-      <th>review_scores_value</th>
-      <th>license</th>
-      <th>instant_bookable</th>
-      <th>calculated_host_listings_count</th>
-      <th>calculated_host_listings_count_entire_homes</th>
-      <th>calculated_host_listings_count_private_rooms</th>
-      <th>calculated_host_listings_count_shared_rooms</th>
-      <th>reviews_per_month</th>
     </tr>
   </thead>
   <tbody>
@@ -1338,21 +1298,7 @@ listings_det.head()
       <td>20210910193531</td>
       <td>2021-09-11</td>
       <td>Rooftop terrace room ,  ensuite bathroom</td>
-      <td>Excellent connection with the AIRPORT and EXHI...</td>
-      <td>None</td>
-      <td>https://a0.muscache.com/pictures/683224/4cc318...</td>
-      <td>13660</td>
-      <td>...</td>
-      <td>4.89</td>
-      <td>4.77</td>
-      <td>4.85</td>
-      <td>None</td>
-      <td>f</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>1.21</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1362,21 +1308,7 @@ listings_det.head()
       <td>20210910193531</td>
       <td>2021-09-11</td>
       <td>Bright and airy room</td>
-      <td>We have a quiet and sunny room with a good vie...</td>
-      <td>We live in a leafy neighbourhood with plenty o...</td>
-      <td>https://a0.muscache.com/pictures/68483181/87bc...</td>
-      <td>83531</td>
-      <td>...</td>
-      <td>4.82</td>
-      <td>4.21</td>
-      <td>4.67</td>
-      <td>None</td>
-      <td>f</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0.39</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1386,21 +1318,7 @@ listings_det.head()
       <td>20210910193531</td>
       <td>2021-09-11</td>
       <td>Apartmento Arganzuela- Madrid Rio</td>
-      <td>Apartamento de tres dormitorios dobles, gran s...</td>
-      <td>Barrio Arganzuela, junto a Madrid Rio, zonas c...</td>
-      <td>https://a0.muscache.com/pictures/58e6a770-509c...</td>
-      <td>82175</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>None</td>
-      <td>f</td>
-      <td>5</td>
-      <td>4</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1410,21 +1328,7 @@ listings_det.head()
       <td>20210910193531</td>
       <td>2021-09-11</td>
       <td>Gran Via Studio Madrid</td>
-      <td>Studio located 50 meters from Gran Via, next t...</td>
-      <td>The area is next to the Gran Via, so people li...</td>
-      <td>https://a0.muscache.com/pictures/miso/Hosting-...</td>
-      <td>346366726</td>
-      <td>...</td>
-      <td>5.00</td>
-      <td>5.00</td>
-      <td>4.83</td>
-      <td>None</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.51</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1434,21 +1338,7 @@ listings_det.head()
       <td>20210910193531</td>
       <td>2021-09-11</td>
       <td>Single Room whith private Bathroom</td>
-      <td>Nice and cozy roon for one person with a priva...</td>
-      <td>Es un barrio muy tranquilo, en una zona de Mad...</td>
-      <td>https://a0.muscache.com/pictures/149358/218d5b...</td>
-      <td>114340</td>
-      <td>...</td>
-      <td>4.71</td>
-      <td>4.70</td>
-      <td>4.72</td>
-      <td>None</td>
-      <td>f</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1.65</td>
+	  <td>...</td>
     </tr>
   </tbody>
 </table>
@@ -1598,10 +1488,7 @@ listings_det
       <th>bathrooms</th>
       <th>bedrooms</th>
       <th>beds</th>
-      <th>number_of_reviews</th>
-      <th>review_scores_rating</th>
-      <th>review_scores_communication</th>
-      <th>review_scores_location</th>
+      <th>...</th>
     </tr>
   </thead>
   <tbody>
@@ -1614,10 +1501,7 @@ listings_det
       <td>NaN</td>
       <td>1.0</td>
       <td>1.0</td>
-      <td>80</td>
-      <td>4.87</td>
-      <td>4.89</td>
-      <td>4.77</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1626,12 +1510,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>33</td>
-      <td>4.58</td>
-      <td>4.82</td>
-      <td>4.21</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1640,12 +1519,7 @@ listings_det
       <td>f</td>
       <td>6</td>
       <td>NaN</td>
-      <td>3.0</td>
-      <td>5.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1654,12 +1528,7 @@ listings_det
       <td>f</td>
       <td>3</td>
       <td>NaN</td>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>12</td>
-      <td>4.92</td>
-      <td>5.00</td>
-      <td>5.00</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1668,12 +1537,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>149</td>
-      <td>4.68</td>
-      <td>4.71</td>
-      <td>4.70</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1682,12 +1546,7 @@ listings_det
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18904</th>
@@ -1696,12 +1555,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18905</th>
@@ -1711,11 +1565,7 @@ listings_det
       <td>1</td>
       <td>NaN</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18906</th>
@@ -1724,12 +1574,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18907</th>
@@ -1738,12 +1583,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18908</th>
@@ -1752,12 +1592,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
   </tbody>
 </table>
