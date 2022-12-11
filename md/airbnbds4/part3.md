@@ -2303,7 +2303,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.accommodates)
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
 	  <th></th>
     </tr>
   </thead>
@@ -2601,7 +2600,7 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
+	  <th></th>
     </tr>
   </thead>
   <tbody>
@@ -3313,7 +3312,6 @@ df
       <td>Hispanoamérica</td>
       <td>40.457240</td>
       <td>...</td>
-	  <td>...</td>
     </tr>
     <tr>
       <th>1</th>
