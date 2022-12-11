@@ -778,11 +778,7 @@ listings[listings.name.isna()]
       <th>neighbourhood</th>
       <th>latitude</th>
       <th>longitude</th>
-      <th>room_type</th>
-      <th>price</th>
-      <th>minimum_nights</th>
-      <th>calculated_host_listings_count</th>
-      <th>availability_365</th>
+      <th>...</th>
     </tr>
   </thead>
   <tbody>
@@ -795,11 +791,7 @@ listings[listings.name.isna()]
       <td>Palacio</td>
       <td>40.41458</td>
       <td>-3.71422</td>
-      <td>Private room</td>
-      <td>30</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>2394</th>
@@ -810,11 +802,7 @@ listings[listings.name.isna()]
       <td>Simancas</td>
       <td>40.43765</td>
       <td>-3.62672</td>
-      <td>Entire home/apt</td>
-      <td>50</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>2842</th>
@@ -825,11 +813,7 @@ listings[listings.name.isna()]
       <td>Universidad</td>
       <td>40.42718</td>
       <td>-3.71144</td>
-      <td>Entire home/apt</td>
-      <td>65</td>
-      <td>3</td>
-      <td>1</td>
-      <td>0</td>
+      <td>...</td>
     </tr>
   </tbody>
 </table>
@@ -837,7 +821,7 @@ listings[listings.name.isna()]
 
 
 
-#### Duplicate analysis
+#### Analysis of Duplicates
 
 We check if there are any duplicate records.
 
@@ -1049,7 +1033,7 @@ listings.iloc[:,8:12].describe().T
 * In minimum_nights you have to review the maximums
 * In calculated_host_listings_count you have to check the maximums
 
-We review minimums and maximums in the price
+We will review minimums and maximums in the price
 
 ```python
 listings.price.plot.kde()
@@ -1068,7 +1052,7 @@ listings.price.plot.kde()
     
 
 
-We review the highs
+We will focus now on highs values
 
 
 ```python
@@ -1087,7 +1071,7 @@ plt.xticks(size = 10);
     
 * the value 9999 is usually a way to impute nulls, but in this case its frequency is not too far from other values that may be valid, such as 8000, so we won't touch it
 
-We check the values close to zero
+We will check the values close to zero
 
 ```python
 plt.figure(figsize=(16,8))
@@ -1137,12 +1121,7 @@ listings
       <th>neighbourhood_group</th>
       <th>neighbourhood</th>
       <th>latitude</th>
-      <th>longitude</th>
-      <th>room_type</th>
-      <th>price</th>
-      <th>minimum_nights</th>
-      <th>calculated_host_listings_count</th>
-      <th>availability_365</th>
+      <th>...</th>
     </tr>
   </thead>
   <tbody>
@@ -1154,12 +1133,7 @@ listings
       <td>Chamartín</td>
       <td>Hispanoamérica</td>
       <td>40.457240</td>
-      <td>-3.676880</td>
-      <td>Private room</td>
-      <td>60</td>
-      <td>1</td>
-      <td>2</td>
-      <td>180</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1169,12 +1143,7 @@ listings
       <td>Latina</td>
       <td>Cármenes</td>
       <td>40.403810</td>
-      <td>-3.741300</td>
-      <td>Private room</td>
-      <td>31</td>
-      <td>4</td>
-      <td>2</td>
-      <td>364</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1184,12 +1153,7 @@ listings
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.388400</td>
-      <td>-3.695110</td>
-      <td>Entire home/apt</td>
-      <td>50</td>
-      <td>15</td>
-      <td>5</td>
-      <td>222</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1199,12 +1163,7 @@ listings
       <td>Centro</td>
       <td>Universidad</td>
       <td>40.421830</td>
-      <td>-3.705290</td>
-      <td>Entire home/apt</td>
-      <td>92</td>
-      <td>5</td>
-      <td>1</td>
-      <td>115</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1214,12 +1173,7 @@ listings
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.389750</td>
-      <td>-3.690180</td>
-      <td>Private room</td>
-      <td>26</td>
-      <td>2</td>
-      <td>1</td>
-      <td>349</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>...</th>
@@ -3190,16 +3144,16 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
 
 
 
-Aquí sí podríamos hacer una asignación más directa. Leyendo la matriz en vertical vemos que:
+Here we could make a more direct assignment. Reading the matrix vertically we see that:
 
-* cero, una o dos camas se suele corresponder con una habitación
-* tres o cuatro camas se suele corresponder con dos habitaciones
-* cinco o seis camas se suele corresponder con tres habitaciones
-* a más camas le vamos a poner cuatro habitaciones
+* zero, one or two beds usually correspond to a room
+* three or four beds usually correspond to two rooms
+* five or six beds usually correspond to three rooms
+* we are going to put four rooms with more beds
 
-Vamos a modificar la función que habíamos creado para imputar los nulos de bedrooms a partir de beds.
+We are going to modify the function that we had created to impute the nulls of bedrooms from beds.
 
-Primero hacemos el conteo de bedrooms
+First we count the bedrooms
 
 
 ```python
@@ -3227,7 +3181,7 @@ listings_det.bedrooms.value_counts(dropna = False)
 
 
 
-Ejecutamos la función actualizada
+We execute the updated function
 
 
 ```python
@@ -3248,7 +3202,7 @@ def imputar_nulos(registro):
 listings_det.loc[listings_det.bedrooms.isna(),'bedrooms'] = listings_det.loc[listings_det.bedrooms.isna()].apply(imputar_nulos, axis = 1).astype('float64')
 ```
 
-Comprobamos
+Review
 
 
 ```python
@@ -3275,7 +3229,7 @@ listings_det.bedrooms.value_counts(dropna = False)
 
 
 
-Por último vamos a eliminar bathrooms
+Finally we are going to eliminate bathrooms
 
 
 ```python
@@ -3467,9 +3421,9 @@ listings_det
 
 
 
-#### Análisis de duplicados
+#### Duplicate analysis
 
-Comprobamos si hay algún registro duplicado
+We check if there are any duplicate records
 
 
 ```python
@@ -3507,9 +3461,9 @@ listings_det.info()
     memory usage: 1.3+ MB
 
 
-#### Análisis de variables categóricas
+#### Analysis of categorical variables
 
-Vamos a analizar los valores y las frecuencias de las variables categóricas
+We are going to analyze the values and frequencies of the categorical variables
 
 
 ```python
@@ -3525,7 +3479,7 @@ listings_det.host_is_superhost.value_counts()
 
 
 
-#### Análisis de variables numéricas
+#### Analysis of numerical variables
 
 
 ```python
@@ -3658,31 +3612,30 @@ listings_det.describe(include = 'number').T
 
 
 
-No vemos nada extraño.
+We don't see anything strange.
 
-En este punto ya hemos detectado y corregido los principales problemas de calidad de datos así que pasamos a crear el datamart analítico integrando nuestras tablas.
+At this point we have already detected and corrected the main data quality problems, so we went on to create the analytical datamart integrating our tables.
 
-## DATAMART ANALITICO
+## ANALYTICAL DATAMART
 
-Tenemos 2 tablas principales:
+We have 2 main tables:
 
 * listings
 * listings_det
 
-Y sabemos que ambas comparten el campo id, por tanto podemos cruzarlas por él.
+And we know that both share the id field, so we can cross them through it.
 
-La tabla principal es listings, ya que la de detalle lo que hace es darnos datos adicionales.
+The main table is listings, since what the detail table does is give us additional data.
 
-Por tanto la tabla que ha de mandar en la integración es listings.
+Therefore, the table that has to control in the integration is listings.
 
-Además tambien tenemos la tabla del precio, que en este caso cruza conceptualmente con listings a través del distrito (neighbourhood_group).
+In addition, we also have the price table, which in this case conceptually crosses with listings through the district (neighbourhood_group).
 
-Aunque no hemos comprobado todavía que los literales sean iguales, por tanto quizá será necesario hacer alguna corrección manual.
+Although we haven't checked yet that the literals are the same, so some manual correction may be necessary.
 
-Vamos a empezar por las 2 principales.
+Let's start with the 2 main ones.
 
-Dado que va a mandar la tabla listings el resultado final tendrá que tener tantas filas como listings y tantas columnas como las de ambas tablas (menos 1 por el id que se quedará como una única variable)
-
+Since the listings table is going to be sent, the final result will have to have as many rows as listings and as many columns as those of both tables (minus 1 for the id, which will remain as a single variable).
 
 ```python
 listings.shape
@@ -3707,7 +3660,7 @@ listings_det.shape
 
 
 
-Es decir, si sale bien la tabla final tendrá 17710 filas y 21 columnas.
+If it goes well, the final table will have 17710 rows and 21 columns.
 
 
 ```python
@@ -4031,11 +3984,11 @@ df
 
 
 
-Ahora vamos a ver cómo podemos incorporar la información externa del precio por metro cuadrado.
+Now we are going to see how we can incorporate the external information of the price per square meter.
 
-Para ello lo primero es analizar los valores de la variable distrito en ambas tablas, ya que necesitan coincidir para que podamos cruzarlos.
+To do this, the first thing is to analyze the values of the district variable in both tables, since they need to coincide so that we can cross them.
 
-En df la variable es categórica, así que para sacar los niveles tenemos que usar .categories
+In df the variable is categorical, so to get the levels we have to use .categories
 
 
 ```python
@@ -4105,13 +4058,13 @@ distritos2
 
 
 
-Comparando parece todo igual excepto:
+Comparing everything seems the same except:
 
 * Fuencarral - El Pardo
 * Moncloa - Aravaca
 * San Blas - Canillejas
 
-Por tanto vamos a reemplazar estos valores en precio_m2 para que sean iguales a los de df y podamos cruzarlos
+Therefore we are going to replace these values in price_m2 so that they are equal to those of df and we can cross them
 
 
 ```python
@@ -4260,9 +4213,9 @@ precio_m2
 
 
 
-Ahora sí que ya podemos cruzarlos.
+Now we can cross them.
 
-Manda df.
+df is our key dataframe.
 
 
 ```python
@@ -4586,7 +4539,7 @@ df
 
 
 
-Comprobamos que no se hayan generado nulos en la unión.
+We check that no nulls have been generated in the union.
 
 
 ```python
@@ -4600,9 +4553,9 @@ df.precio_m2.isna().sum()
 
 
 
-## GUARDAR EN LA BASE DE DATOS
+## SAVE TO DATABASE
 
-Ahora que ya tenemos el tablón de análisis vamos a guardarlo en la base de datos para que cada vez que queramos hacer análisis no tengamos que repetir todo el procesamiento de este notebook
+Now that we have the analysis board, we are going to save it in the database so that every time we want to do an analysis we do not have to repeat all the processing of this notebook.
 
 
 ```python
