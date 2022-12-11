@@ -230,7 +230,7 @@ precio_m2
 
 Cleaning the price:
     
-1. removing the drive
+1. removing the units
 2. removing the thousands separator points
 3. changing the type to integer
 
@@ -566,7 +566,7 @@ listings
       <td>Chamartín</td>
       <td>Hispanoamérica</td>
       <td>40.457240</td>
-      <th>...</th>
+      <td>...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -576,7 +576,7 @@ listings
       <td>Latina</td>
       <td>Cármenes</td>
       <td>40.403810</td>
-      <th>...</th>
+      <td>...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -586,7 +586,7 @@ listings
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.388400</td>
-      <th>...</th>
+      <td>...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -596,7 +596,7 @@ listings
       <td>Centro</td>
       <td>Universidad</td>
       <td>40.421830</td>
-      <th>...</th>
+      <td>...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -604,7 +604,8 @@ listings
       <td>Single Room whith private Bathroom</td>
       <td>114340</td>
       <td>Arganzuela</td>
-      <th>...</th>
+      <td>...</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>...</th>
@@ -612,7 +613,7 @@ listings
       <td>...</td>
       <td>...</td>
       <td>...</td>
-	  <th>...</th>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18904</th>
@@ -622,7 +623,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424384</td>
-      <th>...</th>
+      <td>...</td>
     </tr>
     <tr>
       <th>18905</th>
@@ -632,7 +633,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424447</td>
-      <th>...</th>
+      <td>...</td>
     </tr>
     <tr>
       <th>18906</th>
@@ -642,7 +643,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424989</td>
-      <th>...</th>
+      <td>...</td>
     </tr>
     <tr>
       <th>18907</th>
@@ -652,7 +653,7 @@ listings
       <td>Salamanca</td>
       <td>Recoletos</td>
       <td>40.424352</td>
-      <th>...</th>
+      <td>...</td>
     </tr>
     <tr>
       <th>18908</th>
@@ -662,7 +663,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.425670</td>
-      <th>...</th>
+      <td>...</td>
     </tr>
   </tbody>
 </table>
