@@ -27,21 +27,20 @@ import sqlalchemy as sa
 %config IPCompleter.greedy=True
 ```
 
-## IMPORTACION DE DATOS
+## DATA IMPORT
 
-### Datos internos
+### Internal data
 
-Crear la conexión a la base de datos
+Create the connection to the database## DATA IMPORT
+
+### Internal data
+
+Create the connection to the database
 
 
 ```python
 con = sa.create_engine('sqlite:///../Datos/airbnb.db')
 ```
-
-Si desconociéramos los nombres de las tablas que están en la base de datos, la doc de SqlAlchemy nos dice que podemos usar la función inspect.
-
-https://docs.sqlalchemy.org/en/14/core/reflection.html#fine-grained-reflection-with-inspector
-
 
 ```python
 from sqlalchemy import inspect
@@ -57,44 +56,13 @@ tablas
 
 
 
-Cargar las tablas
+Mass Load the tables
 
 
 ```python
-listings = pd.read_sql('listings', con)
-listings_det = pd.read_sql('listings_det', con)
-```
-
-Truco PRO 1:
-
-Cargar las tablas una a una suele ser lo más conveniente, pero si tuvieras por ejemplo 100 tablas podría ser pesado.
-
-Un truco es crear los dataframes de forma dinámica, usando los nombres que ya teníamos en la lista tablas.
-
-Para ello podemos usar la función exec dentro de un bucle que recorra la lista con los nombres de las tablas.
-
-Esto es para usuarios avanzados, así que te dejo que lo investigues por tu cuenta, y si no lo entiendes no te preocupes, la opción manual te servirá en el 99% de los casos.
-
-
-```python
-# lo dejo comentado para que no lo ejecutes por error. Si lo quieres ejecutar quita las parrillas
-# for tabla in tablas:
-#     exec(f'{tabla} = pd.read_sql(tabla, con)')
-```
-
-Truco PRO 2:
-
-*NOTA: Este truco solo sirve para cuando has cargado las tablas con la opción PRO. Si las has cargado con la opción manual no tiene sentido, por eso te lo dejo también comentado*
-
-También podemos revisar las dimensiones de cada tabla de forma automática para ver que han cargado bien.
-
-Para ello podemos usar eval() que hace que entienda el nombre de la tabla como un objeto y no como una cadena, y por tanto nos deje aplicar el método shape
-
-
-```python
-# lo dejo comentado para que no lo ejecutes por error. Si lo quieres ejecutar quita las parrillas
-# for cada in tablas:
-#     print(cada + ': ' + str(eval(cada).shape))
+exec(f'{tabla} = pd.read_sql(tabla, con)')
+for cada in tablas:
+  print(cada + ': ' + str(eval(cada).shape))
 ```
 
     df: (17710, 24)
