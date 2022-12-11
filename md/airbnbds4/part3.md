@@ -606,6 +606,7 @@ listings
       <td>Arganzuela</td>
       <td>...</td>
 	  <td>...</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>...</th>
@@ -613,6 +614,8 @@ listings
       <td>...</td>
       <td>...</td>
       <td>...</td>
+	  <td>...</td>
+	  <td>...</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -672,7 +675,7 @@ listings
 
 
 
-Revisamos los tipos de variable
+We will check now data types
 
 
 ```python
@@ -700,15 +703,15 @@ listings.info()
     memory usage: 1.7+ MB
 
 
-Conclusión: pasar algunas objeto (neighbourhood_group, neighbourhood, room_type) a categóricas.
-
+**Conclusion**: pass some object (neighborhood_group, neighborhood, room_type) to categorical.
+	
 
 ```python
 for variable in ['neighbourhood_group','neighbourhood','room_type']:
     listings[variable] = listings[variable].astype('category')
 ```
 
-Comprobamos
+Check
 
 
 ```python
@@ -736,11 +739,11 @@ listings.info()
     memory usage: 1.4+ MB
 
 
-#### Análisis de nulos
+#### Analysis of nulls
 
-Por la columna Non-null del info() vemos que solo name tiene 3 nulos.
+From the Non-null column of info() we see that only name has 3 nulls.
 
-Los revisamos pero vemos que no supone un problema, así que los dejamos.
+We review them but we see that it is not a problem, so we leave them.
 
 
 ```python
@@ -834,9 +837,9 @@ listings[listings.name.isna()]
 
 
 
-#### Análisis de duplicados
+#### Duplicate analysis
 
-Comprobamos si hay algún registro duplicado
+We check if there are any duplicate records.
 
 
 ```python
@@ -850,9 +853,9 @@ listings.duplicated().sum()
 
 
 
-#### Análisis de variables categóricas
+#### Analysis of categorical variables
 
-Vamos a analizar los valores y las frecuencias de las variables categóricas
+We are going to analyze the values and frequencies of the categorical variables
 
 
 ```python
@@ -926,7 +929,7 @@ listings.room_type.value_counts()
 
 
 
-Vemos que hay hoteles. Nuestra empresa no se plantea comprar hoteles, así que tenemos que eliminar estos registros.
+We see that there are hotels. Our company is not considering buying hotels, so we have to remove these records.
 
 
 ```python
@@ -949,9 +952,9 @@ listings.room_type.value_counts()
 
 
 
-#### Análisis de variables numéricas
+#### Analysis of numerical variables
 
-De las variables numéricas tiene sentido analizar desde price hasta availability_365, osea desde las posiciones de columnas de la 8 a la 11
+Of the numeric variables, it makes sense to analyze from price to availability_365, that is, from column positions 8 to 11
 
 
 ```python
@@ -1040,14 +1043,13 @@ listings.iloc[:,8:12].describe().T
 
 
 
-Conclusiones:
+**Conclusions**:
 
-* En el precio hay que revisar mínimos y máximos
-* En minimum_nights hay que revisar los máximos
-* En calculated_host_listings_count hay que revisar los máximos
+* In the price you have to check minimums and maximums
+* In minimum_nights you have to review the maximums
+* In calculated_host_listings_count you have to check the maximums
 
-Revisamos mínimos y máximos en el precio
-
+We review minimums and maximums in the price
 
 ```python
 listings.price.plot.kde()
@@ -1066,7 +1068,7 @@ listings.price.plot.kde()
     
 
 
-Revisamos los máximos
+We review the highs
 
 
 ```python
@@ -1081,12 +1083,11 @@ plt.xticks(size = 10);
     
 
 
-Conclusión: 
+**Conclusion**:
     
-* el valor 9999 normalmente suele ser una forma de imputar nulos, pero en este caso su frecuencia no está muy lejos de otros valores que pueden ser válidos, como el 8000, así que no lo vamos a tocar
+* the value 9999 is usually a way to impute nulls, but in this case its frequency is not too far from other values that may be valid, such as 8000, so we won't touch it
 
-Revisamos los valores cercanos a cero
-
+We check the values close to zero
 
 ```python
 plt.figure(figsize=(16,8))
@@ -1100,10 +1101,9 @@ plt.xticks(size = 10);
     
 
 
-Conclusión: 
+**Conclusion**:
     
-* Hay un pico en 20 euros, y parece que por debajo de esa cantidad sería difícil obtener rentabilidad, así que vamos a descartar los inmuebles que se alquilan por debajo de 20 euros
-
+* There is a peak at 20 euros, and it seems that below that amount it would be difficult to obtain profitability, so we are going to rule out properties that are rented below 20 euros
 
 ```python
 listings = listings.loc[listings.price > 19]
@@ -1318,13 +1318,13 @@ listings
 
 
 
-Para minimum_nights y alculated_host_listings_count habría que hacer un ejercicio similar.
+For minimum_nights and alculated_host_listings_count you would have to do a similar exercise.
 
-No obstante no es algo que sea core en nuestro análisis y por tanto te lo dejo como deberes para que practiques.
+However, it is not something that is core in our analysis and therefore I leave it as homework for you to practice.
 
-### Tabla listings_det
+### Table listings_det
 
-#### Visión general
+#### Overview
 
 
 ```python
@@ -1592,9 +1592,9 @@ listings_det.info()
     memory usage: 10.8+ MB
 
 
-#### Variables y tipos
+#### Variables and Types
 
-Vamos a seleccionar solo aquellas variables que nos aporten información relevante para nuestros objetivos.
+We are going to select only those variables that provide us with relevant information for our objectives.
 
 
 ```python
@@ -1812,7 +1812,7 @@ listings_det
 
 
 
-Analizamos los tipos
+We are going to analyze data types
 
 
 ```python
@@ -1839,7 +1839,7 @@ listings_det.info()
     memory usage: 1.6+ MB
 
 
-Conclusión: pasar host_is_superhost a categórica.
+**Conclusion**: change host_is_superhost to categoric.
 
 
 ```python
@@ -1868,7 +1868,7 @@ listings_det.info()
     memory usage: 1.5+ MB
 
 
-#### Análisis de nulos
+#### Null analysis
 
 
 ```python
@@ -1893,15 +1893,15 @@ listings_det.isna().sum()
 
 
 
-Conclusiones:
+**Conclusions**:
 
-* bathrooms está totalmente a nulos, por tanto la eliminamos
-* description no pasa nada porque tenga nulos, así que la dejamos
-* host_is_superhost tiene muy pocos nulos y no es una variables super relevante, así que la dejamos
-* beds: podemos intentar imputarla a partir de accomodates
-* bedrooms sí es una variable importante para nosotros, podemos intentar imputar los nulos a través de proxies como accomodates o beds
+* bathrooms is completely null, so we remove it
+* description nothing happens because it has nulls, so we leave it
+* host_is_superhost has very few nulls and is not a super relevant variable, so we leave it
+* beds: we can try to impute it from accommodates
+* bedrooms is an important variable for us, we can try imputing nulls through proxies like accommodates or beds
 
-Vamos a ver si podemos hacer una imputación de beds a partir del número de personas que se pueden acomodar.
+Let's see if we can make an imputation of beds based on the number of people that can be accommodated.
 
 
 ```python
@@ -2372,14 +2372,14 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
 
 
 
-Parece que sí podríamos hacer una asignación mas o menos directa. Leyendo la matriz en vertical vemos que:
+It seems that we could make a more or less direct assignment. Reading the matrix vertically we see that:
 
-* una o dos personas se suelen corresponder con una cama
-* tres o cuatro personas se suelen corresponder con dos camas
-* cinco o seis personas se suelen corresponder con tres camas
-* a más de 6 personas le vamos a poner cuatro camas
+* one or two people usually correspond to a bed
+* three or four people usually correspond to two beds
+* five or six people usually correspond to three beds
+* we will put four beds for more than 6 people
 
-Repasamos el número de nulos y la frecuencia de cada valor
+We review the number of nulls and the frequency of each value
 
 
 ```python
@@ -2415,7 +2415,7 @@ listings_det['beds'].value_counts(dropna = False)
 
 
 
-Creamos una función para imputar los nulos de beds en base a accommodates
+We create a function to impute the nulls of beds based on accommodates
 
 
 ```python
@@ -2437,7 +2437,7 @@ listings_det.loc[listings_det.beds.isna(),'beds'] = listings_det.loc[listings_de
 
 ```
 
-Comprobamos
+Review
 
 
 ```python
@@ -2472,9 +2472,9 @@ listings_det.beds.value_counts(dropna = False)
 
 
 
-Ahora vamos a ver si podemos hacer una imputación de bedrooms.
+Now let's see if we can make an imputation of bedrooms.
 
-Empezamos por cruzar el número de habitaciones con el número de personas que se pueden acomodar.
+We start by crossing the number of rooms with the number of people that can be accommodated.
 
 
 ```python
@@ -2793,9 +2793,9 @@ pd.crosstab(listings_det.bedrooms, listings_det.accommodates)
 
 
 
-No parece muy fiable.
+It doesn't seem very reliable.
 
-Vamos a contrastarlo con el número de camas.
+Let's contrast it with the number of beds.
 
 
 ```python
