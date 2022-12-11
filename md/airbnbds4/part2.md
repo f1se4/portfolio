@@ -1,17 +1,17 @@
-# ANÁLISIS INICIAL DE FICHEROS Y PREPARACIÓN DEL CASO
+# INITIAL ANALYSIS OF FILES AND PREPARATION OF THE CASE
 
-Usaremos datos reales ofrecidos por AirBnB en esta página: http://insideairbnb.com/get-the-data.html
+We will use actual data provided by AirBnB on this page: http://insideairbnb.com/get-the-data.html
 
-Concretamente usaremos la ciudad de Madrid, pero en la página tienes muchas más ciudades por si tienes interés en replicarlo con una localización más significativa para ti.
+Specifically, we will use the city of Madrid, but on the page you have many more cities in case you are interested in replicating it with a more significant location for you.
 
-Como ves AirBnb entrega los datos en formato csv y con todo en inglés.
+As you can see, AirBnb delivers the data in csv format and with everything in English.
 
-A efectos de este programa y de cara a tu aprendizaje yo voy a hacer modificaciones para:
+For the purposes of this program and with a view to your learning I am going to make modifications to:
 
-* Quedarnos sólo con las tablas que nos vayan a resultar útiles
-* Cargar toda la info a una base de datos para practicar con este formato, ya que será el más habitual en entornos empresariales
+* Keep only the tables that will be useful to us
+* Load all the information to a database to practice with this format, since it will be the most common in business environments
 
-Podría haber hecho todo esto "en cocina" y empezar el ejercicio ya con ese formato, pero creo que esta primera parte "detrás de las cámaras" también puede tener aprendizajes para ti, así que la he incluído también como parte del contenido formativo.
+I could have done all this "in the kitchen" and started the exercise already with that format, but I think that this first part "behind the scenes" can also have lessons for you, so I have also included it as part of the training content.
 
 ## SETUP
 
@@ -27,9 +27,9 @@ import seaborn as sns
 %config IPCompleter.greedy=True
 ```
 
-## ENTENDER LOS FICHEROS
+## UNDERSTAND THE FILES
 
-En la web de AirBnB podemos ver la descripción de las tablas:
+On the AirBnB website we can see the description of the tables:
 
 
     
@@ -38,9 +38,9 @@ En la web de AirBnB podemos ver la descripción de las tablas:
 
 
 
-Vamos a cargar una por una, entenderlas y tomar decisión de si la usamos o no.
+We are going to load one by one, understand them and make a decision whether to use it or not.
 
-### Cargamos y entendemos listings agregados
+### We load and understand aggregated listings
 
 
 ```python
@@ -77,19 +77,7 @@ listings.head()
       <th>name</th>
       <th>host_id</th>
       <th>host_name</th>
-      <th>neighbourhood_group</th>
-      <th>neighbourhood</th>
-      <th>latitude</th>
-      <th>longitude</th>
-      <th>room_type</th>
-      <th>price</th>
-      <th>minimum_nights</th>
-      <th>number_of_reviews</th>
-      <th>last_review</th>
-      <th>reviews_per_month</th>
-      <th>calculated_host_listings_count</th>
-      <th>availability_365</th>
-      <th>number_of_reviews_ltm</th>
+<td>...</td>
       <th>license</th>
     </tr>
   </thead>
@@ -100,19 +88,7 @@ listings.head()
       <td>Rooftop terrace room ,  ensuite bathroom</td>
       <td>13660</td>
       <td>Simon</td>
-      <td>Chamartín</td>
-      <td>Hispanoamérica</td>
-      <td>40.45724</td>
-      <td>-3.67688</td>
-      <td>Private room</td>
-      <td>60</td>
-      <td>1</td>
-      <td>80</td>
-      <td>2019-05-14</td>
-      <td>1.21</td>
-      <td>2</td>
-      <td>180</td>
-      <td>4</td>
+<td>...</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -121,19 +97,7 @@ listings.head()
       <td>Bright and airy room</td>
       <td>83531</td>
       <td>Abdel</td>
-      <td>Latina</td>
-      <td>Cármenes</td>
-      <td>40.40381</td>
-      <td>-3.74130</td>
-      <td>Private room</td>
-      <td>31</td>
-      <td>4</td>
-      <td>33</td>
-      <td>2018-05-29</td>
-      <td>0.39</td>
-      <td>2</td>
-      <td>364</td>
-      <td>0</td>
+<td>...</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -142,19 +106,7 @@ listings.head()
       <td>Apartmento Arganzuela- Madrid Rio</td>
       <td>82175</td>
       <td>Jesus</td>
-      <td>Arganzuela</td>
-      <td>Legazpi</td>
-      <td>40.38840</td>
-      <td>-3.69511</td>
-      <td>Entire home/apt</td>
-      <td>50</td>
-      <td>15</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>5</td>
-      <td>222</td>
-      <td>0</td>
+<td>...</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -163,19 +115,7 @@ listings.head()
       <td>Gran Via Studio Madrid</td>
       <td>346366726</td>
       <td>A</td>
-      <td>Centro</td>
-      <td>Universidad</td>
-      <td>40.42183</td>
-      <td>-3.70529</td>
-      <td>Entire home/apt</td>
-      <td>92</td>
-      <td>5</td>
-      <td>12</td>
-      <td>2020-03-01</td>
-      <td>0.51</td>
-      <td>1</td>
-      <td>115</td>
-      <td>2</td>
+<td>...</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -184,19 +124,7 @@ listings.head()
       <td>Single Room whith private Bathroom</td>
       <td>114340</td>
       <td>Agustina</td>
-      <td>Arganzuela</td>
-      <td>Legazpi</td>
-      <td>40.38975</td>
-      <td>-3.69018</td>
-      <td>Private room</td>
-      <td>26</td>
-      <td>2</td>
-      <td>149</td>
-      <td>2018-05-15</td>
-      <td>1.65</td>
-      <td>1</td>
-      <td>349</td>
-      <td>0</td>
+<td>...</td>
       <td>NaN</td>
     </tr>
   </tbody>
@@ -237,7 +165,7 @@ listings.info()
     memory usage: 2.6+ MB
 
 
-### Cargamos y entendemos listings detalle
+### We upload and understand detailed listings
 
 
 ```python
@@ -509,12 +437,12 @@ listings_det.info()
     memory usage: 10.7+ MB
 
 
-Conclusiones: 
+Conclusions:
 
-* Son los mismos registros pero el fichero de detalle tiene más columnas.
-* Podríamos unirlas mediante el campo id
+* They are the same records but the detail file has more columns.
+* We could join them through the id field
 
-### Cargamos y entendemos reviews agregado
+### We load and understand reviews added
 
 
 ```python
@@ -599,7 +527,7 @@ reviews.info()
     memory usage: 9.4+ MB
 
 
-### Cargamos y entendemos reviews detalle
+### We upload and understand detailed reviews
 
 
 ```python
@@ -712,12 +640,12 @@ reviews_det.info()
     memory usage: 28.3+ MB
 
 
-Conclusiones: 
+Conclusions:
 
-* Son los mismos registros pero el fichero de detalle tiene más columnas.
-* Realmente esta info de las reseñas no nos aporta nada a nuestro objetivo, así que no usaremos estas tablas
+* They are the same records but the detail file has more columns.
+* Really this information from the reviews does not contribute anything to our objective, so we will not use these tables
 
-### Cargamos y entendemos calendar
+### We load and understand calendar
 
 
 ```python
@@ -1087,12 +1015,12 @@ calendar.info()
     memory usage: 368.6+ MB
 
 
-Conclusiones:
+Conclusions:
 
-* Esta tabla se proyecta hacia el futuro, y parece contener la disponibilidad de reservas
-* No es información que nos sirva a nuestros fines y por tanto no la usaremos
+* This table is projected into the future, and appears to contain reserve availability
+* It is not information that serves our purposes and therefore we will not use it
 
-### Cargamos y entendemos neighbourhoods.csv
+### We load and understand neighborhoods.csv
 
 
 ```python
@@ -1161,12 +1089,12 @@ neigh.head(5)
 
 
 
-Conclusiones:
+Conclusions:
 
-* Es simplemente un maestro de vecindario y grupo de vecindario
-* En principio no la usaremos, ya que tanto el vecindario como su grupo ya están incorporados en otras tablas
+* It is simply a neighborhood teacher and neighborhood group
+* At first we will not use it, since both the neighborhood and its group are already incorporated into other tables
 
-### Cargamos y entendemos neighbourhoods.geojson
+### Load and understand neighborhoods.geojson
 
 
 ```python
@@ -1251,35 +1179,24 @@ neigh_geo.info()
     memory usage: 2.1+ KB
 
 
-Conclusiones:
+Conclusions:
 
-* Parece info de geometría para mapas
-* Hacer mapas con geometrías se sale del alcance de este programa, veremos otra opción mucho más sencilla, así que no la usaremos
+* Looks like geometry info for maps
+* Making maps with geometries is out of the scope of this program, we will see another much easier option, so we will not use it
 
-### Conclusiones del análisis de ficheros
+### Conclusions of the file analysis
 
-* Tablas principales que usaremos:
-    * listings.csv
-    * listings.csv.gz
+* Main tables we will use:
+     * listings.csv
+     * listings.csv.gz
 
-## CREACIÓN DE UNA BASE DE DATOS
+## CREATION OF A DATABASE
 
-Vamos a meter las tablas seleccionadas en una base de datos, con el objetivo que  vayas cogiendo soltura con este formato.
+We are going to put the selected tables in an internal database.
 
-Usaremos la que es posiblemente la base de datos más sencilla: sqlite, ya que es auto-contenida, sin servidor y sin configuración, por lo que suele ser el formato elegido para almacenar proyectos "propios".
+We will use what is possibly the simplest database: sqlite, since it is self-contained, serverless and configuration-free, so it is usually the format of choice for storing "own" projects.
 
-Además viene por defecto con Python 3 y se puede usar sin tener que instalar nada adicional.
-
-Lectura recomendada para entender mejor los pros y contras de Sqlite: https://www.hostgator.mx/blog/sqlite-que-es-y-diferencias-con-mysql/
-
-Para crear una base de datos con sqlite y cargar tablas simplemente tenemos que:
-
-1. Crear una conexión como ya sabemos
-2. Guardar los datos con to_sql, y si la tabla de destino no existe todavía la creará
-
-Nota: si la tabla ya existiera y lo que queremos hacer es reemplazarla hay que usar el parámetro if_exists = 'replace'
-
-Creamos la conexión:
+We create the connection:
 
 
 ```python
@@ -1288,7 +1205,7 @@ import sqlalchemy as sa
 con = sa.create_engine('sqlite:///../Datos/airbnb.db')
 ```
 
-Creamos las tablas y cargamos los datos
+We create the tables and load the data
 
 
 ```python
