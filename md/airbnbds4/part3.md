@@ -1,24 +1,16 @@
-# CREACIÓN DEL DATAMART ANALÍTICO
+# CREATION OF THE ANALYTICAL DATAMART
 
-Realmente nuestro caso empezaría aquí.
+It's a good practice doing the individual data quality of each table first, especially because if the volume is very high, when joining them it is multiplied even more.
 
-Los data engineer o informáticos nos han dado acceso a la base de datos que contiene toda la información.
+Therefore, initially we will leave them as individual tables, then we will apply data quality and finally we will join them to form the board or more officially the analytical datamart.
 
-Y a partir de aquí tenemos que cargarla a Python y empezar a trabajar.
+In this module we are going to:
 
-Podríamos unir ya los datos en esta fase y crear el "tablón analítico" para hacer después la calidad de datos, ya que en este caso los datos no son masivos.
-
-Pero como buena práctica yo recomiendo hacer primero la calidad de datos individual de cada tabla, sobre todo porque si  el volumen fuera muy alto al unirlos todavía se multiplica más.
-
-Por tanto inicialmente las dejaramos como tablas individuales, después aplicaremos calidad de datos y finalmente las uniremos para forma el tablón o más oficialmente el datamart analítico.
-
-En este módulo vamos a:
-
-1. Acceder a la base de datos
-2. Importar los datos como dataframes de Pandas
-3. Realizar la calidad de datos
-4. Crear el datamart analítico
-5. Guardarlo como una tabla en la base de datos para no tener que repetir el proceso
+1. Access the database
+2. Import the data as Pandas dataframes
+3. Perform data quality
+4. Create the analytical datamart
+5. Save it as a table in the database so you don't have to repeat the process
 
 ## SET UP
 
