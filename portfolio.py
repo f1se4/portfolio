@@ -52,15 +52,12 @@ def airbnbds4():
 		part4 = file.read()		
 	with open("./md/airbnbds4/part5.md", "r") as file:
 		part5 = file.read()
-	with open("./md/airbnbds4/part6.md", "r") as file:
-		part6 = file.read()		
 	return render_template("airbnbds4.html", 
 							part1=md.convert(part1),
 							part2=md.convert(part2),
 							part3=md.convert(part3),
 							part4=md.convert(part4),
-							part5=md.convert(part5),
-							part6=md.convert(part6)
+							part5=md.convert(part5)
 							)
 
 @app.route('/mapairbnb')
