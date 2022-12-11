@@ -2914,10 +2914,7 @@ listings_det
       <th>accommodates</th>
       <th>bedrooms</th>
       <th>beds</th>
-      <th>number_of_reviews</th>
-      <th>review_scores_rating</th>
-      <th>review_scores_communication</th>
-      <th>review_scores_location</th>
+      <th>...</th>
     </tr>
   </thead>
   <tbody>
@@ -2929,10 +2926,7 @@ listings_det
       <td>2</td>
       <td>1.0</td>
       <td>1.0</td>
-      <td>80</td>
-      <td>4.87</td>
-      <td>4.89</td>
-      <td>4.77</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2942,10 +2936,7 @@ listings_det
       <td>1</td>
       <td>1.0</td>
       <td>1.0</td>
-      <td>33</td>
-      <td>4.58</td>
-      <td>4.82</td>
-      <td>4.21</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2955,10 +2946,7 @@ listings_det
       <td>6</td>
       <td>3.0</td>
       <td>5.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2968,10 +2956,7 @@ listings_det
       <td>3</td>
       <td>1.0</td>
       <td>1.0</td>
-      <td>12</td>
-      <td>4.92</td>
-      <td>5.00</td>
-      <td>5.00</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -2981,17 +2966,10 @@ listings_det
       <td>1</td>
       <td>1.0</td>
       <td>1.0</td>
-      <td>149</td>
-      <td>4.68</td>
-      <td>4.71</td>
-      <td>4.70</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -3007,10 +2985,7 @@ listings_det
       <td>1</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18905</th>
@@ -3020,10 +2995,7 @@ listings_det
       <td>1</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18906</th>
@@ -3033,10 +3005,7 @@ listings_det
       <td>1</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18907</th>
@@ -3046,10 +3015,7 @@ listings_det
       <td>1</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18908</th>
@@ -3059,10 +3025,7 @@ listings_det
       <td>1</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+	  <td>...</td>
     </tr>
   </tbody>
 </table>
