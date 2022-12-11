@@ -1,8 +1,8 @@
-# ANALISIS E INSIGHTS
+# ANALYSIS AND INSIGHTS
 
-Llegamos a la parte más importante, donde vamos a intentar obtener conclusiones relevantes para el objetivo utilizando todo el trabajo de preparación que hemos hecho, las técnicas de Business Analytics que ya conocemos y además vamos a aprender a crear una visualización en mapa.
+We come to the most important part, where we are going to try to obtain relevant conclusions for the objective using all the preparation work we have done, the Business Analytics techniques that we already know and also we are going to learn how to create a map visualization.
 
-Para ello empezaremos dando respuesta a las preguntas semilla y es probable que en el proceso nos vayan surgiendo hallazgos interesantes que nos lleven a nuevas preguntas o a la aplicación de ciertas técnicas.
+To do this, we will begin by answering the seed questions and it is likely that in the process interesting findings will emerge that lead us to new questions or the application of certain techniques.
 
 ## SET UP
 
@@ -27,7 +27,7 @@ import fiser_tools as fs
 fs.misc.dark_theme()
 ```
 
-## CARGA DE DATOS
+## DATA UPLOAD
 
 
 ```python
@@ -315,7 +315,7 @@ df.precio_total.describe()
 
 
 
-Vemos que hay al menos un atípico por la parte de arriba que sesga la media, por tanto vamos a usar la mediana como medida de centralización más fiable.
+We see that there is at least one outlier on the upper part that skews the mean, so we are going to use the median as a more reliable measure of centralization.
 
 
 ```python
@@ -363,7 +363,7 @@ df.groupby('distrito').precio_total.median().sort_values(ascending = False)
 
 
 
-Nos llama la atención el dato de San Blas, vamos a verlo con más detalle a ver qué está pasando.
+The data from San Blas catches our attention, we are going to look at it in more detail to see what is happening.
 
 
 ```python
@@ -804,21 +804,21 @@ df.loc[df.distrito == 'San Blas - Canillejas'].sort_values('precio_total',ascend
 
 
 
-Vemos que son precios en el entorno de los 3.000 - 5.000 euros!
+We see that they are prices in the environment of 3,000 - 5,000 euros!
 
-Al leer la descripción nos damos cuenta de todos estos precios están definidos por la final de la Champions League.
+When reading the description we realize that all these prices are defined by the Champions League final.
 
-Lo cual es un insight interesante: 
+Which is an interesting insight:
 
-**Insight 1: pueden existir inmuebles con un valor regular residual pero con alto valor en momentos puntuales por acontenicimientos deportivos o espectáculos**
+**Insight 1: there may be properties with a regular residual value but with high value at specific times due to sporting events or shows**
 
-¿Tendría sentido generar un producto de alquiler que consista en alquilar de forma "normal" a un precio inferior al mercado con la condición de que el inquilino deje el piso libre para alquilarlo "turísticamente" en fechas señaladas?
+Would it make sense to generate a rental product that consists of renting in a "normal" way at a price below the market with the condition that the tenant leaves the apartment free to rent it "touristically" on designated dates?
 
-En el resto no hay sorpresas, con distritos como Salamanca, Centro o Chanmartín a la cabeza.
+In the rest there are no surprises, with districts like Salamanca, Centro or Chanmartín in the lead.
 
-Pero por ejemplo vemos que la diferencia de precio media entre Retiro y Tetuán es muy baja.
+But for example we see that the average price difference between Retiro and Tetuán is very low.
 
-Esto nos lleva a comparar el precio medio por distrito con el precio medio de compra también por distrito.
+This leads us to compare the average price per district with the average purchase price also per district.
 
 
 ```python
@@ -983,15 +983,15 @@ for cada in range(0,temp.shape[0]):
     
 
 
-Existe una clara correlación entre el precio de compra en cada distrito y el precio que podremos cobrar.
+There is a clear correlation between the purchase price in each district and the price we will be able to charge.
 
-Claramente se perciben tres clusters de bajo-bajo, medio-medio y alto-alto.
+Three clusters of low-low, medium-medium and high-high are clearly perceived.
 
-Y la excepción de San Blas que ya sabemos por qué es.
+And the exception of San Blas that we already know why it is.
 
-Por tanto como era esperable no hay a priori ningún "chollo" claro a este nivel.
+Therefore, as expected, there is no clear "bargain" at this level a priori.
 
-Vamos a repetir el análisis a nivel de barrio a ver si identificamos algo.
+We are going to repeat the analysis at the neighborhood level to see if we identify anything.
 
 
 ```python
@@ -1107,16 +1107,16 @@ for cada in range(0,temp.shape[0]):
     
 
 
-A este nivel ya vemos más cosas:
+At this level we already see more things:
 
-* 3 barrios que sobresalen, posiblemente los 3 sean de San Blas
-* Dentro de cada grupo de bajo-medio-alto sí podemos empezar a separarar
-    * Bajo: Simancas, Ambroz, Marroquina, San Juan Bautista
-    * Medio: El Plantio, Valdemarín, Valdefuentes
-    * Medio-alto: Jerónimos, Fuentela reina
-    * Alto: Recoletos
+* 3 neighborhoods that stand out, possibly all 3 are from San Blas
+* Within each low-medium-high group, we can begin to separate
+     * Bass: Simancas, Ambroz, Marroquina, San Juan Bautista
+     * Medium: El Plantio, Valdemarín, Valdefuentes
+     * Medium-high: Jerónimos, Fuentela Reina
+     * High: Recoletos
     
-**Insight 2: Existen ciertos barrios que apriori pueden maximizar la relación coste-ingresos y además podemos segmentarlo por el tipo calidad del inmueble en el que nos interes invertir**
+**Insight 2: There are certain neighborhoods that a priori can maximize the cost-income ratio and we can also segment it by the type of quality of the property in which we are interested in investing**
 
 
 ```python
@@ -1130,9 +1130,9 @@ df.loc[df.neighbourhood.isin(['Rosas','Canillejas','Hellin']),'distrito'].unique
 
 
 
-**¿Qué factores (a parte de la localización determinan el precio del alquiler?**
+**What factors (apart from location determine the rental price?**
 
-Para responder a esta pregunta podemos construir un minicubo, ya que hemos discretizado nuestras variables de análisis.
+To answer this question we can build a minicube, since we have discretized our analysis variables.
 
 
 ```python
@@ -1514,7 +1514,7 @@ minicubo_precio
 
 
 
-Sobre el minicubo vamos analizando cada variable.
+On the minicube we are analyzing each variable.
 
 
 ```python
@@ -1592,11 +1592,11 @@ ax2.plot(minicubo_precio.loc['bedrooms_disc'].precio_compra,color = 'green');
     
 
 
-En cuanto al número de habitaciones no hay nada que destacar.
+Regarding the number of rooms, there is nothing to highlight.
 
-Existe una relación casi perfecta entre el precio de compra y el precio total que se puede cobrar.
+There is an almost perfect relationship between the purchase price and the total price that can be charged.
 
-Parte de este efecto puede ser artificial, ya que usamos el número de habitaciones para calcular el precio total como el precio de compra.
+Part of this effect may be artificial, since we use the number of rooms to calculate the total price as the purchase price.
 
 
 ```python
@@ -1669,13 +1669,13 @@ ax2.plot(minicubo_precio.loc['beds_disc'].precio_compra,color = 'green');
     
 
 
-En cuanto al número de camas sí hay una conclusión:
+Regarding the number of beds, there is a conclusion:
 
-**Insight 3: el número de camas a evitar es 2**. O bien ponemos una cama o intentamos meter todas las posibles.
+**Insight 3: the number of beds to avoid is 2**. Either we put a bed or we try to fit as many as possible.
 
-Dado que no había este efecto en el número de habitaciones ¿podría ser que los propietarios estén intentando meter muchas más camas que habitaciones para maximizar el ingreso?
+Since there was no effect on the number of rooms, could it be that the owners are trying to cram in a lot more beds than rooms to maximize revenue?
 
-Veámoslo por ejemplo con los pisos de una habitación:
+Let's see it for example with the floors of a room:
 
 
 ```python
@@ -1688,11 +1688,11 @@ df[df.bedrooms == 1].groupby('beds').precio_total.median().plot();
     
 
 
-Efectivamente aquí hay algo, ya que figura que para pisos de una habitación hay gente que está metiendo hasta decenas de camas!
+Indeed there is something here, since it appears that for one-room apartments there are people who are putting up to dozens of beds!
 
-Sería un tema a explorar con más detalle y comentar con alguien que conozca el negocio.
+It would be a topic to explore in more detail and discuss with someone who knows the business.
 
-Vamos a ver unos ejemplos:
+Let's see some examples:
 
 
 ```python
@@ -2058,15 +2058,15 @@ ax2.plot(minicubo_precio.loc['accommodates_disc'].precio_compra,color = 'green')
     
 
 
-**Insight 4: el número óptimo de huéspedes está en 3, ya el precio de los inmuebles para acomodar 3 es el mismo que para acomodar 1 o 2. A partir de 4 el piso necesita ser mayor y el precio de compra se incrementa bastante**
+**Insight 4: the optimal number of guests is 3, since the price of the properties to accommodate 3 is the same as to accommodate 1 or 2. From 4 the floor needs to be larger and the purchase price increases a lot **
 
-Por último vamos a analizar la variable que hemos construído de cercanía a un punto de interés para ver si tiene efecto sobre el precio de las habitaciones.
+Finally we are going to analyze the variable that we have built of proximity to a point of interest to see if it has an effect on the price of the rooms.
 
-En una situación real hubiéramos construído muchas de este tipo, y repetido el análisis con todas.
+In a real situation we would have built many of this type, and repeated the analysis with all of them.
 
-En este caso como hemos construído la distancia a la Puerta del Sol vamos a evaluar solo los distritos para lo que esto puede ser relevante, es decir los más céntricos.
+In this case, as we have built the distance to Puerta del Sol, we are going to evaluate only the districts for which this may be relevant, that is, the most central ones.
 
-Para ello primero vamos a calcular la distancia media por distrito y elegir un punto de corte.
+To do this, we will first calculate the average distance per district and choose a cut-off point.
 
 
 ```python
@@ -2102,9 +2102,9 @@ df.groupby('distrito').pdi_sol.median().sort_values()
 
 
 
-Vamos a cortar en Latina incluído.
+Let's cut in Latina included.
 
-Y sobre esa selección vamos a visualizar con un scatter.
+And on that selection we are going to visualize with a scatter.
 
 
 ```python
@@ -2142,127 +2142,29 @@ No parece haber una relación tan directa como sería esperable entre la distanc
 
 **Insight 5: estando dentro del distrito parece que la cercanía a puntos de interés no tiene tanto impacto como sería esperable. Eso abre la puerta a buscar inmuebles que estando en un distrito céntrico no estén justo al lado del PdI y por tanto esperablmente tengan un precio de compra menor**
 
-### Analisis sobre la ocupación
+### Analysis of occupation
 
-Para este punto podríamos repetir exactamente los mismos análisis que con el precio pero cambiando la variable precio por la de ocupación que habíamos construido.
+At this point, we could repeat exactly the same analysis as with the price, but changing the price variable for the occupancy variable that we had built.
 
-Dado que sería igual no vamos a desarrollarlo y te lo dejo como tarea para que practiques e intentes obtener tus primeros insights.
+Since it would be the same, we are not going to develop it and I will leave it as a homework for you to practice and try to get your first insights.
 
-En su lugar prefiero el tiempo para enseñarte cómo podemos incluir análisis sobre un mapa, dado que en este caso sería algo muy relevante y es un tipo de análisis que siempre gusta mucho.
+Instead I prefer the time to show you how we can include analysis on a map, since in this case it would be something very relevant and it is a type of analysis that is always very popular.
 
-### Analisis geográfico sobre un mapa
-
-El análisis geográfico es una disciplina en si misma y de bastante complejidad.
-
-Pero afortunadamente hay una alternativa en Python que lo hace muy sencillo y cubre todo lo que necesitamos de forma práctica para nuestro fin.
-
-Es un paquete que se llama Folium y es una implementación de la tecnología Leaflet en Python.
-
-Lo único que necesitamos para usarlo es tener las coordenadas de latitud y longitud.
-
-**Instalación:**
-
-conda install -c conda-forge folium
-
-**Importación:**
-
-import folium
-
-**Documentación:**
-
-https://python-visualization.github.io/folium/index.html
-
+### Geographic analysis on a map
 
 ```python
 import folium
 ```
 
-Con folium no es necesario instalar mapas, ya los trae por defecto, lo único que tenemos que hacer para inicializar un mapa es pasarle las coordenadas de inicio y opcionalmente un nivel de zoom.
+We are going to use the coordinates of the Puerta del Sol that we already had as the center point of the map.
 
-Vamos a usar las coordenadas de la Puerta del Sol que ya teníamos.
-
-
-```python
-folium.Map(location=[40.4167278, -3.7033387],zoom_start=12)
-```
-
-
-
-
-<div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
-&lt;head&gt;    
-    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
-
-        &lt;script&gt;
-            L_NO_TOUCH = false;
-            L_DISABLE_3D = false;
-        &lt;/script&gt;
-
-    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
-    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
-    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
-
-            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
-                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
-            &lt;style&gt;
-                #map_7c34e1012e84411af9dac3059f1fee47 {
-                    position: relative;
-                    width: 100.0%;
-                    height: 100.0%;
-                    left: 0.0%;
-                    top: 0.0%;
-                }
-            &lt;/style&gt;
-
-&lt;/head&gt;
-&lt;body&gt;    
-
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_7c34e1012e84411af9dac3059f1fee47&quot; &gt;&lt;/div&gt;
-
-&lt;/body&gt;
-&lt;script&gt;    
-
-            var map_7c34e1012e84411af9dac3059f1fee47 = L.map(
-                &quot;map_7c34e1012e84411af9dac3059f1fee47&quot;,
-                {
-                    center: [40.4167278, -3.7033387],
-                    crs: L.CRS.EPSG3857,
-                    zoom: 12,
-                    zoomControl: true,
-                    preferCanvas: false,
-                }
-            );
-
-
-
-
-
-            var tile_layer_d275441bbf289a02a1141ae5cb5e181a = L.tileLayer(
-                &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
-                {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_7c34e1012e84411af9dac3059f1fee47);
-
-&lt;/script&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div>
-
-
-
-Por ejemplo vamos a analizar visualmente el insight sobre el distrito de San Blas.
-
+For example, we are going to visually analyze the insight on the San Blas district.
 
 ```python
 datos = df[df.distrito == 'San Blas - Canillejas'].copy()
 ```
 
-Para representar los marcadores de todos los pisos tenemos que crear un bucle para ir añadiéndolos al mapa.
+To represent the markers of all the floors we have to create a loop to add them to the map.
 
 
 ```python
@@ -2276,9 +2178,6 @@ for piso in range(0,len(datos)):
 
 mapa
 ```
-
-
-
 
 <div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
 &lt;head&gt;    
@@ -20038,4 +19937,4 @@ mapa
 
 
 
-**Insight 6: Existen todavía muchos puntos amarillos y naranjas, lo cual puede indicar que todavía existe potencial para explotar más el factor de los eventos deportivos**
+**Insight 1b: There are still many yellow and orange dots, which may indicate that there is still potential to further exploit the factor of sporting events**
