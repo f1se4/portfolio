@@ -1183,6 +1183,7 @@ listings
       <td>...</td>
       <td>...</td>
       <td>...</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18904</th>
@@ -1202,12 +1203,7 @@ listings
       <td>Centro</td>
       <td>Justicia</td>
       <td>40.424447</td>
-      <td>-3.691309</td>
-      <td>Private room</td>
-      <td>29</td>
-      <td>1</td>
-      <td>87</td>
-      <td>358</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>18906</th>
@@ -1487,7 +1483,6 @@ listings_det
       <th>accommodates</th>
       <th>bathrooms</th>
       <th>bedrooms</th>
-      <th>beds</th>
       <th>...</th>
     </tr>
   </thead>
@@ -1551,8 +1546,7 @@ listings_det
       <td>...</td>
       <td>...</td>
 	  <td>...</td>
-	  <td>1.0</td>
-	  <td>1.0</td>
+	  <td>...</td>
     </tr>
     <tr>
       <th>18904</th>
@@ -1572,7 +1566,6 @@ listings_det
       <td>1</td>
       <td>NaN</td>
       <td>1.0</td>
-	  <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
