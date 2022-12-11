@@ -1,8 +1,8 @@
-# PREPARACION DE DATOS
+# DATA PREPARATION
 
-En esta fase vamos a crear nuevas variables o transformar las existentes para poder dar mejor respuesta a nuestro objetivo.
+In this phase we are going to create new variables or transform the existing ones in order to give a better response to our objective.
 
-Vamos a poner ejemplos tanto de como usar las variables internas como de cómo enriquecer con variables externas.
+We are going to give examples of both how to use internal variables and how to enrich with external variables.
 
 ## SET UP
 
@@ -21,7 +21,7 @@ import sqlalchemy as sa
 pd.options.display.max_columns = None
 ```
 
-## CARGA DE DATOS
+## DATA UPLOAD
 
 
 ```python
@@ -60,23 +60,7 @@ df.head()
       <th>neighbourhood_group</th>
       <th>neighbourhood</th>
       <th>latitude</th>
-      <th>longitude</th>
-      <th>room_type</th>
-      <th>price</th>
-      <th>minimum_nights</th>
-      <th>calculated_host_listings_count</th>
-      <th>availability_365</th>
-      <th>description</th>
-      <th>host_is_superhost</th>
-      <th>accommodates</th>
-      <th>bedrooms</th>
-      <th>beds</th>
-      <th>number_of_reviews</th>
-      <th>review_scores_rating</th>
-      <th>review_scores_communication</th>
-      <th>review_scores_location</th>
-      <th>precio_m2</th>
-      <th>distrito</th>
+      <th>...</th>
     </tr>
   </thead>
   <tbody>
@@ -89,23 +73,7 @@ df.head()
       <td>Chamartín</td>
       <td>Hispanoamérica</td>
       <td>40.45724</td>
-      <td>-3.67688</td>
-      <td>Private room</td>
-      <td>60</td>
-      <td>1</td>
-      <td>2</td>
-      <td>180</td>
-      <td>Excellent connection with the AIRPORT and EXHI...</td>
-      <td>t</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>80</td>
-      <td>4.87</td>
-      <td>4.89</td>
-      <td>4.77</td>
-      <td>5098</td>
-      <td>Chamartín</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -116,23 +84,7 @@ df.head()
       <td>Latina</td>
       <td>Cármenes</td>
       <td>40.40381</td>
-      <td>-3.74130</td>
-      <td>Private room</td>
-      <td>31</td>
-      <td>4</td>
-      <td>2</td>
-      <td>364</td>
-      <td>We have a quiet and sunny room with a good vie...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>33</td>
-      <td>4.58</td>
-      <td>4.82</td>
-      <td>4.21</td>
-      <td>2267</td>
-      <td>Latina</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -143,23 +95,7 @@ df.head()
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.38840</td>
-      <td>-3.69511</td>
-      <td>Entire home/apt</td>
-      <td>50</td>
-      <td>15</td>
-      <td>5</td>
-      <td>222</td>
-      <td>Apartamento de tres dormitorios dobles, gran s...</td>
-      <td>f</td>
-      <td>6</td>
-      <td>3.0</td>
-      <td>5.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>4085</td>
-      <td>Arganzuela</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -170,23 +106,7 @@ df.head()
       <td>Centro</td>
       <td>Universidad</td>
       <td>40.42183</td>
-      <td>-3.70529</td>
-      <td>Entire home/apt</td>
-      <td>92</td>
-      <td>5</td>
-      <td>1</td>
-      <td>115</td>
-      <td>Studio located 50 meters from Gran Via, next t...</td>
-      <td>f</td>
-      <td>3</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>12</td>
-      <td>4.92</td>
-      <td>5.00</td>
-      <td>5.00</td>
-      <td>4827</td>
-      <td>Centro</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -197,23 +117,7 @@ df.head()
       <td>Arganzuela</td>
       <td>Legazpi</td>
       <td>40.38975</td>
-      <td>-3.69018</td>
-      <td>Private room</td>
-      <td>26</td>
-      <td>2</td>
-      <td>1</td>
-      <td>349</td>
-      <td>Nice and cozy roon for one person with a priva...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>149</td>
-      <td>4.68</td>
-      <td>4.71</td>
-      <td>4.70</td>
-      <td>4085</td>
-      <td>Arganzuela</td>
+      <td>...</td>
     </tr>
   </tbody>
 </table>
@@ -221,29 +125,29 @@ df.head()
 
 
 
-## PREPARACION DE VARIABLES
+## PREPARATION OF VARIABLES
 
-### Creacion de kpis de palancas
+### Creation of lever kpis
 
-Primero vamos a crear las variables de análisis, es decir las que habíamos identificado como los Kpis que usaremos en las palancas que influyen sobre el negocio.
+First we are going to create the analysis variables, that is, those that we had identified as the Kpis that we will use in the levers that influence the business.
 
-Habíamos dicho que eran 3:
+We had said that there were 3:
 
-* precio por noche: esta ya la tenemos directamente en la variable price, pero vamos a revisarla para ver que la entendemos bien
-* ocupación: tenemos availability_365 pero hay que transformarla
-* precio del inmueble: esta tendremos que crearla con variables externas así que la dejamos para después
+* price per night: we already have this directly in the price variable, but we are going to review it to see that we understand it correctly
+* occupation: we have availability_365 but it must be transformed
+* price of the property: we will have to create this with external variables so we leave it for later
 
-**Empezamos con el precio.**
+**We start with the price.**
 
-La documentación no aclara si el precio es por todo el inmueble, o si en el caso de que se alquile una habitación es por habitación.
+The documentation does not clarify whether the price is for the entire property, or if a room is rented, it is per room.
 
-Es un dato clave para poder hacer la valoración de los potenciales ingresos de un inmueble.
+It is a key piece of information to be able to make an assessment of the potential income of a property.
 
-Vamos a intentar entenderlo analizando el precio medio por tipo de alquiler.
+We are going to try to understand it by analyzing the average price by type of rental.
 
-Es importante filtrar por solo un distrito para no incluir el efecto "zona".
+It is important to filter by only one district so as not to include the "zone" effect.
 
-Así que primero elegimos un distrito que tenga muchos datos.
+So first we choose a district that has a lot of data.
 
 
 ```python
@@ -294,21 +198,21 @@ df.loc[df.distrito == 'Centro',:].groupby('room_type').price.mean()
 
 
 
-Conclusión:
+Conclusion:
     
-* alquilar el apartamento tiene un precio medio de 148€
-* alquilar una habitación tiene un precio medio de 60€ o 67€ según sea compartida o privada
-* por tanto para calcular los "ingresos" de un inmueble sí deberemos multiplicar el precio el precio por el número de habitaciones cuando sea de los tipos Private room o Shared room
+* renting the apartment has an average price of €148
+* renting a room has an average price of €60 or €67 depending on whether it is shared or private
+* Therefore, to calculate the "income" of a property, we must multiply the price by the number of rooms when it is of the Private room or Shared room types
 
-Ahora bien, multiplicar el precio por el total de habitaciones puede sesgar artificialmente al alza la capacidad de generar ingresos de un inmueble.
+However, multiplying the price by the total number of rooms can artificially bias upward the income-generating capacity of a property.
 
-Ya que si se alquila por habitaciones no es probable que siempre esté al 100%
+Since if it is rented by rooms, it is not likely that it will always be 100%
 
-Por tanto deberíamos ponderarlo por el porcentaje medio de habitaciones alquiladas.
+Therefore we should weight it by the average percentage of rented rooms.
 
-No tenemos ese dato, pero supongamos que hemos hablado con el responsable de negocio y nos ha dicho que es del 70%.
+We do not have that data, but suppose we have spoken with the business manager and he has told us that it is 70%.
 
-Podemos crear la variable precio total aplicando apply sobre una función personalizada.
+We can create the total price variable by applying apply on a custom function.
 
 
 ```python
@@ -573,15 +477,15 @@ df[['room_type','price','beds','precio_total']].head(30)
 
 
 
-**Ahora vamos con la ocupación**
+**Now we go with the occupation**
 
-La variable que tenemos que nos permite medir esto es availability_365.
+The variable we have that allows us to measure this is availability_365.
 
-Esta variable nos dice el número de días a un año vista que el inmueble NO está ocupado.
+This variable tells us the number of days in a year that the property is NOT occupied.
 
-Por tanto nos interesaría transformarla a una medida más directa de ocupación, por ejemplo el % del año que SI está ocupada.
+Therefore, we would be interested in transforming it into a more direct measure of occupancy, for example, the % of the year that it IS occupied.
 
-Podemos hacerlo con una tranformación directa.
+We can do it with a direct transformation.
 
 
 ```python
@@ -613,25 +517,7 @@ df.head()
       <th>index</th>
       <th>id</th>
       <th>name</th>
-      <th>host_id</th>
-      <th>neighbourhood_group</th>
-      <th>neighbourhood</th>
-      <th>latitude</th>
-      <th>longitude</th>
-      <th>room_type</th>
-      <th>price</th>
-      <th>minimum_nights</th>
-      <th>calculated_host_listings_count</th>
-      <th>availability_365</th>
-      <th>description</th>
-      <th>host_is_superhost</th>
-      <th>accommodates</th>
-      <th>bedrooms</th>
-      <th>beds</th>
-      <th>number_of_reviews</th>
-      <th>review_scores_rating</th>
-      <th>review_scores_communication</th>
-      <th>review_scores_location</th>
+      <th>...</th>
       <th>precio_m2</th>
       <th>distrito</th>
       <th>precio_total</th>
@@ -644,25 +530,7 @@ df.head()
       <td>0</td>
       <td>6369</td>
       <td>Rooftop terrace room ,  ensuite bathroom</td>
-      <td>13660</td>
-      <td>Chamartín</td>
-      <td>Hispanoamérica</td>
-      <td>40.45724</td>
-      <td>-3.67688</td>
-      <td>Private room</td>
-      <td>60</td>
-      <td>1</td>
-      <td>2</td>
-      <td>180</td>
-      <td>Excellent connection with the AIRPORT and EXHI...</td>
-      <td>t</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>80</td>
-      <td>4.87</td>
-      <td>4.89</td>
-      <td>4.77</td>
+      <td>...</td>
       <td>5098</td>
       <td>Chamartín</td>
       <td>60.0</td>
@@ -673,25 +541,7 @@ df.head()
       <td>1</td>
       <td>21853</td>
       <td>Bright and airy room</td>
-      <td>83531</td>
-      <td>Latina</td>
-      <td>Cármenes</td>
-      <td>40.40381</td>
-      <td>-3.74130</td>
-      <td>Private room</td>
-      <td>31</td>
-      <td>4</td>
-      <td>2</td>
-      <td>364</td>
-      <td>We have a quiet and sunny room with a good vie...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>33</td>
-      <td>4.58</td>
-      <td>4.82</td>
-      <td>4.21</td>
+      <td>...</td>
       <td>2267</td>
       <td>Latina</td>
       <td>31.0</td>
@@ -702,25 +552,7 @@ df.head()
       <td>2</td>
       <td>23001</td>
       <td>Apartmento Arganzuela- Madrid Rio</td>
-      <td>82175</td>
-      <td>Arganzuela</td>
-      <td>Legazpi</td>
-      <td>40.38840</td>
-      <td>-3.69511</td>
-      <td>Entire home/apt</td>
-      <td>50</td>
-      <td>15</td>
-      <td>5</td>
-      <td>222</td>
-      <td>Apartamento de tres dormitorios dobles, gran s...</td>
-      <td>f</td>
-      <td>6</td>
-      <td>3.0</td>
-      <td>5.0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>...</td>
       <td>4085</td>
       <td>Arganzuela</td>
       <td>50.0</td>
@@ -731,25 +563,7 @@ df.head()
       <td>3</td>
       <td>24805</td>
       <td>Gran Via Studio Madrid</td>
-      <td>346366726</td>
-      <td>Centro</td>
-      <td>Universidad</td>
-      <td>40.42183</td>
-      <td>-3.70529</td>
-      <td>Entire home/apt</td>
-      <td>92</td>
-      <td>5</td>
-      <td>1</td>
-      <td>115</td>
-      <td>Studio located 50 meters from Gran Via, next t...</td>
-      <td>f</td>
-      <td>3</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>12</td>
-      <td>4.92</td>
-      <td>5.00</td>
-      <td>5.00</td>
+      <td>...</td>
       <td>4827</td>
       <td>Centro</td>
       <td>92.0</td>
@@ -760,25 +574,7 @@ df.head()
       <td>4</td>
       <td>26825</td>
       <td>Single Room whith private Bathroom</td>
-      <td>114340</td>
-      <td>Arganzuela</td>
-      <td>Legazpi</td>
-      <td>40.38975</td>
-      <td>-3.69018</td>
-      <td>Private room</td>
-      <td>26</td>
-      <td>2</td>
-      <td>1</td>
-      <td>349</td>
-      <td>Nice and cozy roon for one person with a priva...</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>149</td>
-      <td>4.68</td>
-      <td>4.71</td>
-      <td>4.70</td>
+      <td>...</td>
       <td>4085</td>
       <td>Arganzuela</td>
       <td>26.0</td>
@@ -790,19 +586,19 @@ df.head()
 
 
 
-### Transformación de varaibles de análisis
+### Transformation of analysis variables
 
-Algunas de las preguntas semilla están dirigidas a comprobar cómo se comporta el precio o la ocupación según otras variables como el número de habitaciones, la media de valoraciones, etc.
+Some of the seed questions are aimed at checking how the price or occupancy behaves according to other variables such as the number of rooms, the average rating, etc.
 
-Normalmente podremos hacer mejor estos análisis si discretizamos la variable de análisis.
+Normally we can do these analyzes better if we discretize the analysis variable.
 
-En nuestro caso las candidatas para este análisis son: accommodates, bedrooms, beds y number_of_reviews.
+In our case, the candidates for this analysis are: accommodates, bedrooms, beds and number_of_reviews.
 
-En bedrooms tiene sentido una discretización más personalizada. En las otras podemos hacerla automática.
+In bedrooms, a more personalized discretization makes sense. In the others we can make it automatic.
 
-**Discretizar bedrooms**
+**Discretize bedrooms**
 
-Comenzamos por evaluar la distribución de los datos.
+We begin by evaluating the distribution of the data.
 
 
 ```python
@@ -815,9 +611,9 @@ df.bedrooms.value_counts().plot.bar();
     
 
 
-Vamos a discretizar para 1,2,3 y más de 3.
+We are going to discretize for 1,2,3 and more than 3.
 
-Podemos usar np.select
+We can use np.select
 
 
 ```python
@@ -831,7 +627,7 @@ resultados = ['01_Una','02_Dos','03_Tres','04_Cuatro o mas']
 df['bedrooms_disc'] = np.select(condiciones, resultados, default = -999)
 ```
 
-Comprobamos
+Review
 
 
 ```python
@@ -844,9 +640,9 @@ df.bedrooms_disc.value_counts().plot.bar();
     
 
 
-**Discretizar accommodates, beds y number_of_reviews**
+**Discretize accommodates, beds and number_of_reviews**
 
-Vamos a usar qcut para discritizar con percentiles 0.5, 0.8, 1
+We are going to use qcut to discriminate with percentiles 0.5, 0.8, 1
 
 
 ```python
@@ -890,29 +686,29 @@ df['number_of_reviews_disc'].value_counts().sort_index(ascending = False).plot.b
     
 
 
-### Creación de variables con datos externos
+### Creating variables with external data
 
-En este caso en concreto se podrían hacer muchas cosas con datos externos.
+In this particular case, many things could be done with external data.
 
-Lo primero, que ya hemos incorporado parcialmente, es la palanca del precio del inmueble.
+The first thing, which we have already partially incorporated, is the property price lever.
 
-Decíamos que la podíamos estimar multiplicando los metros cuadrados del inmueble por el precio por m2.
+We said that we could estimate it by multiplying the square meters of the property by the price per m2.
 
-El precio_m2 ya lo hemos conseguido, pero el tamaño del inmueble no lo tenemos en los datos.
+We have already obtained the price_m2, but we do not have the size of the property in the data.
 
-Lo que podemos hacer es establecer unos criterios en base al número de habitaciones.
+What we can do is establish criteria based on the number of rooms.
 
-No es perfecto, pero nos servirá de aproximación.
+It's not perfect, but it will serve as an approximation.
 
-**Estimación de los metros cuadrados del inmueble**
+**Estimate of the square meters of the property**
 
-Vamos usar el siguiente algoritmo:
+Let's use the following algorithm:
 
-* una habitación: m2 = 50
-* dos habitaciones: m2 = 70
-* tres habitaciones: m2 = 90
-* cuatro habitaciones: m2 = 120
-* cinco o más habitaciones: m2 = 150
+* a room: m2 = 50
+* two rooms: m2 = 70
+* three rooms: m2 = 90
+* four rooms: m2 = 120
+* five or more rooms: m2 = 150
 
 
 ```python
@@ -946,9 +742,9 @@ df['m2'].value_counts()
 
 
 
-Ahora ya podemos estimar el precio de compra del inmueble.
+Now we can estimate the purchase price of the property.
 
-Recordamos que al precio que nos sale le quitábamos un 30% por capacidad de negociación.
+We remember that we took 30% from the price we got for bargaining power.
 
 
 ```python
@@ -1157,26 +953,26 @@ df[['bedrooms','m2','distrito','precio_m2','precio_compra']].head(20)
 
 
 
-Ahora vamos a poner un ejemplo de qué otro tipo de variables podemos construir.
+Now we are going to give an example of what other types of variables we can build.
 
-En este caso podríamos hacer mucho con las coordenadas x,y.
+In this case we could do a lot with the x,y coordinates.
 
-Ya que en turismo la localización es muy importante.
+Since in tourism the location is very important.
 
-Por ejemplo podríamos calcular las distancias a diferentes puntos de interés como monumentos, lugares de ocio, recintos deportivos, etc.
+For example, we could calculate the distances to different points of interest such as monuments, entertainment venues, sports venues, etc.
 
-Simplemente como ejemplo vamos a calcular la distancia de cada inmueble a la Puerta del Sol.
+Simply as an example we are going to calculate the distance from each property to Puerta del Sol.
 
-Para ello buscamos en Google su longitud y latitud: https://www.123coordenadas.com/coordinates/81497-puerta-del-sol-madrid
+To do this, we Google its longitude and latitude: https://www.123coordenadas.com/coordinates/81497-puerta-del-sol-madrid
 
-Latitud: 40.4167278
-Longitud: -3.7033387
+Latitude: 40.4167278
+Longitude: -3.7033387
 
-**Cálculo de la distancia de cada inmueble a la Puerta del Sol**
+**Calculation of the distance of each property to Puerta del Sol**
 
-Dada la curvatura de la tierra la distancia entre dos puntos a partir de su latitud y longitud se calcula con una fórmula que se llama distancia de Haversine.
+Given the curvature of the earth, the distance between two points based on their latitude and longitude is calculated using a formula called the Haversine distance.
 
-Una búsqueda en Google nos da una función ya construída para calcularla que podemos adaptar: https://stackoverflow.com/questions/4913349/haversine-formula-in-python-bearing-and-distance-between-two-gps-points
+A Google search gives us a built-in function to calculate it that we can adapt: [Haversine](https://stackoverflow.com/questions/4913349/haversine-formula-in-python-bearing-and-distance-between-two-gps-points)
 
 
 ```python
@@ -1197,7 +993,7 @@ def haversine(lat1, lon1, lat2, lon2):
       return R * c
 ```
 
-Creamos la variable
+We create the variable
 
 
 ```python
@@ -1208,7 +1004,7 @@ lon1 = -3.7033387
 df['pdi_sol'] = df.apply(lambda registro: haversine(lat1,lon1,registro.latitude,registro.longitude),axis = 1)
 ```
 
-Comprobamos revisando la distancia media por distritos.
+We check by reviewing the average distance by districts.
 
 
 ```python
@@ -1244,9 +1040,9 @@ df.groupby('distrito').pdi_sol.mean().sort_values()
 
 
 
-## GUARDAMOS EN EL DATAMART
+## WE SAVE IN THE DATAMART
 
-Vamos a guardar esta version como df_preparado
+We are going to save this version as df_preparado
 
 
 ```python
