@@ -1,74 +1,69 @@
-# DISEÑO DEL PROYECTO
+#PROJECT DESIGN
+This case simulates that we are a real estate company that makes investments in large cities, buying properties to later rent them as tourist apartments.
 
-Este caso simula que somos una empresa inmobiliaria que hace inversiones en grandes ciudades comprando inmuebles para posteriormente alquilarlos como apartamentos turísticos.
+The management has made the decision to invest in Madrid, and has commissioned us to analyze the data that the leader in the AirBnb sector makes public to try to find the types of properties that have the greatest commercial potential for tourist rentals.
 
-La dirección ha tomado la decisión de invertir en Madrid, y nos ha encargado analizar los datos que el líder del sector AirBnb hace públicos para intentar encontrar los tipos de inmuebles que tienen mayor potencial comercial para alquier turístico.
+As the main deliverable, they expect the type (or types) of properties that the valuation team must look for among the existing opportunities in the city and the main neighborhoods or geographical areas on which to focus.
 
-Como entregable principal esperan la tipología (o tipologías) de inmuebles que el equipo de valoraciones debe buscar entre las oportunidades existentes en la ciudad y los principales barrios o zonas geográficas en las que focalizarse.
+To meet the objective we will apply the Discovery methodology and BA techniques.
 
-Para cumplir con el objetivo aplicaremos la metodología de Discovery y las técnicas de BA aprendidas.
+Although this specific case is focused on tourist rentals, the same type of approach can be used in cases that have a high "location" component:
 
-Aunque este caso concreto esté centrado en el alquiler turístico el mismo tipo de aproximación se puede usar en casos que tengan un alto componente de "ubicación":
+store opening and closing
 
-* apertura y cierre de tiendas
-* reducción de capacidad instalada
-* expansión de franquicias
-* etc.
+reduction of installed capacity
 
-## OBJETIVO
+franchise expansion
 
-Localizar el perfil (o perfiles) de inmuebles que maximizan el potencial comercial en el mercado del alquiler turístico y las principales zonas donde buscarlos.
+etc.
+## OBJECTIVE
+Locate the profile (or profiles) of properties that maximize commercial potential in the tourist rental market and the main areas where to look for them.
 
-## PALANCAS
+## LEVERS
+After speaking with the valuation team, they tell us that the levers that have the most impact on the profitability of this type of investment are:
 
-Tras hablar con el equipo de valoraciones nos dicen que las palancas que tienen más impacto en la rentabilidad de este tipo de inversiones son:
+**Rental price:** the more you can charge per night, the higher the profitability
 
-* **Precio alquiler**: cuanto más se pueda cobrar por noche mayor es la rentabilidad
-* **Ocupación**: en general cuantos más días al año se pueda alquilar un inmueble mayor es su rentabilidad
-* **Precio inmueble**: cuanto más barato se pueda adquirir la propiedad mayor es la rentabilidad
+**Occupation:** in general, the more days a year a property can be rented, the greater its profitability
 
-## KPIs
+**Real estate price:** the cheaper the property can be acquired, the greater the profitability
+## KPI's
+In this example the Kpis are pretty straightforward:
 
-En este ejemplo los Kpis son bastante directos:
+- We will measure occupancy as the number of days per year that the property can be rented
+- We will measure the rental price as the price per night in euros according to Airbnb
+- We will measure the price of a property as the multiplication between the number of square meters and the average price per m2 in your area, and we will apply a 25% discount on the official price due to the negotiation strength of our purchasing team.
+## ENTITIES AND DATA
+The relevant entities for our objective and from which we may have data are:
 
-* Mediremos la ocupación como el número de días anuales que el inmueble se pueda alquilar
-* Mediremos el precio del alquiler como el precio por noche en euros según Airbnb
-* Mediremos el precio de un inmueble como la multiplicación entre el número de metros cuadrados y el precio medio del m2 en su zona, y aplicaremos un 25% de descuento sobre el precio oficial por la fuerza de negociciación de nuestro equipo de compras.
+Estate
 
-## ENTIDADES Y DATOS
+owners
 
-Las entidades relevantes para nuestro objetivo y de las que podemos disponer de datos son:
+districts
 
-* Inmuebles
-* Propietarios
-* Distritos
+The specific data in each of them will be reviewed in the next module.
 
-Los datos concretos en cada uno de ellos los revisaremos en el siguiente módulo.
+## SEED QUESTIONS
+### About the rental price:
 
-## PREGUNTAS SEMILLA
+- What is the average price? And the price range? And by districts? And by neighborhoods?
+- What is the ranking of districts and neighborhoods by average rental price?
+- What factors (apart from location) determine the rental price?
+- What is the relationship between the size of the property and the price for which it can be rented?
+- How does the competition (number of properties available per neighborhood) influence the rental price?
+- How do the prices vary by rental type (entire flat, private room, shared room)?
+### About the occupation:
 
-Sobre el precio del alquiler:
+- What is the average occupancy? And by districts? And by neighborhoods?
+- How likely is each occupancy level in each district?
+- What is the ranking of districts and neighborhoods by occupation?
+- What factors (aside from location) determine occupancy?
+- What is the relationship between the size of the property and its degree of occupancy?
+- How does competition (number of properties available per neighborhood) influence occupancy?
+### About the purchase price:
 
-* ¿Cual es el precio medio? ¿y el rango de precios?¿Y por distritos?¿Y por barrios?
-* ¿Cual es el ranking de distritos y barrios por precio medio de alquiler?
-* ¿Qué factores (a parte de la localización determinan el precio del alquiler?
-* ¿Cual es la relación entre el tamaño del inmueble y el precio por el que se puede alquilar?
-* ¿Cómo influye la competencia (num inmuebles disponibles por barrio) sobre el precio del alquiler?
-* ¿Cómo varían los precios por tipo de alquiler (todo el piso, habitación privada, habitación compartida)?
-
-
-Sobre la ocupación:
-
-* ¿Cual es la ocupación media? ¿Y por distritos?¿Y por barrios?
-* ¿Cómo de probable es cada nivel de ocupación en cada distrito?
-* ¿Cual es el ranking de distritos y barrios por ocupación?
-* ¿Qué factores (a parte de la localización determinan la ocupación?
-* ¿Cual es la relación entre el tamaño del inmueble y su grado de ocupación?
-* ¿Cómo influye la competencia (num inmuebles disponibles por barrio) sobre la ocupación?
-
-Sobre el precio de compra:
-
-* ¿Cual es el ranking de precio por m2 por distrito?
-* ¿Cual es el ranking de precio del inmueble (m2 * tamaño medio) por distrito?
-* ¿Cual es la relación entre el precio del inmueble y el precio del alquiler por distrito?
-* ¿Cual es la relación entre el precio del inmueble y la ocupación por distrito?
+- What is the price ranking per m2 by district?
+- What is the property price ranking (m2 * average size) by district?
+- What is the relationship between the price of the property and the rental price by district?
+- What is the relationship between the price of the property and the occupation by district?
