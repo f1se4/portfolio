@@ -1510,6 +1510,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
+	  <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -1519,6 +1520,7 @@ listings_det
       <td>f</td>
       <td>6</td>
       <td>NaN</td>
+	  <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -1528,6 +1530,7 @@ listings_det
       <td>f</td>
       <td>3</td>
       <td>NaN</td>
+	  <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -1537,6 +1540,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
+	  <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -1547,6 +1551,8 @@ listings_det
       <td>...</td>
       <td>...</td>
 	  <td>...</td>
+	  <td>1.0</td>
+	  <td>1.0</td>
     </tr>
     <tr>
       <th>18904</th>
@@ -1555,6 +1561,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
+	  <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -1565,6 +1572,7 @@ listings_det
       <td>1</td>
       <td>NaN</td>
       <td>1.0</td>
+	  <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -1574,6 +1582,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
+	  <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -1583,6 +1592,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
+	  <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -1592,6 +1602,7 @@ listings_det
       <td>f</td>
       <td>1</td>
       <td>NaN</td>
+	  <td>1.0</td>
 	  <td>...</td>
     </tr>
   </tbody>
