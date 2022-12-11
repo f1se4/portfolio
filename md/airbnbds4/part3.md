@@ -1495,7 +1495,6 @@ listings_det
       <td>2</td>
       <td>NaN</td>
       <td>1.0</td>
-      <td>1.0</td>
 	  <td>...</td>
     </tr>
     <tr>
@@ -1736,8 +1735,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <th>12</th>
       <th>13</th>
       <th>14</th>
-      <th>15</th>
-      <th>16</th>
+      <th>..</th>
     </tr>
     <tr>
       <th>beds</th>
@@ -1776,8 +1774,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>1</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>1.0</th>
@@ -1795,8 +1792,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>9</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>2.0</th>
@@ -1814,8 +1810,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
-      <td>1</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>3.0</th>
@@ -1833,8 +1828,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>4.0</th>
@@ -1852,8 +1846,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>5.0</th>
@@ -1871,8 +1864,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>2</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>6.0</th>
@@ -1890,8 +1882,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>8</td>
       <td>2</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>7.0</th>
@@ -1909,8 +1900,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>6</td>
       <td>1</td>
       <td>4</td>
-      <td>0</td>
-      <td>0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>8.0</th>
@@ -1928,8 +1918,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>9</td>
       <td>2</td>
       <td>2</td>
-      <td>1</td>
-      <td>0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>9.0</th>
@@ -1947,8 +1936,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>8</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
-      <td>1</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>10.0</th>
@@ -1966,8 +1954,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>2</td>
       <td>1</td>
       <td>0</td>
-      <td>4</td>
-      <td>9</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>11.0</th>
@@ -1985,8 +1972,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>1</td>
       <td>1</td>
-      <td>0</td>
-      <td>3</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>12.0</th>
@@ -2004,8 +1990,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>13.0</th>
@@ -2023,8 +2008,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>1</td>
-      <td>2</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>14.0</th>
@@ -2042,8 +2026,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>5</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>15.0</th>
@@ -2061,8 +2044,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>1</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>16.0</th>
@@ -2080,8 +2062,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>5</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>17.0</th>
@@ -2099,8 +2080,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>2</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>18.0</th>
@@ -2118,8 +2098,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>1</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>23.0</th>
@@ -2137,8 +2116,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>1</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>24.0</th>
@@ -2156,8 +2134,7 @@ pd.crosstab(listings_det.beds, listings_det.accommodates)
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
+	  <td>..</td>
     </tr>
   </tbody>
 </table>
