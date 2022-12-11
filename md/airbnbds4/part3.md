@@ -2305,7 +2305,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.accommodates)
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -2590,30 +2589,9 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <th>8.0</th>
       <th>9.0</th>
       <th>...</th>
-      <th>11.0</th>
-      <th>12.0</th>
-      <th>13.0</th>
-      <th>14.0</th>
-      <th>15.0</th>
-      <th>16.0</th>
-      <th>17.0</th>
-      <th>18.0</th>
-      <th>23.0</th>
-      <th>24.0</th>
     </tr>
     <tr>
       <th>bedrooms</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -2640,16 +2618,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>13</td>
       <td>1</td>
       <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>2.0</th>
@@ -2664,16 +2632,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>5</td>
       <td>0</td>
       <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>3.0</th>
@@ -2688,16 +2646,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>11</td>
       <td>7</td>
       <td>...</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>4.0</th>
@@ -2712,16 +2660,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>19</td>
       <td>6</td>
       <td>...</td>
-      <td>2</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>5.0</th>
@@ -2736,16 +2674,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>17</td>
       <td>2</td>
       <td>...</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>6.0</th>
@@ -2760,16 +2688,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>2</td>
       <td>3</td>
       <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>7.0</th>
@@ -2784,16 +2702,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>1</td>
       <td>0</td>
       <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>3</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>8.0</th>
@@ -2808,16 +2716,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>0</td>
       <td>1</td>
       <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>9.0</th>
@@ -2832,16 +2730,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>0</td>
       <td>0</td>
       <td>...</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>10.0</th>
@@ -2856,16 +2744,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>0</td>
       <td>0</td>
       <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>14.0</th>
@@ -2880,16 +2758,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>0</td>
       <td>0</td>
       <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
     </tr>
     <tr>
       <th>15.0</th>
@@ -2904,16 +2772,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>0</td>
       <td>0</td>
       <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>18.0</th>
@@ -2928,16 +2786,6 @@ pd.crosstab(listings_det.bedrooms, listings_det.beds, dropna=False)
       <td>0</td>
       <td>0</td>
       <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
   </tbody>
 </table>
