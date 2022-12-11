@@ -1,17 +1,7 @@
 # INITIAL ANALYSIS OF FILES AND PREPARATION OF THE CASE
 
-We will use actual data provided by AirBnB on this page: http://insideairbnb.com/get-the-data.html
+We will use actual data provided by AirBnB on this page: [Airbnb Insider](http://insideairbnb.com/get-the-data.html)
 
-Specifically, we will use the city of Madrid, but on the page you have many more cities in case you are interested in replicating it with a more significant location for you.
-
-As you can see, AirBnb delivers the data in csv format and with everything in English.
-
-For the purposes of this program and with a view to your learning I am going to make modifications to:
-
-* Keep only the tables that will be useful to us
-* Load all the information to a database to practice with this format, since it will be the most common in business environments
-
-I could have done all this "in the kitchen" and started the exercise already with that format, but I think that this first part "behind the scenes" can also have lessons for you, so I have also included it as part of the training content.
 
 ## SETUP
 
@@ -205,20 +195,7 @@ listings_det.head()
       <th>name</th>
       <th>description</th>
       <th>neighborhood_overview</th>
-      <th>picture_url</th>
-      <th>host_id</th>
-      <th>host_url</th>
       <th>...</th>
-      <th>review_scores_communication</th>
-      <th>review_scores_location</th>
-      <th>review_scores_value</th>
-      <th>license</th>
-      <th>instant_bookable</th>
-      <th>calculated_host_listings_count</th>
-      <th>calculated_host_listings_count_entire_homes</th>
-      <th>calculated_host_listings_count_private_rooms</th>
-      <th>calculated_host_listings_count_shared_rooms</th>
-      <th>reviews_per_month</th>
     </tr>
   </thead>
   <tbody>
@@ -231,20 +208,7 @@ listings_det.head()
       <td>Rooftop terrace room ,  ensuite bathroom</td>
       <td>Excellent connection with the AIRPORT and EXHI...</td>
       <td>NaN</td>
-      <td>https://a0.muscache.com/pictures/683224/4cc318...</td>
-      <td>13660</td>
-      <td>https://www.airbnb.com/users/show/13660</td>
       <td>...</td>
-      <td>4.89</td>
-      <td>4.77</td>
-      <td>4.85</td>
-      <td>NaN</td>
-      <td>f</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>1.21</td>
     </tr>
     <tr>
       <th>1</th>
@@ -255,20 +219,7 @@ listings_det.head()
       <td>Bright and airy room</td>
       <td>We have a quiet and sunny room with a good vie...</td>
       <td>We live in a leafy neighbourhood with plenty o...</td>
-      <td>https://a0.muscache.com/pictures/68483181/87bc...</td>
-      <td>83531</td>
-      <td>https://www.airbnb.com/users/show/83531</td>
       <td>...</td>
-      <td>4.82</td>
-      <td>4.21</td>
-      <td>4.67</td>
-      <td>NaN</td>
-      <td>f</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0.39</td>
     </tr>
     <tr>
       <th>2</th>
@@ -279,20 +230,7 @@ listings_det.head()
       <td>Apartmento Arganzuela- Madrid Rio</td>
       <td>Apartamento de tres dormitorios dobles, gran s...</td>
       <td>Barrio Arganzuela, junto a Madrid Rio, zonas c...</td>
-      <td>https://a0.muscache.com/pictures/58e6a770-509c...</td>
-      <td>82175</td>
-      <td>https://www.airbnb.com/users/show/82175</td>
       <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>f</td>
-      <td>5</td>
-      <td>4</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
@@ -303,20 +241,7 @@ listings_det.head()
       <td>Gran Via Studio Madrid</td>
       <td>Studio located 50 meters from Gran Via, next t...</td>
       <td>The area is next to the Gran Via, so people li...</td>
-      <td>https://a0.muscache.com/pictures/miso/Hosting-...</td>
-      <td>346366726</td>
-      <td>https://www.airbnb.com/users/show/346366726</td>
       <td>...</td>
-      <td>5.00</td>
-      <td>5.00</td>
-      <td>4.83</td>
-      <td>NaN</td>
-      <td>f</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.51</td>
     </tr>
     <tr>
       <th>4</th>
@@ -327,20 +252,7 @@ listings_det.head()
       <td>Single Room whith private Bathroom</td>
       <td>Nice and cozy roon for one person with a priva...</td>
       <td>Es un barrio muy tranquilo, en una zona de Mad...</td>
-      <td>https://a0.muscache.com/pictures/149358/218d5b...</td>
-      <td>114340</td>
-      <td>https://www.airbnb.com/users/show/114340</td>
       <td>...</td>
-      <td>4.71</td>
-      <td>4.70</td>
-      <td>4.72</td>
-      <td>NaN</td>
-      <td>f</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1.65</td>
     </tr>
   </tbody>
 </table>
