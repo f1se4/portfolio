@@ -3126,8 +3126,7 @@ listings_det.describe(include = 'number').T
       <th>min</th>
       <th>25%</th>
       <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
+      <th>..</th>
     </tr>
   </thead>
   <tbody>
@@ -3139,8 +3138,7 @@ listings_det.describe(include = 'number').T
       <td>6369.0</td>
       <td>19305558.00</td>
       <td>33537761.00</td>
-      <td>42555334.00</td>
-      <td>52182334.0</td>
+      <td>..</td>
     </tr>
     <tr>
       <th>accommodates</th>
@@ -3150,8 +3148,7 @@ listings_det.describe(include = 'number').T
       <td>0.0</td>
       <td>2.00</td>
       <td>2.00</td>
-      <td>4.00</td>
-      <td>16.0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>bedrooms</th>
@@ -3161,8 +3158,7 @@ listings_det.describe(include = 'number').T
       <td>1.0</td>
       <td>1.00</td>
       <td>1.00</td>
-      <td>2.00</td>
-      <td>18.0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>beds</th>
@@ -3172,8 +3168,7 @@ listings_det.describe(include = 'number').T
       <td>0.0</td>
       <td>1.00</td>
       <td>1.00</td>
-      <td>2.00</td>
-      <td>24.0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>number_of_reviews</th>
@@ -3183,8 +3178,7 @@ listings_det.describe(include = 'number').T
       <td>0.0</td>
       <td>0.00</td>
       <td>5.00</td>
-      <td>32.00</td>
-      <td>744.0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>review_scores_rating</th>
@@ -3194,8 +3188,7 @@ listings_det.describe(include = 'number').T
       <td>0.0</td>
       <td>4.50</td>
       <td>4.75</td>
-      <td>4.94</td>
-      <td>5.0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>review_scores_communication</th>
@@ -3205,8 +3198,7 @@ listings_det.describe(include = 'number').T
       <td>1.0</td>
       <td>4.75</td>
       <td>4.92</td>
-      <td>5.00</td>
-      <td>5.0</td>
+	  <td>..</td>
     </tr>
     <tr>
       <th>review_scores_location</th>
@@ -3216,8 +3208,7 @@ listings_det.describe(include = 'number').T
       <td>1.0</td>
       <td>4.73</td>
       <td>4.92</td>
-      <td>5.00</td>
-      <td>5.0</td>
+	  <td>..</td>
     </tr>
   </tbody>
 </table>
