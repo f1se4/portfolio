@@ -1,40 +1,39 @@
-# DISEÑO DEL PROYECTO
+# PROJECT DESIGN
 
-En este caso estaremos trabajando para una compañía de generación de energía solar fotovoltaica.
+In this case we will be working for a photovoltaic solar power generation company.
 
-Han detectado comportamientos anómalos en 2 de las plantas y la subcontrata de mantenimiento no es capaz de identificar el motivo.
+Anomalous behaviors have been detected in 2 of the plants and the maintenance subcontractor is unable to identify the reason.
 
-Antes de desplazar a un equipo de ingenieros nos piden al equipo de data science que analicemos los datos de los sensores y medidores para ver si podemos detectar el problema.
+Before deploying a team of engineers, they ask the data science team to analyze the data from the sensors and meters to see if we can detect the problem.
 
-En este caso entre otras cosas vamos a aprender:
+In this case, among other things, we are going to learn:
 
-* cómo funcionan este tipo de plantas solares
-* análisis a realizar en datasets donde la variable tiempo tiene mucha importancia
-* cómo enfocar el análisis en proyectos donde los datos son recogidos por sensores o medidores
+* how these types of solar plants work
+* analysis to be carried out on datasets where the time variable is very important
+* how to approach analysis in projects where data is collected by sensors or meters
 
-Por tanto, mucho de lo que aprendamos aquí es de aplicación general en proyectos de industria e IoT:
+Therefore, much of what we learn here is generally applicable to industry and IoT projects:
 
-* análisis de producción en fábricas
-* otros tipos de energía
+* factory production analysis
+* other types of energy
 * smart cities
-* IoT en agricultura
+* IoT in agriculture
 * etc.
 
 
-## OBJETIVO
+## OBJECTIVE
 
-Analizar los datos disponibles para intentar intuir donde pueden estar los problemas y si es necesario desplazar o no a un equipo de ingenieros a las plantas.
+Analyze the available data to try to intuit where the problems may be and whether or not it is necessary to send a team of engineers to the plants.
 
-## PALANCAS
+## LEVERS
 
-En este tipo de proyectos en el que hay un proceso claro la parte más IMPORTANTE es conocer y entender ese proceso.
+In this type of project in which there is a clear process, the most IMPORTANT part is to know and understand that process.
 
-Vamos a ver por ejemplo cómo en este caso, que parece a priori fácil por la aparente sencillez de los datos, si no hacemos un diseño del proyecto guiado por el proceso, nos podríamos meter en un bucle infinito de análisis sin llegar a ningún lado.
+Let's see, for example, how in this case, which seems easy a priori due to the apparent simplicity of the data, if we do not design the project guided by the process, we could get into an infinite loop of analysis without getting anywhere.
 
-Una vez entendido cómo funciona el negocio y el proceso las palancas nos van a salir solas.
+Once we understand how the business and the process work, the levers will come out on their own.
 
-**¿Cómo funciona una planta de energía solar fotovoltaica?**
-
+**How does a photovoltaic solar power plant work?**
 
 
 
@@ -44,105 +43,96 @@ Una vez entendido cómo funciona el negocio y el proceso las palancas nos van a 
     
 
 
+Therefore, the levers that influence the business objective (in this case, generate AC current) are:
 
-Fuente del gráfico: https://upload.wikimedia.org/wikipedia/commons/b/bb/How_Solar_Power_Works.png
+1. **Irradiation**: the greater the irradiation, the greater the DC generated. But it is not monotonic, from certain values higher temperatures can reduce the generation capacity
+2. **Condition of the panels**: they must be clean and in good working order to generate the most DC energy possible
+3. **Inverter efficiency**: there is always a loss in the transformation from DC to AC, but it must be as little as possible. They must also be in proper condition and working order.
+4. **Meters and sensors**: if they break down and do not measure well, we lose traceability and the possibility of detecting failures
 
-Por tanto las palancas que influyen sobre el objetivo de negocio (en este caso generar corriente AC) son:
+## KPI's
 
-1. **Irradiación**: a mayor irradiación mayor DC generada. Pero no es monotónica, a partir de ciertos valores mayor temperatura puede mermar la capacidad de generación
-2. **Estado de los paneles**: deben estar limpios y con un correcto funcionamiento para generar la mayor energía DC posible
-3. **Eficiencia de los inverters**: siempre hay una pérdida en la transformación de DC a AC, pero debe ser la mínima posible. También deben estar en correcto estado y funcionamiento.
-4. **Medidores y sensores**: si se estropean y no miden bien perdemos la trazabilidad y la posibilidad de detectar fallos
+* Irradiation: measures the solar energy that arrives
+* Ambient and module temperature: measured by plant sensors in degrees Celsius
+* DC power: measure the kW of direct current
+* AC power: measure the kW of alternating current
+* Inverter efficiency (we will create it): measures the capacity of transformation from DC to AC. It is calculated as AC/DC * 100
 
-## KPIs
+## ENTITIES AND DATA
 
-* Irradiación: mide la energía solar que llega
-* Temperatura ambiente y del módulo: medida por los sensores de la planta en grados Celsius
-* Potencia DC: medida los kw de corriente contínua
-* Potencia AC: medida los kw de corriente alterna
-* Eficiencia del inverter (lo crearemos nosotros): mide la capacidad de transformación de DC a AC. Se calcula como AC / DC * 100
+To determine the entities it is necessary to know what a solar plant is composed of.
 
-## ENTIDADES Y DATOS
+The minimum unit is the cell, it is there where the generation of energy by reaction with the photons of the sun takes place.
 
-Para determinar las entidades es necesario conocer de qué se compone una planta solar.
+The cells are encapsulated in "rectangles" called modules.
 
-La unidad mínima es la celda, es ahí donde se produce la generación de energía por reacción con los fotones del sol.
+Several modules form a panel.
 
-Las celdas se encapsulan en unos "rectángulos" que se llaman módulos.
+The panels are arranged in rows called arrays.
 
-Varios módulos forman un panel.
+An inverter receives direct current from several arrays.
 
-Los paneles se organizan en filas que se llaman arrays.
+A plant can have several inverters.
 
-Un inverter recibe corriente contínua de varios arrays.
-
-Una planta puede tener varios inverters.
-
-Además están los medidores y los sensores, que puede haber uno o varios.
-
-
-
-
+There are also the meters and sensors, which may be one or more.
 
 
     
 ![jpeg](static/notebooks/solar/01_Diseno_del_proyecto_files/01_Diseno_del_proyecto_13_0.jpg)
     
 
-
-
-En nuestro caso las entidades que tenemos en la granularidad de los datos son:
+In our case, the entities that we have in the granularity of the data are:
     
-* Ventanas de 15 minutos durante un período de 34 días
-* Plantas: son 2
-* Inverters: varios por planta
-* Sólo un sensor de irradiación por planta
-* Sólo un sensor de temperatura ambiente por planta
-* Sólo un sensor de temperatura del módulo por planta
+* 15-minute windows over a 34-day period
+* Plants: there are 2
+* Inverters: several per plant
+* Only one irradiation sensor per plant
+* Only one room temperature sensor per floor
+* Only one module temperature sensor per floor
 
-Esto condiciona que podremos saber por ejemplo si un inverter de una planta tiene menor rendimiento del esperado, pero no sabremos qué array, panel o módulo lo puede estar causando.
+This conditions that we will be able to know, for example, if an inverter in a plant has lower performance than expected, but we will not know which array, panel or module may be causing it.
 
-## PREGUNTAS SEMILLA
+## SEED QUESTIONS
 
-Habiendo entendido las palancas, kpis y entidades ya podemos plantear las preguntas semilla:
+Having understood the levers, kpis and entities, we can now ask the seed questions:
 
-Sobre la irradiación:
+About irradiation:
 
-* ¿Llega suficiente irradiación todo los días?
-* ¿Es similar en ambas plantas?
-* ¿Cómo es su distribución por hora?
-* ¿Cómo se relaciona con la temperatura ambiente y la temperatura del módulo?
+* Is there enough irradiation every day?
+* Is it similar on both floors?
+* How is your hourly distribution?
+* How is it related to ambient temperature and module temperature?
 
-Sobre las plantas:
+About the plants:
 
-* ¿Les llega la misma cantidad de irradiación?
-* ¿Tienen similar número de inverters?
-* ¿Generan similar cantidad de DC?
-* ¿Generan similar cantidad de AC?
+* Does the same amount of irradiation reach them?
+* Do they have a similar number of inverters?
+* Do they generate similar amounts of DC?
+* Do they generate a similar amount of AC?
 
-Sobre la generación de DC:
+About the DC generation:
 
-* ¿Cual es la relación entre irradiación y generación de DC?
-* ¿Se ve afectada en algún momento por la temperatura ambiente o del módulo?
-* ¿Es similar en ambas plantas?
-* ¿Cómo se distribuye a lo largo del día?
-* ¿Es constante a lo largo de los días?
-* ¿Es constante en todos los inverters?
-* ¿Ha habido momentos de fallos?
+* What is the relationship between irradiation and DC generation?
+* Is it ever affected by ambient or module temperature?
+* Is it similar on both floors?
+* How is it distributed throughout the day?
+* Is it constant throughout the days?
+* Is it constant in all inverters?
+* Have there been moments of failure?
 
-Sobre la generación de AC:
+About AC generation:
 
-* ¿Cual es la relación entre DC y generación de AC?
-* ¿Es similar en ambas plantas?
-* ¿Cómo se distribuye a lo largo del día?
-* ¿Es constante a lo largo de los días?
-* ¿Es constante en todos los inverters?
-* ¿Ha habido momentos de fallos?
+* What is the relationship between DC and AC generation?
+* Is it similar on both floors?
+* How is it distributed throughout the day?
+* Is it constant throughout the days?
+* Is it constant in all inverters?
+* Have there been moments of failure?
 
-Sobre los medidores y sensores:
+About meters and sensors:
 
-* ¿Son fiables los datos de irradiación?
-* ¿Son fiables los datos de temperatura?
-* ¿Son fiables los datos de DC?
-* ¿Son fiables los datos de AC?
-* ¿Son similares los datos entre ambas plantas?
+* Are the irradiation data reliable?
+* Is the temperature data reliable?
+* Is the DC data reliable?
+* Are the CA data reliable?
+* Are the data similar between the two plants?
