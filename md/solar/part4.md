@@ -1069,7 +1069,7 @@ sns.heatmap(temp.corr(), annot=True);
 
 
     
-![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_16_0.png)
+![png](static/notebooks/solar/static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_16_0.png)
     
 
 
@@ -1080,7 +1080,7 @@ sns.pairplot(temp.reset_index(), hue = 'planta', height=3, plot_kws={'alpha': 0.
 
 
     
-![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_17_0.png)
+![png](static/notebooks/solar/static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_17_0.png)
     
 
 
@@ -1263,7 +1263,7 @@ sns.heatmap(temp, annot=True, fmt=".2f");
 
 
     
-![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_21_0.png)
+![png](static/notebooks/solar/static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_21_0.png)
     
 
 
@@ -1880,7 +1880,7 @@ dc_constante_p1.unstack(level = 1).plot(subplots = True, layout = (17,2), sharex
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_45_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_45_0.png)
     
 
 
@@ -1925,7 +1925,7 @@ dc_constante_p2.unstack(level = 1).plot(subplots = True, layout = (17,2), sharex
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_50_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_50_0.png)
     
 
 
@@ -1945,7 +1945,7 @@ sns.scatterplot(data = df, x = df.kw_dc, y = df.kw_ac, hue = df.planta);
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_53_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_53_0.png)
     
 
 
@@ -2287,7 +2287,7 @@ sns.lineplot(data = temp, x = 'hora', y = 'eficiencia', hue = 'planta');
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_56_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_56_0.png)
     
 
 
@@ -2427,7 +2427,7 @@ sns.lineplot(data = temp[temp.planta == 'p2'], x = 'hora', y = 'value', hue = 'v
 ```
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_59_1.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_59_1.png)
     
 
 
@@ -2448,7 +2448,7 @@ temp.eficiencia.plot.density();
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_62_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_62_0.png)
     
 
 
@@ -2747,7 +2747,7 @@ temp[temp.kw_dc > 0].eficiencia.plot.density();
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_66_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_66_0.png)
     
 
 
@@ -3122,7 +3122,7 @@ sns.scatterplot(data = temp, x = 't_modulo', y = 'kw_dc',hue = 'kw_dc_cero');
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_72_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_72_0.png)
     
 
 
@@ -3137,7 +3137,7 @@ temp.groupby('inverter_id').kw_dc_cero.mean().sort_values(ascending = False).plo
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_74_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_74_0.png)
     
 
 
@@ -3157,7 +3157,7 @@ plt.xticks(rotation = 90);
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_77_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_77_0.png)
     
 
 
@@ -3172,7 +3172,7 @@ plt.xticks(rotation = 90);
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_80_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_80_0.png)
     
 
 To have a term of comparison we are going to repeat the analyzes with plant 1.
@@ -3480,7 +3480,7 @@ temp.eficiencia.plot.density();
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_83_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_83_0.png)
     
 
 
@@ -3494,7 +3494,7 @@ plt.xticks(rotation = 90);
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_85_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_85_0.png)
     
 
 
@@ -3510,7 +3510,7 @@ plt.xticks(rotation = 90);
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_88_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_88_0.png)
     
 
 
@@ -3525,7 +3525,7 @@ temp.groupby('inverter_id').kw_dc_cero.mean().sort_values(ascending = False).plo
 
 
     
-![png](04_AnalisisInsights_files/04_AnalisisInsights_90_0.png)
+![png](static/notebooks/solar/04_AnalisisInsights_files/04_AnalisisInsights_90_0.png)
     
 
 
