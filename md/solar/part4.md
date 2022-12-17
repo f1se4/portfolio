@@ -1,4 +1,4 @@
-# ANALISIS E INSIGHTS
+# ANALYSIS AND INSIGHTS
 
 ## SET UP
 
@@ -385,18 +385,17 @@ df_dia.head()
 
 
 
-## ANALISIS E INSIGHTS
+## ANALYSIS AND INSIGHTS
 
-La primera palanca es la recepción de la energía solar.
+The first lever is the reception of solar energy.
 
-Tenemos 3 kpis con los que medir esta palanca: irradiación que llega, temperatura ambiente y temperatura del módulo.
+We have 3 kpis with which to measure this lever: incoming irradiation, ambient temperature, and module temperature.
 
-Estos kpis se miden con un único sensor por planta, así que el dato es el mismo para todos los inverters.
+These kpis are measured with a single sensor per plant, so the data is the same for all inverters.
 
-Tenemos que entender cómo funcionan estas variables entre sí antes de pasar a ver cómo interactúan con el siguiente nivel.
+We need to understand how these variables work with each other before moving on to see how they interact with the next level.
 
-Dado que da igual el inverter y solo necesitamos esas 3 variables vamos a crear un dataset más pequeño con solo un inverter de cada planta para trabajar sobre el.
-
+Since the inverter does not matter and we only need those 3 variables, we are going to create a smaller dataset with only one inverter from each plant to work on.
 
 ```python
 df
@@ -854,7 +853,7 @@ recepcion
 
 
 
-### ¿Las dos plantas reciben la misma cantidad de energía solar?
+### Do the two plants receive the same amount of solar energy?
 
 
 ```python
@@ -931,12 +930,12 @@ ax[2].set_title('Temperatura módulo por planta');
     
 
 
-Conclusiones:
+Conclusions:
 
-* En general la planta 2 recibe más energía solar que la 1
-* Pero esta diferencia no puede implicar el problema de rendimiento que supuestamente existe
+* In general, plant 2 receives more solar energy than plant 1
+* But this difference cannot imply the performance problem that supposedly exists
 
-### ¿Cómo se relacionan esas tres variables?
+### How are these three variables related?
 
 
 ```python
@@ -1085,13 +1084,13 @@ sns.pairplot(temp.reset_index(), hue = 'planta', height=3, plot_kws={'alpha': 0.
     
 
 
-Conclusiones:
+Conclusions:
 
-* La irradiación correlaciona mucho con la temperatura del módulo
-* Pero no tanto con la temperatura ambiente
-* Por tanto una primera forma de identificar módulos defectuosos o sucios es localizar los que produzcan poco cuando la irradiación es alta
+* Irradiance highly correlates with module temperature
+* But not so much with room temperature
+* Therefore, a first way to identify defective or dirty modules is to locate those that produce little when the irradiation is high
 
-### ¿Cómo se distribuye la irradiación y la temperatura a lo largo del día?
+### How is the irradiation and temperature distributed throughout the day?
 
 
 ```python
@@ -1443,14 +1442,14 @@ sns.heatmap(temp, annot=True, fmt=".1f");
     
 
 
-Conclusiones:
+Conclusions:
 
-* Ambas plantas tienen patrones similares. Podríamos pensar que están en zonas geográficas no muy alejadas
-* Existe irradiación (y por tanto a priori las plantas deberían producir) entre las 7 y las 17
-* La irradiación máxima se produce entre las 11 y las 12
-* La temperatura ambiente máxima se produce entre las 14 y las 16
+* Both plants have similar patterns. We might think that they are in geographical areas not far away
+* There is irradiation (and therefore a priori the plants should produce) between 7 a.m. and 5 p.m.
+* The maximum irradiation occurs between 11 and 12
+* The maximum room temperature occurs between 14 and 16
 
-### ¿Ambas plantas son igual de capaces de generar DC a partir de la irradiación?
+### Are both plants equally capable of generating DC from irradiation?
 
 
 ```python
@@ -1464,7 +1463,7 @@ sns.scatterplot(data = df, x = df.irradiacion, y = df.kw_dc);
     
 
 
-Existen 2 patrones claramente diferentes. ¿Serán las plantas?
+There are 2 clearly different patterns. Could it be the plants?
 
 
 ```python
@@ -1478,15 +1477,15 @@ sns.scatterplot(data = df, x = df.irradiacion, y = df.kw_dc, hue = 'planta');
     
 
 
-La planta número 2 produce muchos menos kw ante los mismos niveles de irradiación.
+Plant number 2 produces much less kW at the same irradiation levels.
 
-Pero antes habíamos visto que la relación entre dc y ac en la planta 1 era rara.
+But before we had seen that the relationship between dc and ac in plant 1 was strange.
 
-Y también que los datos de dc y ac no cuadraban con los de kw_dia.
+And also that the data for dc and ac did not match those of kw_dia.
 
-Hay algo raro en los datos.
+There is something strange in the data.
 
-Vamos a ver la relación entre la irradiación y kw_dia a ver si nos da luz.
+Let's see the relationship between irradiation and kw_dia to see if it gives us light.
 
 
 ```python
@@ -1500,17 +1499,17 @@ sns.scatterplot(data = df, x = df.irradiacion, y = df.kw_dia, hue = 'planta');
     
 
 
-Es muy extraño. Parece que la relación es que a más irradiación menos kw generados. Lo cual no tiene sentido.
+It's very strange. It seems that the relationship is that the more irradiation, the less kW generated. Which doesn't make sense.
 
-Incluso parece que los máximos de kw se producen en horas de irradiación cero.
+It even seems that the kw maximums occur in hours of zero irradiation.
 
-¿Te imaginas qué puede estar pasando?
+Can you imagine what could be happening?
 
-CUIDADO: la variable kw_dia es un ACUMULADO. Eso significa que debería alcanzar su máximo cuando llega la última hora del día, por ej las 23:45, donde obviamente la irradiación es cero.
+BEWARE: the variable kw_dia is a CUMULATIVE. That means that it should reach its maximum when the last hour of the day arrives, for example 23:45, where obviously the irradiation is zero.
 
-Y no tener datos hsta pasadas las 7 que es cuando vemos que hay irradiación.
+And not have data until after 7, which is when we see that there is irradiation.
 
-Vamos a comprobarlo.
+Let's check it out.
 
 
 ```python
@@ -1523,29 +1522,29 @@ df.groupby('hora')[['kw_dia']].mean().plot.bar();
     
 
 
-De nuevo algo no cuadra. Hay generación entre las 00 y las 06.
+Again something doesn't add up. There is generation between 00 and 06.
 
-Y además a partir de las 18 comienza a decaer, lo cual no debería pasar si es un acumulado.
+And also after 6:00 p.m. it begins to decline, which should not happen if it is accumulated.
 
-Conclusión:
+Conclusion:
 
-No nos fiamos de estas variables acumuladas como kw_dia y kw_total.
+We don't trust these cumulative variables like kw_day and kw_total.
 
-Pero la verdad es que tampoco nos fiamos mucho de las otras.
+But the truth is that we don't trust the others much either.
 
-En una situación real yo pararía el proyecto hasta ser capaz de ver qué pasa con los datos.
+In a real situation I would stop the project until I was able to see what happens with the data.
 
-Pero para poder continuar vamos a asumir que los datos de dc y ac son correctos.
+But in order to continue we are going to assume that the dc and ac data are correct.
 
-Y bajo esa asunción obtendremos nuestras conclusiones.
+And under this assumption we will obtain our conclusions.
 
 **INSIGHT #1**
 
-La planta 2 genera niveles mucho más bajos de DC incluso a niveles similares de irradiación
+Plant 2 generates much lower levels of DC even at similar levels of irradiation
 
-### ¿La generación es constante a lo largo de los días?
+### Is the generation constant throughout the days?
 
-Podemos usar el df_dia para graficar la visión global de generación de DC durante el período de análisis.
+We can use the df_dia to plot the global vision of DC generation during the analysis period.
 
 
 ```python
@@ -1559,13 +1558,13 @@ sns.lineplot(data = df_dia.reset_index(), x = df_dia.reset_index().fecha, y = 'k
     
 
 
-Vemos que la planta 1 tiene mucha más variabilidad mientras que la planta 2 es mucho más constante.
+We see that plant 1 has much more variability while plant 2 is much more constant.
 
-Pero sobre todo nos extraña los bajos niveles de generacion de DC en de la planta 2 en comparación con la 1.
+But above all we are surprised by the low levels of DC generation on plant 2 compared to 1.
 
-Vamos a examinar la generación de cada día a ver si vemos algo raro.
+Let's examine the generation of each day to see if we see something strange.
 
-Generamos una variable date para poder agregar por ella.
+We generate a date variable to be able to add by it.
 
 
 ```python
@@ -1847,9 +1846,7 @@ df
 </div>
 
 
-
-Creamos un dataframe temporal para analizar la generación de DC horaria en cada día en la planta 1.
-
+We create a temporal dataframe to analyze the hourly DC generation on each day at plant 1.
 
 ```python
 dc_constante_p1 = df[df.planta == 'p1'].groupby(['planta','date','hora']).kw_dc.sum()
@@ -1875,8 +1872,7 @@ dc_constante_p1
 
 
 
-Vamos a pasar date a columnas, para poder respresentar cada columna (que son los dates) como una variable y por tanto como un gráfico independiente.
-
+We create a temporal dataframe to analyze the hourly DC generation on each day at plant 1.
 
 ```python
 dc_constante_p1.unstack(level = 1).plot(subplots = True, layout = (17,2), sharex=True, figsize=(20,30));
@@ -1888,14 +1884,14 @@ dc_constante_p1.unstack(level = 1).plot(subplots = True, layout = (17,2), sharex
     
 
 
-Conclusiones:
+Conclusions:
 
-* En la planta 1 sí se mantienen unos patrones similares durante todos los días
-* A excepción de un parón el día 20 de Mayo y una caída extraña el 05 de Junio
-* Pero ninguna parece ser estructural
-* Por tanto aunque cada día pudiera tener diferentes totales de producción los patrones intradía son similares y parecen correctos
+* On floor 1, similar patterns are maintained every day
+* Except for a break on May 20 and a strange crash on June 5
+* But none appear to be structural
+* Therefore, although each day may have different production totals, the intraday patterns are similar and seem correct.
 
-Repetimos el análisis en la planta 2
+We repeated the analysis on plant 2
 
 
 ```python
@@ -1921,9 +1917,7 @@ dc_constante_p2
     Name: kw_dc, Length: 816, dtype: float64
 
 
-
-Vamos a pasar date a columnas, para poder respresentar cada columna (que son los dates) como una variable y por tanto como un gráfico independiente.
-
+We are going to pass date to columns, to be able to represent each column (which are the dates) as a variable and therefore as an independent graph.
 
 ```python
 dc_constante_p2.unstack(level = 1).plot(subplots = True, layout = (17,2), sharex=True, figsize=(20,30));
@@ -1935,14 +1929,14 @@ dc_constante_p2.unstack(level = 1).plot(subplots = True, layout = (17,2), sharex
     
 
 
-Conclusiones:
+Conclusions:
 
-* De nuevo el día 20 de Mayo aparece con un comportamiento raro
-* Los niveles de producción son constantes durante los días, pero siempre unas 10 veces por debajo de los nivels de la planta 1
+* Again on May 20 he appears with a strange behavior
+* Production levels are constant over the days, but always about 10 times below plant 1 levels
 
-**INSIGHT #2:** Los niveles bajos de la planta 2 son constantes y presentan unas curvas diarias que parecen normales.
+**INSIGHT #2:** The low levels of plant 2 are constant and have daily curves that seem normal.
 
-### ¿La conversión de DC a AC se genera correctamente?
+### Is the DC to AC conversion generated correctly?
 
 
 ```python
@@ -1955,9 +1949,9 @@ sns.scatterplot(data = df, x = df.kw_dc, y = df.kw_ac, hue = df.planta);
     
 
 
-De nuevo los patrones son clarísimos: la planta 2 transforma la corriente de forma mucho más eficiente.
+Again the patterns are very clear: plant 2 transforms the current much more efficiently.
 
-Vamos a ampliar analizando la variable eficiencia que habíamos creado.
+We are going to expand by analyzing the efficiency variable that we had created.
 
 
 ```python
@@ -2299,14 +2293,14 @@ sns.lineplot(data = temp, x = 'hora', y = 'eficiencia', hue = 'planta');
 
 **INSIGHT #3**
 
-La planta 1 tiene una capacidad de transformar DC a AC bajísima, lo cual sugiere problemas con los inverters
+Plant 1 has a very low capacity to transform DC to AC, which suggests problems with the inverters
 
-Otras conclusiones:
+Other conclusions:
 
-* Entrar en el detalle de los inverters de la planta 1, a ver si son todos o hay algunos que sesgan la media
-* Revisar por qué la planta 2 pierde eficiencia durante las horas de más irradiación
+* Go into the details of the inverters on floor 1, to see if they are all or there are some that bias the average
+* Review why plant 2 loses efficiency during the hours of most irradiation
 
-Vamos a empezar por la segunda, comparando la producción de DC con la de AC en la planta 2.
+We are going to start with the second, comparing the production of DC with that of AC in plant 2.
 
 
 ```python
@@ -2432,22 +2426,14 @@ plt.figure(figsize = (12,8))
 sns.lineplot(data = temp[temp.planta == 'p2'], x = 'hora', y = 'value', hue = 'variable', ci = False);
 ```
 
-    C:\Users\f1se4\AppData\Local\Temp\ipykernel_26308\981826885.py:2: FutureWarning: 
-    
-    The `ci` parameter is deprecated. Use `errorbar=('ci', False)` for the same effect.
-    
-      sns.lineplot(data = temp[temp.planta == 'p2'], x = 'hora', y = 'value', hue = 'variable', ci = False);
-    
-
-
     
 ![png](04_AnalisisInsights_files/04_AnalisisInsights_59_1.png)
     
 
 
-Vemos que efectivamente en las horas centrales hay pérdida de eficiencia. Pero ni de lejos el nivel de pérdida que habíamos visto en el análisis anterior.
+We see that indeed in the central hours there is a loss of efficiency. But nowhere near the level of loss that we had seen in the previous analysis.
 
-Vamos a analizar la distribución de la eficiencia en esas horas.
+We are going to analyze the distribution of efficiency in those hours.
 
 
 ```python
@@ -2466,9 +2452,9 @@ temp.eficiencia.plot.density();
     
 
 
-Hay un conjunto de datos con eficiencia cero, y es lo que genera el problema. ¿Pero cual es la causa de esa eficiencia cero?
+There is a data set with zero efficiency, and that is what causes the problem. But what is the cause of that zero efficiency?
 
-Vamos a seleccionar esos casos y revisarlos.
+We are going to select those cases and review them.
 
 
 ```python
@@ -2765,11 +2751,11 @@ temp[temp.kw_dc > 0].eficiencia.plot.density();
     
 
 
-Efectivamente cuando hay DC la eficiencia es superior al 96%.
+Indeed when there is DC the efficiency is higher than 96%.
 
-La pregunta entonces es ¿por qué no hay DC? ¿Hay algún patrón?
+The question then is why is there no DC? Is there a pattern?
 
-Vamos a crear un indicador de DC = 0 para poder analizarlo.
+Let's create a DC = 0 flag so we can analyze it.
 
 
 ```python
@@ -3065,7 +3051,7 @@ temp
 
 
 
-Empezamos por las variables numéricas.
+We will start with the numerical variables.
 
 
 ```python
@@ -3123,11 +3109,11 @@ temp.groupby('kw_dc_cero')[['irradiacion','t_ambiente','t_modulo']].mean()
 
 
 
-En la temperatura ambiente no hay mucha diferencia, pero en la del módulo y en la irradiación sí.
+At room temperature there is not much difference, but at module temperature and irradiation yes.
 
-¿Podría ser que si se calienta demasiado el módulo deje de generar DC?
+Could it be that if it gets too hot the module stops generating DC?
 
-Vamos a verlo comparando la temperatura del módulo con la generación de DC.
+Let's see it by comparing the module temperature with the DC generation.
 
 
 ```python
@@ -3140,9 +3126,9 @@ sns.scatterplot(data = temp, x = 't_modulo', y = 'kw_dc',hue = 'kw_dc_cero');
     
 
 
-La hipótesis anterior no se confirma, ya que hay muchos casos de temperaturas altas donde se genera DC, y también de kw_dc igual a cero en casi todos los rangos de temperaturas.
+The previous hypothesis is not confirmed, since there are many cases of high temperatures where DC is generated, and also of kw_dc equal to zero in almost all temperature ranges.
 
-Vamos a analizar ahora las categóricas, empezando por el inverter.
+We are now going to analyze the categorical ones, starting with the inverter.
 
 
 ```python
@@ -3155,13 +3141,13 @@ temp.groupby('inverter_id').kw_dc_cero.mean().sort_values(ascending = False).plo
     
 
 
-Existe gran diferencia en el porcentaje de producción cero de DC por inverter.
+There is a big difference in the percentage of zero DC production per inverter.
 
-Desde algunos que tienen menos del 5% hasta algunos que superan el 30%.
+From some that have less than 5% to some that exceed 30%.
 
-**INSIGHT #4:**: En la planta 2 existen varios inverters a los que no está llegando suficiente producción de DC, y por tanto cuyos módulos necesitan revisión.
+**INSIGHT #4:**: On plant 2 there are several inverters that are not getting enough DC production, and therefore whose modules need revision.
 
-Vamos a analizar los inverters desde el punto de vista de la eficiencia media para ver si hay "buenos y malos".
+We are going to analyze the inverters from the point of view of the average efficiency to see if there are "good and bad".
 
 
 ```python
@@ -3175,10 +3161,9 @@ plt.xticks(rotation = 90);
     
 
 
-**INSIGHT #5:**: Una vez descontando el problema de la no generación de DC, los inverters de la planta 2 sí funcionan bien y hacen bien el trabajo de transformación a AC.
+**INSIGHT #5:**: Once discounting the problem of not generating DC, the inverters of plant 2 do work well and do the job of transformation to AC well.
 
-Para terminar de analizar la eficiencia de los inverters podemos ver su rendimiento en cada  uno de los días para ver si han posido existir problemas puntuales
-
+To finish analyzing the efficiency of the inverters, we can see their performance on each of the days to see if there may have been specific problems.
 
 ```python
 temp[temp.kw_dc > 0].groupby(['inverter_id','date']).eficiencia.mean().unstack(level = 0).plot(subplots = True, sharex=True, figsize=(20,40))
@@ -3190,8 +3175,7 @@ plt.xticks(rotation = 90);
 ![png](04_AnalisisInsights_files/04_AnalisisInsights_80_0.png)
     
 
-
-Para tener un término de comparación vamos a repetir los análisis con la planta 1.
+To have a term of comparison we are going to repeat the analyzes with plant 1.
 
 
 ```python
@@ -3500,7 +3484,7 @@ temp.eficiencia.plot.density();
     
 
 
-Vemos que no, aquí todos los inverters tienen una eficiencia constante (aunque muy baja)
+We see that no, here all the inverters have a constant efficiency (although very low)
 
 
 ```python
@@ -3514,9 +3498,9 @@ plt.xticks(rotation = 90);
     
 
 
-Vemos que salvo días puntuales en algunos inverters en el resto la eficiencia es constante.
+We see that except for specific days in some inverters, in the rest the efficiency is constant.
 
-Vamos a revisar la eficiencia media diaria por cada inverter.
+We are going to review the average daily efficiency for each inverter.
 
 
 ```python
@@ -3530,9 +3514,9 @@ plt.xticks(rotation = 90);
     
 
 
-En el análisis por inverter vemos de nuevo que todos los datos son constantes.
+In the inverter analysis we see again that all the data are constant.
 
-Vamos a comprobar que entonces no hay fallos en la generación de DC.
+We are going to verify that then there are no failures in the generation of DC.
 
 
 ```python
@@ -3545,26 +3529,26 @@ temp.groupby('inverter_id').kw_dc_cero.mean().sort_values(ascending = False).plo
     
 
 
-Vemos que aunque hay algunos inverters que han tenido fallos su magnitud es inferior al 2% de las mediciones.
+We see that although there are some inverters that have had failures, their magnitude is less than 2% of the measurements.
 
-Por tanto la generación de DC en la planta 1 sí es correcta, y el fallo está en la transformación de DC a AC.
+Therefore the generation of DC in plant 1 is correct, and the failure is in the transformation from DC to AC.
 
-## CONCLUSIONES
+## CONCLUSIONS
 
-Tras un ananálisis de los datos podemos concluir que:
+After an analysis of the data we can conclude that:
     
-* Existen graves problemas de calidad de datos. Se debería revisar en qué parte de la cadena se generan estos problemas, incluyendo los medidores de las plantas.
-* El hecho de que la generación en DC sea unas 10 veces superior en la planta 1 que en la 2, sumado al hecho de que la eficiencia en la planta 1 esté sobre el 10% nos lleva a pensar que el dato de generación de DC en la planta 1 puede estar artificialmente escalado por algún motivo.
-* Pero de momento a falta de comprobación vamos a asumir que los datos son correctos.
-* La dos plantas han recibido altas cantidades de irradiación, no hemos localizado ningún problema en esta fase
-* Aunque la temperatura ambiente es superior en la planta 2 y sus módulos se calientan más que los de la planta 1 esto no parece tener un impacto significativo
-* La generación de DC de la planta 1 funciona bien, los módulos parecen llevar DC a los inverters.
-* La generación de DC de la planta 2 NO funciona bien, algunos módulos llevan muy poco DC a los inverters incluso en las horas de mayor irradiación.
-* La transformación de DC a AC de la planta 1 NO funciona bien, solo se transforma en torno al 10%, eso sí, de forma constante. Y esta baja eficiencia no es debida a momentos de no recepción de DC ni se concentra en inverters concretos, si no que parece más estructural (de nuevo tener en cuenta que podría deberse a un problema de calidad de datos en kw_dc de la planta 1
-* La transformación de DC a AC de la planta 2 funciona bien, ya que una vez eliminados los períodos de generación cero de DC el resto tienen una eficiencia superior al 97%
+* There are serious data quality problems. It should be reviewed in which part of the chain these problems are generated, including the meters of the plants.
+* The fact that the DC generation is about 10 times higher in plant 1 than in plant 2, added to the fact that the efficiency in plant 1 is over 10% leads us to think that the DC generation data on floor 1 it may be artificially scaled for some reason.
+* But for now, in the absence of verification, we will assume that the data is correct.
+* The two plants have received high amounts of irradiation, we have not located any problem at this stage
+* Although the ambient temperature is higher on floor 2 and its modules get hotter than those on floor 1, this does not seem to have a significant impact
+* Plant 1 DC generation works fine, the modules seem to bring DC to the inverters.
+* The DC generation of plant 2 does NOT work well, some modules carry very little DC to the inverters even in the hours of greatest irradiation.
+* The transformation from DC to AC of floor 1 does NOT work well, it only transforms around 10%, yes, constantly. And this low efficiency is not due to moments of non-reception of DC nor is it concentrated in specific inverters, but rather it seems more structural (again keep in mind that it could be due to a data quality problem in kw_dc of plant 1
+* The transformation from DC to AC of plant 2 works well, since once the periods of zero DC generation are eliminated, the rest have an efficiency greater than 97%
 
-Recomendaciones:
+Recommendations:
 
-* Revisar la captación de datos y su fiabilidad
-* Revisión de mantenimiento en los módulos de los inverters  de la planta 2 en los que hay muchos momentos de generación cero de DC
-* Revisión de mantenimiento de los inverters de la Planta 1
+* Review the data collection and its reliability
+* Maintenance check on the inverter modules of plant 2 in which there are many moments of zero DC generation
+* Maintenance review of the inverters of Plant 1
