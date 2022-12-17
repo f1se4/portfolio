@@ -1,4 +1,4 @@
-# CALIDAD DE DATOS Y CREACION DATAMART ANALITICO
+# DATA QUALITY AND ANALYTICAL DATAMART CREATION
 
 ## SET UP
 
@@ -17,16 +17,16 @@ import fiser_tools as fs
 fs.misc.dark_theme()
 ```
 
-## CARGA DE DATOS
+## DATA UPLOAD
 
-Este caso se compone de 4 ficheros:
+This case consists of 4 files:
 
-* Planta 1, datos de generación
-* Planta 1, datos de sensor ambiental
-* Planta 2, datos de generación
-* Planta 2, datos de sensor ambiental
+* Plant 1, generation data
+* plant 1, environmental sensor data
+* Plant 2, generation data
+* Plant 2, environmental sensor data
 
-### Carga de datos planta 1 - datos de generación
+### Load data plant 1 - generation data
 
 
 ```python
@@ -182,7 +182,7 @@ p1g
 
 
 
-### Carga de datos planta 1 - datos de sensor ambiental
+### Load data plant 1 - environmental sensor data
 
 
 ```python
@@ -326,7 +326,7 @@ p1w
 
 
 
-### Carga de datos planta 2 - datos de generación
+### Load data plant 2 - generation data
 
 
 ```python
@@ -482,7 +482,7 @@ p2g
 
 
 
-### Carga de datos planta 2 - datos de sensor ambiental
+### Data upload plant 2 - environmental sensor data
 
 
 ```python
@@ -626,11 +626,11 @@ p2w
 
 
 
-## CALIDAD DE DATOS
+## DATA QUALITY
 
-### Calidad de planta 1 - datos de generación
+### Plant quality 1 - generation data
 
-Empezamos con la visión general.
+We start with the overview.
 
 
 ```python
@@ -653,18 +653,18 @@ p1g.info()
     memory usage: 3.7+ MB
     
 
-Vemos que no hay nulos.
+We see that there are no nulls.
 
-Vemos que DATE_TIME está como object.
+We see that DATE_TIME is as object.
 
-Convertimos DATE_TIME a tipo datetime.
+We convert DATE_TIME to type datetime.
 
 
 ```python
 p1g['DATE_TIME'] = pd.to_datetime(p1g.DATE_TIME,dayfirst=True)
 ```
 
-Revisamos una muestra de datos.
+We reviewed a sample of data.
 
 
 ```python
@@ -758,7 +758,7 @@ p1g.head()
 
 
 
-Comprobamos que el identificador de planta sea único.
+We check that the plant identifier is unique.
 
 
 ```python
@@ -772,14 +772,14 @@ p1g.PLANT_ID.unique()
 
 
 
-Vamos a reemplazarlo por un literal más legible.
+Let's replace it with a more readable literal.
 
 
 ```python
 p1g['PLANT_ID'] = p1g.PLANT_ID.replace(4135001, 'p1')
 ```
 
-Revisamos los descriptivos.
+We review the descriptions.
 
 
 ```python
@@ -868,7 +868,7 @@ p1g.describe().T
 
 
 
-Vamos a quitar la visualización de notación científica.
+Let's remove the scientific notation display.
 
 
 ```python
@@ -962,9 +962,9 @@ p1g.describe().T
 
 
 
-Resulta extraño la diferencia de medias entre DC y AC.
+The difference in means between DC and AC is strange.
 
-Vamos a visualizarlo.
+Let's visualize it.
 
 
 ```python
@@ -977,10 +977,9 @@ p1g[['DC_POWER','AC_POWER']].plot(figsize = (16,12));
     
 
 
-La diferencia es muy grande.
+The diference is huge.
 
-Primero vamos a comprobar si van en la misma dirección aunque sea a disinta escala (con una correlación), y después vamos a comprobar cual es el ratio medio entre ambas medidas.
-
+First we are going to check if they go in the same direction even if it is on a different scale (with a correlation), and then we are going to check what is the average ratio between both measures.
 
 ```python
 p1g.DC_POWER.corr(p1g.AC_POWER)
@@ -1013,12 +1012,11 @@ p1g.DC_POWER.corr(p1g.AC_POWER)
 
 
 
-Parece que los Inverters están transformando solo el 10% de DC a AC, lo cual a priori es muy bajo.
+It seems that the Inverters are transforming only 10% from DC to AC, which a priori is very low.
 
-De todas formas desde la calidad llegamos hasta aquí y seguiremos explorando esto en la parte de análisis y comparándolo con la Planta 2 a ver si pasa lo mismo.
+In any case, from quality we got here and we will continue exploring this in the analysis part and comparing it with Plant 2 to see if the same thing happens.
 
-Analizamos la variable categórica, que es el identificador de los inverters.
-
+We analyze the categorical variable, which is the identifier of the inverters.
 
 ```python
 p1g.SOURCE_KEY.nunique()
@@ -1065,19 +1063,19 @@ p1g.SOURCE_KEY.value_counts()
 
 
 
-Conclusiones:
+Conclusions:
 
-    * La planta 1 tiene 22 inverters
-    * Todos tienen un número similar de medidas aunque no exactamente igual
-    * Podrían ser paradas por mantenimientos, o simples pérdidas de datos pero lo apuntamos para la fase de análisis
+     * plant 1 has 22 inverters
+     * All have a similar number of measures although not exactly the same
+     * They could be stops due to maintenance, or simple data loss, but we write it down for the analysis phase
 
-Vamos a analizar las variables DAILY_YIELD, ya que los metadatos nos dicen que la variable TOTAL_YIELD es el total acumulado **por inverter**, pero en DAILY_YIELD no lo especifica, por lo que no sabemos si es un acumulado por inverter o por planta.
+We are going to analyze the DAILY_YIELD variables, since the metadata tells us that the TOTAL_YIELD variable is the accumulated total **per inverter**, but in DAILY_YIELD it does not specify it, so we do not know if it is accumulated per inverter or per plant.
 
-La hipótesis es la siguiente: si es por planta no debería haber diferencias entre el dato de los diferentes inverters en el mismo momento puntual.
+The hypothesis is the following: if it is per plant, there should be no differences between the data from the different inverters at the same specific moment.
 
-Y por consiguiente si vemos que sí hay diferencias entonces es que el dato es por inverter.
+And therefore if we see that there are differences then it is that the data is due to the inverter.
 
-Para comprobarlo nos sirve con coger una muestra de inverters.
+To verify it, it is useful to take a sample of inverters.
 
 
 ```python
@@ -1235,11 +1233,11 @@ temp
 
 
 
-En los datos ya vemos que es diferente, pero vamos a comprobar sobre más datos para que no sea un efecto de esos registros en concreto.
+In the data we already see that it is different, but we are going to check on more data so that it is not an effect of those specific records.
 
-Vamos a verlo gráficamente, y por simplificar vamos a coger solo una muestra de días.
+We are going to see it graphically, and for simplicity we are going to take only a sample of days.
 
-Como tenemos la fecha como index recordamos que podemos usar indexación parcial y slice.
+Since we have the date as index we remember that we can use partial and slice indexing.
 
 
 ```python
@@ -1403,11 +1401,9 @@ sns.lineplot(data = temp.reset_index(), x = temp.reset_index().DATE_TIME, y = 'D
 ![png](static/notebooks/solar/02_Calidad_de_datos_files/02_Calidad_de_datos_45_0.png)
     
 
+Definitely different inverters have different data at the same time, so we conclude that this variable is **per inverter**
 
-Definitivamente diferentes inverters tienen diferentes datos en el mismo momento temporal, por lo que concluímos que esa variable es **por inverter**
-
-Por último vamos a analizar el período en el que tenemos datos y si el número de mediciones diarias es constante.
-
+Finally we are going to analyze the period in which we have data and if the number of daily measurements is constant.
 
 ```python
 p1g.DATE_TIME.dt.date.value_counts().sort_index().plot.bar(figsize = (12,8));
@@ -1419,14 +1415,14 @@ p1g.DATE_TIME.dt.date.value_counts().sort_index().plot.bar(figsize = (12,8));
     
 
 
-Conclusiones:
+Conclusions:
 
-    * El período de datos es entre el 15 de Mayo del 2020 y el 17 de Junio de 2020
-    * Tenemos datos para todos los días, no falta ninguno intermedio
-    * Pero algunos días como el 21/05 o el 29/05 tienen menos mediciones
-    * Por lo que no parece 100% regular
+     * The data period is between May 15, 2020 and June 17, 2020
+     * We have data for every day, there are no intermediate days missing
+     * But some days like 05/21 or 05/29 have fewer measurements
+     * So it doesn't look 100% regular
 
-### Calidad de datos planta 1 - datos de sensor ambiental
+### Data quality plant 1 - environmental sensor data
 
 
 ```python
@@ -1448,7 +1444,7 @@ p1w.info()
     memory usage: 149.3+ KB
     
 
-Corregimos el tipo de DATE_TIME
+We correct the type of DATE_TIME
 
 
 ```python
@@ -1557,7 +1553,7 @@ p1w.head()
 
 
 
-Reemplazamos el nombre de la planta.
+We replaced the name of the plant.
 
 
 ```python
@@ -1701,7 +1697,7 @@ p1w
 
 
 
-Revisamos los estadísticos.
+We review the statistics.
 
 
 ```python
@@ -1779,7 +1775,7 @@ p1w.describe().T
 
 
 
-Revisamos la variable categórica, que es el identificador del sensor.
+We check the categorical variable, which is the sensor identifier.
 
 
 ```python
@@ -1793,9 +1789,9 @@ p1w.SOURCE_KEY.nunique()
 
 
 
-Solo hay un sensor de variables ambientales en la planta.
+There is only one sensor for environmental variables in the plant.
 
-Revisamos la fecha.
+We revise the date.
 
 
 ```python
@@ -1808,14 +1804,14 @@ p1w.DATE_TIME.dt.date.value_counts().sort_index().plot.bar(figsize = (12,8));
     
 
 
-Conclusiones:
+Conclusions:
 
-    * El período de datos es entre el 15 de Mayo del 2020 y el 17 de Junio de 2020
-    * Tenemos datos para todos los días, no falta ninguno intermedio
-    * Pero algunos días como el 21/05 o el 29/05 tienen menos mediciones
-    * Por lo que no parece 100% regular
+     * The data period is between May 15, 2020 and June 17, 2020
+     * We have data for every day, there are no intermediate days missing
+     * But some days like 05/21 or 05/29 have fewer measurements
+     * So it doesn't look 100% regular
 
-### Calidad de planta 2 - datos de generación
+### Plant quality 2 - generation data
 
 
 ```python
@@ -2027,9 +2023,9 @@ p2g.describe().T
 
 
 
-En este caso los valores de DC y AC están mucho más cercanos entre sí.
+In this case the values of DC and AC are much closer to each other.
 
-Vamos a calcular el ratio.
+Let's calculate the ratio.
 
 
 ```python
@@ -2051,9 +2047,9 @@ Vamos a calcular el ratio.
 
 
 
-Ahora los valores del ratio sí están muy próximos a uno.
+Now the values of the ratio are very close to one.
 
-Analizamos la variable categórica, que es el identificador de los inverters.
+We analyze the categorical variable, which is the identifier of the inverters.
 
 
 ```python
@@ -2150,7 +2146,7 @@ p2w.info()
     memory usage: 152.9+ KB
     
 
-Corregimos el tipo de DATE_TIME
+We correct the type of DATE_TIME
 
 
 ```python
@@ -2259,7 +2255,7 @@ p2w.head()
 
 
 
-Reemplazamos el nombre de la planta.
+We replaced the name of the plant.
 
 
 ```python
@@ -2403,7 +2399,7 @@ p2w
 
 
 
-Revisamos los estadísticos.
+We review the statistics.
 
 
 ```python
@@ -2481,7 +2477,7 @@ p2w.describe().T
 
 
 
-Analizamos la variable categórica, que es el identificador del sensor.
+We analyze the categorical variable, which is the sensor identifier.
 
 
 ```python
@@ -2495,9 +2491,9 @@ p2w.SOURCE_KEY.nunique()
 
 
 
-Solo hay un sensor de variables ambientales en la planta.
+There is only one sensor for environmental variables in the plant.
 
-Revisamos la fecha.
+We revise the date.
 
 
 ```python
@@ -2510,31 +2506,31 @@ p2w.DATE_TIME.dt.date.value_counts().sort_index().plot.bar(figsize = (12,8));
     
 
 
-Conclusiones:
+Conclusions:
 
-    * El período de datos es entre el 15 de Mayo del 2020 y el 17 de Junio de 2020
-    * Tenemos datos para todos los días, no falta ninguno intermedio
-    * Pero algunos días como el 15/05 u otros tienen menos mediciones, aunque faltan mucho menos que en los otros datasets
-    * Pero no parece 100% regular
+     * The data period is between May 15, 2020 and June 17, 2020
+     * We have data for every day, there are no intermediate days missing
+     * But some days like 05/15 or others have fewer measurements, although they are much less missing than in the other datasets
+     * But it doesn't look 100% regular
 
-### Temas pendientes de la calidad de datos para analizar posteriormente
+### Pending data quality issues for further analysis
 
-* En la planta 1 parece que los Inverters están transformando solo el 10% de DC a AC, lo cual a priori es muy bajo.
-* En la planta 2 el ratio es mucho más cercano a 1.
-* Los intervalos de medida no son 100% regulares. Hay días con menos medidas, y hay también diferencias por inverters.
+* On plant 1 it seems that the inverters are transforming only 10% from DC to AC, which a priori is very low.
+* On plant 2 the ratio is much closer to 1.
+* The measurement intervals are not 100% regular. There are days with fewer measurements, and there are also differences due to inverters.
 
 
-## CREACIÓN DEL DATAMART ANALITICO
+## CREATION OF THE ANALYTICAL DATAMART
 
-Vamos a hacer una unión por partes.
+We are going to do a union by parts.
 
-Primero los dos datasets de generación. Que será una apilación de registros ya que los campos son iguales.
+First the two generation datasets. Which will be a stack of records since the fields are the same.
 
-Después los dos de medidas ambientales. Que será una apilación de registros ya que los campos son iguales.
+After the two of environmental measures. Which will be a stack of records since the fields are the same.
 
-Y por último cruzaremos ambos parciales mediante la integración por campos clave.
+And finally we will cross both partials through integration by key fields.
 
-### Unión de los datasets de generación
+### Union of generation datasets
 
 
 ```python
@@ -2690,7 +2686,7 @@ gener
 
 
 
-Vamos a renombrar ya las variables para hacerlas más descriptivas y usables.
+Let's rename the variables now to make them more descriptive and usable.
 
 
 ```python
@@ -2846,9 +2842,9 @@ gener
 
 
 
-Ahora que tenemos las 2 plantas unidas vamos a hacer lo que se llama un análisis de coherencia, dado que según la documentación kw_dia y kw_total están directamente relacionados con kw_dc y kw_ac.
+Now that we have the 2 plants together we are going to do what is called a consistency analysis, since according to the documentation kw_dia and kw_total are directly related to kw_dc and kw_ac.
 
-Vamos a intentar replicar los datos de kw_dia y kw_total.
+We are going to try to replicate the data of kw_dia and kw_total.
 
 
 ```python
@@ -3023,7 +3019,7 @@ gener2
 
 
 
-La suma por planta, date e inverter de kw_dc o de kw_ac debería coincidir con el máximo de kw_dia.
+The sum per plant, date and inverter of kw_dc or kw_ac should match the maximum of kw_dia.
 
 
 ```python
@@ -3181,8 +3177,7 @@ gener2
 </div>
 
 
-
-Ordenamos para poder analizar.
+We order to be able to analyze.
 
 
 ```python
@@ -3338,10 +3333,9 @@ gener2
 
 
 
-Kw_dia no concuerda para nada ni con kw_dc ni con kw_ac.
+Kw_dia does not match either kw_dc or kw_ac at all.
 
-Vamos a ver si concuerda con kw_total, para ello calculamos el incremento diario de kw_total que debería coincidir con el máximo de kw_dia del día anterior.
-
+We are going to see if it agrees with kw_total, for this we calculate the daily increase of kw_total that should coincide with the maximum of kw_day of the previous day.
 
 ```python
 gener2['lag1'] = gener2.groupby(['planta','inverter_id']).kw_total.shift(1)
@@ -3521,7 +3515,7 @@ gener2
 
 
 
-Comprobamos en la planta 1.
+We check on plant 1.
 
 
 ```python
@@ -4167,7 +4161,7 @@ gener2[gener2.planta == 'p1'].head(50)
 
 
 
-Comprobamos en la planta 2.
+We check on plant 2.
 
 
 ```python
@@ -4813,13 +4807,13 @@ gener2[gener2.planta == 'p2'].head(50)
 
 
 
-Conclusiones:
-* kw_dia tiene coherencia con kw_total
-* pero éstas no tienen coherencia con kw_dc ni con kw_ac
-* es como si estuvieran en diferentes unidades o hubiera algún cálculo del que no somos conscientes
-* por tanto tendremos 2 bloques a poder usar: o bien kw_dc con kw_ac, o bien kw_dia con kw_total, pero no podemos mezclarlas entre sí
+Conclusions:
+* kw_dia is consistent with kw_total
+* but these are not consistent with kw_dc or kw_ac
+* it's as if they are in different units or there is some calculation that we are not aware of
+* therefore we will have 2 blocks to be able to use: either kw_dc with kw_ac, or kw_dia with kw_total, but we cannot mix them together
 
-### Unión de los datasets de mediciones ambientales
+### Union of environmental measurement datasets
 
 
 ```python
@@ -4963,7 +4957,7 @@ temper
 
 
 
-Vamos a renombrar ya las variables para hacerlas más descriptivas y usables.
+Let's rename the variables now to make them more descriptive and usable.
 
 
 ```python
@@ -5107,11 +5101,9 @@ temper
 
 
 
-### Creación del datamart analitico
+### Creation of the analytical datamart
 
-En este caso el campo clave es compuesto de fecha y planta y manda el dataset de generación, ya que el de temperatura solo nos aporta variables adicionales.
-
-
+In this case, the key field is made up of date and plant and commands the generation dataset, since the temperature field only provides us with additional variables.
 ```python
 df = pd.merge(left = gener, right = temper, how = 'left', on = ['fecha','planta'])
 df
@@ -5313,7 +5305,7 @@ df
 
 
 
-Tras una integración siempre es conveniente comprobar si se han generado nulos.
+After an integration it is always convenient to check if nulls have been generated.
 
 
 ```python
@@ -5338,7 +5330,7 @@ df.isna().sum()
 
 
 
-Buscamos si los nulos cumplen algún patrón.
+We search if the nulls fulfill some pattern.
 
 
 ```python
@@ -5443,9 +5435,9 @@ nulos
 
 
 
-Se trata del día 3 de Junio a las 14:00, que por algún motivo no tiene datos de temperatura pero solo para 4 inverters de la planta 1.
+It is about June 3 at 2:00 p.m., which for some reason does not have temperature data but only for 4 inverters on floor 1.
 
-Vamos a buscar en el dataset de temperatura si existe ese datetime.
+We are going to search the temperature dataset if that datetime exists.
 
 
 ```python
@@ -5560,14 +5552,14 @@ temper[temper.fecha.between('2020-06-03 13:30:00', '2020-06-03 14:30:00')]
 
 
 
-Efectivamente vemos que falta ese tramo en ambas plantas. Pero sin embargo solo hay mediciones en esa hora en la planta 1, y solo en 4 inverters.
+Indeed we see that this section is missing on both floors. However, there are only measurements at that time on floor 1, and only on 4 inverters.
 
-Por tanto habría dos soluciones:
+So there would be two solutions:
 
-* imputar esos datos para esos invertes
-* eliminar esos 4 registros
+* impute these data for these investments
+* delete those 4 records
 
-Dado que parece una franja de medición propia solo de 4 inverters de la planta 1 vamos a optar por eliminarlos.
+Since it seems like a measurement strip of its own, only 4 inverters on floor 1, we are going to choose to eliminate them.
 
 
 ```python
@@ -5771,7 +5763,7 @@ df
 
 
 
-Por último vamos a pasar la fecha al index para poder usar toda la potencia de Pandas.
+Finally we are going to pass the date to the index to be able to use all the power of Pandas.
 
 
 ```python
@@ -5977,29 +5969,6 @@ df
 
 
 ## GUARDAMOS EL DATAMART
-
-Hasta ahora habíamos usado csv y bases de datos para guardar los datos.
-
-Son formatos muy útiles y sobre todo portables.
-
-Pero tienen el problema de son externos a Python, y por tanto no son capaces de almacenar metadatos propios de Python como algunos tipos de variables (ej datetime).
-
-Por eso se creó un formato propio de Python: el pickle.
-
-Con este formato podemos almacenar cualquier objeto de Python, desde un dataset hasta un modelo de machine learning.
-
-Y tiene la ventaja de que cuando lo recuperas tiene exactamente todas las propiedades del momento en el que lo guardaste.
-
-Además de que está bastante optimizado en cuanto al tamaño en disco.
-
-El inconveniente es que no es tan portable. No puedes abrirlo desde Excel por ejemplo.
-
-Puedes ponerle la extensión que quieras al archivo, aunque se suele usar la convencion .pickle
-
-Para guardar en pickle desde Pandas usamos df.to_pickle('ruta_en_disco')
-
-Y para cargar un pickle usamos pd.read_pickle('ruta_en_disco')
-
 
 ```python
 df.to_pickle('df.pickle')
