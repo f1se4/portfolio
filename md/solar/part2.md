@@ -973,7 +973,7 @@ p1g[['DC_POWER','AC_POWER']].plot(figsize = (16,12));
 
 
     
-![png](static/notebooks/solar/static/notebooks/solar/02_Calidad_de_datos_files/02_Calidad_de_datos_31_0.png)
+![png](static/notebooks/solar/02_Calidad_de_datos_files/02_Calidad_de_datos_31_0.png)
     
 
 
