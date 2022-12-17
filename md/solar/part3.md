@@ -1,4 +1,4 @@
-# TRANSFORMACION DE DATOS
+# DATA TRANSFORMATION
 
 ## SET UP
 
@@ -21,7 +21,7 @@ fs.misc.dark_theme()
 pd.options.display.float_format = '{:15.2f}'.format
 ```
 
-## CARGA DE DATOS
+## DATA UPLOAD
 
 
 ```python
@@ -250,9 +250,9 @@ df.info()
     memory usage: 11.5+ MB
     
 
-## CREACION DE VARIABLES
+## CREATION OF VARIABLES
 
-Comenzamos por extraer los componentes de la fecha e incorporarlos como nuevas variables.
+We start by extracting the date components and adding them as new variables.
 
 
 ```python
@@ -520,16 +520,15 @@ df
 </div>
 
 
+We are going to create the inverter efficiency variable, which consists of the percentage of DC that successfully transforms to AC.
 
-Vamos a crear la variable eficiencia del inverter, que consiste en el porcentaje de DC que transforma a AC satisfactoriamente.
+But we are presented with a very common difficulty in ratios, that the denominator can be zero.
 
-Pero se nos presenta una dificultad muy habitual en los ratios, que el denominador puede ser cero.
+If that were the case, when doing the ratio it would return a null.
 
-Si fuera el caso, al hacer el ratio nos devolvería un nulo.
+In our case the denominator is DC, so if the DC generation were zero, the AC generation should also be zero.
 
-En nuestro caso el denominador es DC, por tanto si la generación de DC fuera cero la de AC debería ser cero también.
-
-Podemos corregir eso simplemente imputando los nulos que salgan por ceros.
+We can correct that simply by imputing the nulls that come out with zeros.
 
 
 ```python
@@ -543,7 +542,7 @@ def eficiencia_inverter(AC,DC):
 df['eficiencia'] = eficiencia_inverter(df.kw_ac, df.kw_dc)
 ```
 
-Comprobamos que no haya generado nulos.
+We check that it has not generated nulls.
 
 
 ```python
@@ -557,7 +556,7 @@ df.eficiencia.isna().sum()
 
 
 
-Visualizamos la eficiencia a nivel global.
+We visualize efficiency globally.
 
 
 ```python
@@ -570,17 +569,17 @@ df.eficiencia.plot.kde();
     
 
 
-Aquí hay algo importante.
+Here is something important.
 
-Hay dos grupos claramente diferenciados y uno de ellos es claramente ineficiente.
+There are two clearly differentiated groups and one of them is clearly inefficient.
 
-Pero de momento lo dejamos apuntado y más adelante revisaremos que entidad es la que está teniendo problemas: planta, inverter, etc.
+But for now we'll leave it written down and later we'll review which entity is having problems: plant, inverter, etc.
 
-## REORDENACION DEL DATAFRAME
+## DATAFRAME REORDERING
 
-En este caso es muy importante no empezar a analizar por analizar, si no seguir el plan definido en el diseño del proyecto, ya que existe un orden muy claro en el proceso: factores ambientales --> kw_dc --> kw ac.
+In this case it is very important not to start analyzing by analyzing, but to follow the plan defined in the project design, since there is a very clear order in the process: environmental factors --> kw_dc --> kw ac.
 
-Así que vamos a reorganizar las columnas del df para que nos ayude a interpretar en este orden.
+So let's rearrange the columns of the df to help us interpret in this order.
 
 
 ```python
@@ -1122,18 +1121,17 @@ df
 
 
 
-## DATAFRAME DIARIO
+## DAILY DATAFRAME
 
-En nivel de análisis al que tenemos los datos es cada 15 minutos, lo cual puede ser demasiado desagregado para ciertos análisis.
+The level of analysis at which we have the data is every 15 minutes, which may be too disaggregated for certain analyses.
 
-Vamos a dejar construída una versión del dataframe agregada a nivel dia.
+We are going to build a version of the dataframe added to the day level.
 
-Para ello usamos resample para hacer downgrading.
+For this we use resample to do downgrading.
 
-Deberemos agregar por planta e inverter que son los campos clave de nuestro dataset.
+We must add by plant and inverter, which are the key fields of our dataset.
 
-Como tenemos variables a las que aplican diferentes funciones de agregación podemos usar el formato de diccionario de agg()
-
+Since we have variables to which different aggregation functions apply we can use the dictionary format of agg()
 
 ```python
 df.head()
@@ -1687,15 +1685,13 @@ df_dia
 
 
 
-Nos lo ha generado con multi índice, tanto en filas como en columnas.
+It has been generated for us with a multi-index, both in rows and in columns.
 
-Para quitar el de las columnas podemos aplanar los nombres con .to_flat_index(), que es un método relativamente reciente de Pandas.
+To remove the from the columns we can flatten the names with .to_flat_index().
 
-https://pandas.pydata.org/docs/reference/api/pandas.MultiIndex.to_flat_index.html
+This returns the levels in tuples, which we can then join with a list comprehension.
 
-Esto devuelve los niveles en tuplas, que luego podemos unir con un list comprehension.
-
-Vamos a revisar como devuelve los nombres de columnas to_flat_index()
+Let's review how to_flat_index() returns the column names
 
 
 ```python
@@ -1721,7 +1717,7 @@ tuplas
 
 
 
-Y unimos ambas partes del par con un guión bajo usando .join
+And we join both parts of the pair with an underscore using .join
 
 
 ```python
@@ -2092,7 +2088,7 @@ df_dia
 
 
 
-Ahora tenemos que pasar planta e inverter_id a columnas, y dejar la fecha como el índice.
+Now we need to pass plant and inverter_id to columns, and leave the date as the index.
 
 
 ```python
@@ -2479,9 +2475,9 @@ df_dia
 
 
 
-Ya tenemos preparados nuestros datasets por hora y por día.
+We already have our hourly and daily datasets ready.
 
-Los guardamos.
+We keep them.
 
 
 ```python
