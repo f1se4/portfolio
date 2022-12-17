@@ -40,6 +40,23 @@ def airbnb():
 							part4=md.convert(part4)
 							)
     
+@app.route('/solar')
+def solar():
+	with open("./md/solar/part1.md", "r") as file:
+		part1 = file.read()
+	with open("./md/solar/part2.md", "r") as file:
+		part2 = file.read()	
+	with open("./md/solar/part3.md", "r") as file:
+		part3 = file.read()
+	with open("./md/solar/part4.md", "r") as file:
+		part4 = file.read()					
+	return render_template("solar.html", 
+							part1=md.convert(part1),
+							part2=md.convert(part2),
+							part3=md.convert(part3),
+							part4=md.convert(part4)
+							)
+
 @app.route('/airbnbds4')
 def airbnbds4():
 	with open("./md/airbnbds4/part1.md", "r") as file:

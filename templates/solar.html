@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#part1">1.Design</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#part2">2.Ini. Analysis</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#part3">3.Datamart</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#part4">4.Transformations</a>
+    </li>
+</ul>
+  <div id="myTabContent" class="tab-content">
+    <div role="tabpanel" class="tab-pane fade active show" id="part1">
+        <div class="jumbotron">
+            {{ part1|safe }}
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="part2">
+        <div class="jumbotron">
+             {{ part2|safe }}
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="part3">
+        <div class="jumbotron">
+             {{ part3|safe }}
+        </div>
+    </div>
+	    <div role="tabpanel" class="tab-pane fade" id="part4">
+        <div class="jumbotron">
+             {{ part4|safe }}
+        </div>
+      </div>
+  </div>
+{% endblock %}
