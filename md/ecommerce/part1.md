@@ -1,27 +1,27 @@
-# DISEÑO DEL PROYECTO
+# PROJECT DESIGN
 
-En este caso trabajaremos como consultores para un ecommerce del sector cosméticos.
+In this case we will work as consultants for an ecommerce in the cosmetics sector.
 
-Esta empresa ha teniendo una evolución plana durante los últimos meses y nos ha contratado para analizar sus datos transaccionales e implementar acciones CRO personalizadas a su situación en base a dicho análisis.
+This company has had a flat evolution during the last months and has contracted us to analyze its transactional data and implement CRO actions customized to its situation based on said analysis.
 
-En este caso entre otras cosas vamos a aprender:
+In this case, among other things, we are going to learn:
 
-* cómo son los datos de un ecommerce
-* técnicas de análisis orientadas a incrementar facturación y margen en un ecommerce, tanto básicas o genéricas como algunas técnicas avanzadas específicas de este sector
-* las principales métricas sobre las que tenemos que trabajar y algunas acciones CRO que podemos poner en práctica para mejorarlas
-* a construir dos recursos analíticos muy potentes para este sector: una segmentación RFM y un sistema de recomendación. 
+* how are the data of an ecommerce
+* Analysis techniques aimed at increasing billing and margin in an e-commerce, both basic or generic, as well as some advanced techniques specific to this sector
+* the main metrics on which we have to work and some CRO actions that we can put into practice to improve them
+* to build two very powerful analytical resources for this sector: an RFM segmentation and a recommendation system.
 
-Por tanto, mucho de lo que aprendamos aquí es de aplicación general en prácticamente cualquier ecommerce.
+Therefore, much of what we learn here is of general application in practically any ecommerce.
 
-## OBJETIVO
+## TARGET
 
-Analizar los datos transaccionales para intentar potenciales acciones CRO que incrementen visitas, conversiones y ticket medio, y por tanto incrementar la facturación global del ecommerce.
+Analyze transactional data to try potential CRO actions that increase visits, conversions and average ticket, and therefore increase global ecommerce billing.
 
-Crear activos analíticos avanzados como una segmentación RFM y un sistema de recomendación que impulsen la consecución del objetivo.
+Create advanced analytics assets such as RFM segmentation and a recommendation system that drive goal achievement.
 
-## PALANCAS
+## LEVERS
 
-Como siempre vamos a entender primero el negocio, y sus principales procesos, métricas y conceptos.
+As always, we will first understand the business, and its main processes, metrics and concepts.
 
 
 
@@ -33,97 +33,97 @@ Como siempre vamos a entender primero el negocio, y sus principales procesos, m�
 
 
 
-El primer paso es cuando un usuario llega a la web del ecommerce. Normalmente vendrá desde:
+The first step is when a user arrives at the ecommerce website. It will normally come from:
 
-* Campañas de pago: paid ads como Facebook Ads o Google Ads
-* Contenido orgánico: blog, rrss, ...
-* Tráfico directo: conoce la url y la introduce en el navegador
+* Payment campaigns: paid ads such as Facebook Ads or Google Ads
+* Organic content: blog, rss, ...
+* Direct traffic: knows the url and enters it in the browser
 
-Ese tráfico se llama visitas, y las páginas que van viendo se llaman páginas vistas, aunque en nuestro caso lo llamaremos views.
+That traffic is called visits, and the pages they see are called page views, although in our case we will call it views.
 
-El usuario navega por la web y cuando le gusta un producto lo mete en el carrito.
+The user browses the web and when he likes a product, he puts it in the cart.
 
-Finalmente puede sacar productos del carrito, salir sin comprar nada, o finalmente hacer el pedido.
+Finally you can remove products from the cart, leave without buying anything, or finally place the order.
 
-Un proceso común es la venta cruzada, en la cual se recomiendan al usuario otros productos que también podrían interesarle.
+A common process is cross-selling, in which the user is recommended other products that might also interest him.
 
-Incluso cuando se ha ido podemos volver a contartar al usuario mediante retargeting o email marketing.
+Even when it's gone we can tell the user again through retargeting or email marketing.
 
-Todo este proceso se llama funnel o también customer journey.
+This entire process is called funnel or also customer journey.
 
-En el entorno online prácticamente todo se puede registrar. 
+In the online environment practically everything can be registered.
 
-El registro del usuario puede ser logado o no.
+The user record can be logged or not.
 
-La secuencia de acciones que hace un usuario en la misma sesión de navegación se llama sesión.
+The sequence of actions that a user does in the same browsing session is called a session.
 
-El ratio de compras sobre las visitas se llama ratio de conversión.
+The ratio of purchases to visits is called the conversion ratio.
 
-Además existen otras métricas clave que tenemos que dominar para gestionar correctamente un ecommerce:
+In addition, there are other key metrics that we have to master to correctly manage an ecommerce:
 
 * CPA
 * AOV
-* Frecuencia de compra
+* Purchase frequency
 * LTV
 * Churn
 
-CONCEPTO CLAVE: Solo existen 3 formas de incrementar un negocio:
+KEY CONCEPT: There are only 3 ways to grow a business:
 
-1. Más clientes: esto implica conseguir más visitas y mayor conversión
-2. Más frecuencia: esto implica conseguir que los mismos clientes compren más veces
-3. Mayor ticket medio: esto implica conseguir que se compre más o más caro en la misma sesión de compra
+1. More customers: this means getting more visits and higher conversion
+2. More frequency: this means getting the same customers to buy more times
+3. Higher average ticket: this implies getting more or more expensive purchases in the same shopping session
 
-Para conseguir esos 3 efectos trabajamos sobre las siguientes palancas operativas:
+To achieve these 3 effects we work on the following operational levers:
 
-* Customer journey: cómo podemos optimizar cada uno de los pasos del proceso
-* Clientes: cómo podemos usar la info disponible de los clientes para optimizar las campañas que realicemos
-* Productos: cómo podemos optimizar el catálogo de productos e identificar de manera personalizada qué productos tenemos que poner delante de cada cliente
+* Customer journey: how we can optimize each step of the process
+* Clients: how we can use the information available from clients to optimize the campaigns we carry out
+* Products: how we can optimize the product catalog and identify in a personalized way which products we have to put in front of each client
 
-Entenderemos en nuestro caso CRO de manera amplia, es decir como la disciplina que pone en práctica acciones para trabajar sobre las palancas y conceptos anteriores.
+In our case, we will understand CRO in a broad way, that is, as the discipline that puts actions into practice to work on the previous levers and concepts.
 
-## KPIs
+## KPI's
 
-* Visitas
-* Conversión
-* Frecuencia de compra
-* Ticket medio
-* Tasa abandono carrito
+* Visits
+* Conversion
+* Purchase frequency
+* Average ticket
+* Cart abandonment rate
 * LTV
 
-## ENTIDADES Y DATOS
+## ENTITIES AND DATA
 
-En nuestro caso las entidades que tenemos en la granularidad de los datos son:
+In our case, the entities that we have in the granularity of the data are:
     
-* Usuarios
-* Clientes
-* Sesiones
-* Eventos
-* Productos
+* Users
+* Customers
+* Sessions
+* Events
+* Products
 
-## PREGUNTAS SEMILLA
+## SEED QUESTIONS
 
-Habiendo entendido las palancas, kpis y entidades ya podemos plantear las preguntas semilla:
+Having understood the levers, kpis and entities, we can now ask the seed questions:
 
-Sobre el customer journey:
+About the customer journey:
 
-* ¿Cómo es un proceso típico de compra?
-* ¿Cuántos productos se ven, se añaden al carro, se abandonan y se compran de media en cada sesión?
-* ¿Cómo ha sido la tendencia de estos indicadores en los últimos meses?
+* What is a typical purchasing process like?
+* How many products are viewed, added to cart, abandoned and purchased on average in each session?
+* How has the trend of these indicators been in recent months?
 
-Sobre los clientes:
+About customers:
 
-* ¿Cuántos productos compra cada cliente?
-* ¿Cuánto se gasta cada cliente?
-* ¿Hay "mejores clientes" que haya que identificar y tratar de forma diferente?
-* ¿Los clientes repiten compras en los siguientes meses?
-* ¿Cual es el LTV medio de un cliente?
-* ¿Podemos diseñar campañas personalizas al valor del cliente?
+* How many products does each customer buy?
+* How much does each customer spend?
+* Are there "better customers" that need to be identified and treated differently?
+* Do customers repeat purchases in the following months?
+* What is the average LTV of a client?
+* Can we design personalized campaigns to customer value?
 
-Sobre los productos:
+About the products:
 
-* ¿Cuales son los productos más vendidos?
-* ¿Hay productos que no se venden?
-* ¿Existe relación entre el precio del producto y su volumen de ventas?
-* ¿Hay productos que se visiten pero no se compren?
-* ¿Hay productos que se saquen recurrentemente del carrito?
-* ¿Se podrían hacer recomendaciones personalizadas de productos para cada cliente?
+* What are the most sold products?
+* Are there products that are not sold?
+* Is there a relationship between the price of the product and its sales volume?
+* Are there products that are visited but not purchased?
+* Are there products that are repeatedly removed from the cart?
+* Could personalized product recommendations be made for each client?
