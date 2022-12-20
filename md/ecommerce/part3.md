@@ -1,7 +1,4 @@
-# ANALISIS E INSIGHTS (TOTAL)
-
-***NOTA: Este notebook incluye también todas las lecciones, incluyendo las de la parte I, para que puedas ejecutar todos los cálculos y objetos anteriores y de esa forma continuar fácilmente con la parte II que comienza en la lección 1.2.5 ¿Cual es la supervivencia de los clientes?***
-
+# ANALYSIS AND INSIGHTS
 
 ```python
 import numpy as np
@@ -210,12 +207,9 @@ df
 <p>2074026 rows × 16 columns</p>
 </div>
 
+## Understanding events
 
-
-## Entendiendo los eventos
-
-### ¿Cómo está funcionando el Customer Journey?
-
+### How is the Customer Journey working?
 
 ```python
 eventos = df.evento.value_counts()
@@ -245,7 +239,6 @@ kpis = pd.DataFrame({'kpi':['visitas','carrito','compra'],
 
 kpis
 ```
-
 
 
 
@@ -293,9 +286,6 @@ kpis
 
 
 
-conda install -c conda-forge plotly
-
-
 ```python
 from plotly import graph_objects as go
 
@@ -312,78 +302,18 @@ fig.update_layout(
 fig.show()
 ```
 
+Conclusions:
 
+* Starting rates are 60% cart on views and 22% purchase on cart
+* Therefore, there are 40% of visits that need to be worked on to get more carts, and 78% of carts that need to be worked on to get more purchases.
 
-Conclusiones:
+### How many products are viewed, added to cart, abandoned and purchased on average in each session?
 
-* Las tasas de partida son un 60% de carrito sobre visualiazaciones y un 22% de compra sobre carrito
-* Por tanto existe un 40% de visitas sobre las que hay que trabajar para conseguir más carritos, y un 78% de carritos sobre los que trabajar para conseguir más compras
+Unlike the macro analysis of the funnel, this analysis is per session, which makes it more operational.
 
-TRUCO PRO:
+Knowing the main kpis per session allows us to establish the baseline to measure the results of CRO actions.
 
-Este tipo de análisis conviene encapsularlo en funciones.
-
-De tal forma que ante un nuevo cliente que tenga la misma estructura de datos podremos preparar informes automáticos para los análisis más frecuentes.
-
-Por ejemplo vamos a crear una función para hacer funnel analytics.
-
-
-```python
-#Esta función recibe la variable de los eventos como entrada
-def funnel_analytics(evento):
-    
-    #hacemos el conteo
-    eventos = df.evento.value_counts()
-
-    #preparamos las variables
-    kpi_visitas_p = 100
-    kpi_carrito_p = eventos.loc['cart'] / eventos.loc['view'] * 100
-    kpi_abandono_p = eventos.loc['remove_from_cart'] / eventos.loc['cart'] * 100
-    kpi_compra_p = eventos.loc['purchase'] / eventos.loc['cart'] * 100
-    kpis = pd.DataFrame({'kpi':['visitas','carrito','compra'],
-                         'valor':[kpi_visitas_p,kpi_carrito_p,kpi_compra_p]})
-    
-    #creamos el gráfico
-    from plotly import graph_objects as go
-    fig = go.Figure(go.Funnel(
-        y = kpis.kpi,
-        x = kpis.valor.round(2),
-        marker = {'color': ['red','blue','green']},
-        opacity = 0.3
-        ))
-
-    fig.update_layout(
-        title = 'Funnel Conversión Inicial')
-
-    fig.show()
-    
-    #imprimimos un informe de conclusiones
-    print(f'Las tasas de partida son un {kpi_carrito_p.round(2)}% de carrito sobre visualiazaciones y un {kpi_compra_p.round(2)}% de compra sobre carrito. \n')
-    print(f'Por tanto existe un {100 - kpi_carrito_p.round(2)}% de visitas sobre las que hay que trabajar para conseguir más carritos, y un {100 - kpi_compra_p.round(2)}% de carritos sobre los que trabajar para conseguir más compras.')
-```
-
-La ejecutamos.
-
-
-```python
-funnel_analytics(df.evento)
-```
-
-
-
-    Las tasas de partida son un 59.75% de carrito sobre visualiazaciones y un 22.2% de compra sobre carrito. 
-    
-    Por tanto existe un 40.25% de visitas sobre las que hay que trabajar para conseguir más carritos, y un 77.8% de carritos sobre los que trabajar para conseguir más compras.
-    
-
-### ¿Cuántos productos se ven, se añaden al carro, se abandonan y se compran de media en cada sesión?
-
-A diferencia del análisis macro del funnel este análisis es por sesión, lo cual lo hace más operativo.
-
-Conocer los principales kpis por sesión nos permite establecer la línea base para ir midiendo los resultados de las acciones de CRO.
-
-Primero creamos un dataframe con la granularidad a nivel de sesión y evento que necesitamos.
-
+First we create a dataframe with the granularity at the session and event level that we need.
 
 ```python
 sesion_prod = df.groupby(['sesion','evento']).producto.count()
@@ -409,8 +339,7 @@ sesion_prod
 
 
 
-Pasamos los eventos a columnas.
-
+We pass the events to columns.
 
 ```python
 sesion_prod = sesion_prod.unstack().fillna(0)
@@ -536,8 +465,7 @@ sesion_prod
 
 
 
-Para comprobar calculamos los totales y debería darnos los mismos que a nivel global.
-
+To check we calculate the totals and it should give us the same as globally.
 
 ```python
 sesion_prod.sum()
@@ -555,8 +483,7 @@ sesion_prod.sum()
 
 
 
-Reordenamos las columnas.
-
+We rearrange the columns.
 
 ```python
 sesion_prod = sesion_prod[['view','cart','remove_from_cart','purchase']]
@@ -682,8 +609,7 @@ sesion_prod
 
 
 
-Calculamos la media de cada evento por sesión.
-
+We calculated the mean of each event per session.
 
 ```python
 media_eventos_sesion = sesion_prod.mean()
@@ -700,23 +626,20 @@ media_eventos_sesion
     purchase                      0.29
     dtype: float64
 
+Conclution:
 
+In each session, on average:
 
-Conclusión:
+* 2.2 products are seen
+* 1.3 products are added to the cart
+* 0.9 products are removed from the cart
+* 0.3 products are purchased
 
-En cada sesión, de media:
+As we said, these are the numbers that we must increase with the CRO actions.
 
-* Se ven 2.2 productos
-* Se añaden 1.3 productos al carrito
-* Se eliminan 0.9 productos del carrito
-* Se compran 0.3 productos
+### Are there differences between hourly events?
 
-Como decíamos, éstos son los números que deberemos incrementar con las acciones de CRO.
-
-### ¿Existen diferencias entre los eventos por horas?
-
-Creamos el dataframe a granularidad evento y hora.
-
+We create the dataframe at event and time granularity.
 
 ```python
 eventos_hora = df.groupby(['evento','hora']).producto.count()
@@ -742,8 +665,7 @@ eventos_hora
 
 
 
-Pasamos los eventos a columnas.
-
+We pass the events to columns.
 
 ```python
 eventos_hora = eventos_hora.unstack(level = 0)
@@ -959,8 +881,7 @@ eventos_hora
 
 
 
-Vamos a visualizar cómo se distribuyen los eventos por hora.
-
+Let's visualize how the events are distributed per hour.
 
 ```python
 eventos_hora.plot()
@@ -973,10 +894,9 @@ plt.xticks(ticks = eventos_hora.index);
     
 
 
-Existe una pauta global como era de esperar.
+There is a global pattern as expected.
 
-Pero para ver mejor las diferencias podemos crear una nueva variable que sea el ratio de compras por visita en cada hora.
-
+But to better see the differences we can create a new variable that is the ratio of purchases per visit in each hour.
 
 ```python
 eventos_hora['compras_visitas'] = eventos_hora.purchase / eventos_hora.view * 100
@@ -1218,8 +1138,7 @@ eventos_hora
 
 
 
-Reordenamos las variables
-
+We rearrange the variables
 
 ```python
 eventos_hora = eventos_hora[['view','cart','remove_from_cart','purchase','compras_visitas']]
@@ -1461,8 +1380,7 @@ eventos_hora
 
 
 
-Visualizamos para ver si hay horas en las que se compra proporcionalmente más.
-
+We visualize to see if there are hours in which proportionally more is purchased.
 
 ```python
 plt.figure(figsize = (12,6))
@@ -1476,13 +1394,12 @@ plt.xticks(eventos_hora.index);
     
 
 
-Conclusiones:
+Conclusions:
     
-* Las horas en las que la gente compra más son la 1, las 8, de 11 a 13 y las 18
-* Las horas en las que la gente no compra son las 24, de 3 a 7, de 14 a 17 y de 19 a 23
+* The hours in which people buy the most are 1, 8, 11 to 13 and 18
+* The hours in which people do not buy are 24:00, from 3 to 7, from 14 to 17 and from 19 to 23
 
-Vamos a analizar ahora no de forma proporcional, si no en absoluto si existen o no horas más frecuentes para cada tipo de evento.
-
+We are now going to analyze not proportionally, but absolutely, whether or not there are more frequent hours for each type of event.
 
 ```python
 plt.figure(figsize = (12,12))
@@ -1494,11 +1411,9 @@ sns.heatmap(data = eventos_hora);
 ![png](static/notebooks/ecommerce/part3_files/part3_42_0.png)
     
 
+The problem is that since each event has a different scale, this graph does not allow us to differentiate the patterns well.
 
-El problema es que como cada evento tiene diferente escala este gráfico no nos permite diferenciar bien los patrones.
-
-Para solucionarlo podemos usar la tipificación de variables que aprendimos en el módulo de estadística.
-
+To solve it we can use the typing of variables that we learned in the statistics module.
 
 ```python
 def tipificar(variable):
@@ -1772,15 +1687,13 @@ eventos_hora_tip.plot(subplots = True, sharex = False, figsize = (12,12),xticks 
 ![png](static/notebooks/ecommerce/part3_files/part3_48_0.png)
     
 
+Conclusions:
 
-Conclusiones:
+* **INSIGHT #1**: All metrics are maximized in the time slots between 9 a.m. and 1 p.m. and between 6 p.m. and 8 p.m.
+* This information is very relevant, for example, for paid ads, both for traffic generation and retargeting
+* In addition, there seems to be some subtype of user who buys at 1 in the morning, who, although not very frequent, does buy a lot
 
-* **INSIGHT #1**: Todas las métricas se maximzan en las franjas entre las 9 y las 13 y entre las 18 y las 20
-* Esta info es muy relevante por ejemplo de cara a paid ads, tanto de generación de tráfico como de retargeting
-* Además, parece haber algún subtipo de usuario que compra a la 1 de la mañana, que aunque no sea muy frecuente sí compra mucho
-
-### ¿Cúal es la media de facturación mensual?
-
+### What is the average monthly billing?
 
 ```python
 df.loc[df.evento == 'purchase'].groupby('mes').precio.sum().mean()
@@ -2207,11 +2120,9 @@ tendencia.plot(subplots = True, figsize = (12,6), sharex = True, xticks = tenden
 ![png](static/notebooks/ecommerce/part3_files/part3_55_0.png)
     
 
+The trend is flat across all metrics, confirming the need for CRO stocks.
 
-La tendencia es plana en todas las métricas, lo que confirma la necesidad de las acciones de CRO.
-
-Existe un pico significativo en la semana del 24, obviamente por black friday, vamos a hacer el mismo análisis pero diario y solo para noviembre y dicienbre para ver el efecto.
-
+There is a significant peak in the week of the 24th, obviously due to Black Friday, we are going to do the same analysis but daily and only for November and December to see the effect.
 
 ```python
 tendencia_diaria = df.loc['2019-11':'2019-12'].groupby('evento').resample('D').evento.count().unstack(level = 0)
@@ -2471,17 +2382,13 @@ tendencia_diaria.plot(subplots = True, figsize = (16,10), sharex = True, xticks 
     
 ![png](static/notebooks/ecommerce/part3_files/part3_59_0.png)
     
+Conclusions:
 
+* Indeed the peak coincides with black friday (day 29)
+* But there is still a bigger peak a few days before, on the 22nd, possibly due to the start of Black Friday week
+* Surprisingly, the days of Christmas themselves have a decreasing trend, which means that consumers have clearly advanced their purchases
 
-Conclusiones:
-
-* Efectivamente el pico coincide con el black friday (día 29)
-* Pero aún hay un pico mayor unos días antes, el día 22, posiblemente por el inicio de la semana black friday
-* Sorprendemente los propios días de Navidad tienen una tendencia decreciente, lo que significa que los consumidores claramente han adelantado sus compras
-
-Vamos a hacer el mismo análisis para Enero y Febrero.
-
-
+We are going to do the same analysis for January and February.
 ```python
 tendencia_diaria = df.loc['2020-01':'2020-02'].groupby('evento').resample('D').evento.count().unstack(level = 0)
 tendencia_diaria = tendencia_diaria[['view','cart','remove_from_cart','purchase']]
@@ -2492,22 +2399,19 @@ tendencia_diaria.plot(subplots = True, figsize = (16,10), sharex = True, xticks 
     
 ![png](static/notebooks/ecommerce/part3_files/part3_61_0.png)
     
+Conclusions:
 
+* During the week of Kings there is no sales peak either
+* Nor the days before Valentine's Day
+* But there is a very pronounced peak on January 27, surely some local event
 
-Conclusiones:
+**INSIGHT #2** The big takeaway is that all the Christmas shopping pie is delivered on Black Friday week
 
-* Durante la semana de Reyes tampoco hay pico de ventas
-* Ni los días previos a San Valentín
-* Pero sí hay un pico muy pronunciado el 27 de Enero, seguramente algún evento local
+### Moments of truth?
 
-**INSIGHT #2** La gran conclusión es que todo el pastel de las compras navideñas se reparte en la semana del black friday
+Could we manage to identify moments at the day-hour level in which the greatest number of purchases take place?
 
-### ¿Momentos de la verdad?
-
-¿Podríamos llegar a identificar momentos a nivel de día-hora en los que se producen el mayor número de compras?
-
-Sería muy útil para concentrar gran parte de la inversión de campañas justo en esos momentos.
-
+It would be very useful to focus a large part of the investment of campaigns just at those moments.
 
 ```python
 compras_dia_hora = df.loc[df.evento == 'purchase'].groupby(['date','hora']).evento.count().unstack(level = 0).fillna(0)
@@ -2864,14 +2768,11 @@ sns.heatmap(compras_dia_hora);
     
 ![png](static/notebooks/ecommerce/part3_files/part3_66_0.png)
     
+## Understanding customers
 
+To analyze at the customer level, it is best to create a dataframe of only buyers with customer granularity and the variables that interest us.
 
-## Entendiendo los clientes
-
-Para analizar a nivel de cliente lo mejor es crear un dataframe de solo compradores con granularidad cliente y las variables que nos interesan.
-
-Hay que tener cuidado con la función de agregación que usamos en cada una.
-
+We must be careful with the aggregation function that we use in each one.
 
 ```python
 clientes = df.loc[df.evento == 'purchase'].groupby(['usuario']).agg({'producto':'count',
@@ -3001,8 +2902,7 @@ clientes
 
 
 
-Renombramos
-
+we rename
 
 ```python
 clientes.columns = ['productos_tot_num','compras_tot_num','precio_medio_prod','ult_compra']
@@ -3128,8 +3028,7 @@ clientes
 
 
 
-Vamos a calcular variables adicionales.
-
+We are going to calculate additional variables.
 
 ```python
 clientes['gasto_tot'] = clientes.productos_tot_num * clientes.precio_medio_prod
@@ -3282,8 +3181,7 @@ clientes
 
 
 
-### ¿Cómo se distribuyen los clientes en cuanto a gasto?
-
+### How are customers distributed in terms of spending?
 
 ```python
 sns.histplot(data = clientes, x = 'gasto_tot', bins = 50)
@@ -3294,12 +3192,9 @@ plt.xlim([0,300]);
     
 ![png](static/notebooks/ecommerce/part3_files/part3_75_0.png)
     
+The vast majority of clients have spent less than €50 in the period.
 
-
-La gran mayoría de los clientes han gastado menos de 50€ en el período.
-
-### ¿Cómo se distribuyen los clientes en cuanto al número de compras?
-
+### How are customers distributed in terms of the number of purchases?
 
 ```python
 sns.countplot(data = clientes, x = 'compras_tot_num');
@@ -3309,16 +3204,13 @@ sns.countplot(data = clientes, x = 'compras_tot_num');
     
 ![png](static/notebooks/ecommerce/part3_files/part3_78_0.png)
     
+**INSIGHT #3** The vast majority of customers only make one purchase.
 
+There is a long way to go to improve this ratio through:
 
-**INSIGHT #3** La gran mayoría de los clientes sólo hace una compra.
+* email marketing with newsletters and personalized offers
 
-Existe gran recorrido para mejorar este ratio mediante:
-
-* email marketing con newletters y ofertas personalizadas
-
-### ¿Cuántos productos compra un cliente de media en cada compra?
-
+### How many products does an average customer buy with each purchase?
 
 ```python
 clientes.productos_por_compra.describe()
@@ -3338,17 +3230,15 @@ clientes.productos_por_compra.describe()
     Name: productos_por_compra, dtype: float64
 
 
+**INSIGHT #4** The medium purchase includes 5 products.
 
-**INSIGHT #4** La compra mediana incluye 5 productos.
+But 25% of customers buy more than 10 products in the same purchase.
 
-Pero un 25% de los clientes compran más de 10 productos en la misma compra.
+There is a long way to go to improve this ratio through:
 
-Existe gran recorrido para mejorar este ratio mediante:
+* recommendation systems at the time of purchase
 
-* sistemas de recomendación en el momento de la compra
-
-### ¿Qué clientes nos han generado más ingresos?
-
+### Which clients have generated the most income for us?
 
 ```python
 clientes.nlargest(n = 10, columns = 'gasto_tot')
@@ -3489,8 +3379,7 @@ clientes.nlargest(n = 10, columns = 'gasto_tot')
 
 
 
-Para calcular calculamos el gasto total medio por cliente.
-
+To calculate we calculate the average total spend per customer.
 
 ```python
 clientes.gasto_tot.describe()
@@ -3509,18 +3398,15 @@ clientes.gasto_tot.describe()
     max             1559.21
     Name: gasto_tot, dtype: float64
 
+**INSIGHT #5** There are customers with average spending dozens of times higher than the average.
 
+These customers must be retained through loyalty programs.
 
-**INSIGHT #5** Existen clientes con gasto medio decenas de veces superior a la media.
+### What is customer survival?
 
-Hay que fidelizar estos clientes mediante programas de fidelización.
+Since we only have 5 months of history, we are going to create cohort analyzes 3 months into the future, which gives us 3 cohorts.
 
-### ¿Cual es la supervivencia de los clientes?
-
-Dado que solo tenemos 5 meses de histórico vamos a crear análisis de cohortes a 3 meses vista, lo cual nos da para hacer 3 cohortes.
-
-Preparamos un dataframe solo con compradores y con las variables usuario y mes.
-
+We prepare a dataframe only with buyers and with the user and month variables.
 
 ```python
 c = df.loc[df.evento == 'purchase', ['usuario','mes']]
@@ -3620,8 +3506,7 @@ c
 
 
 
-Pasamos los meses a columnas.
-
+We pass the months to columns.
 
 ```python
 c = pd.crosstab(c.usuario,c.mes).reset_index()
@@ -3764,8 +3649,7 @@ c
 
 
 
-Renombramos y eliminamos el usuario que ya no lo necesitamos.
-
+We rename and delete the user that we no longer need it.
 
 ```python
 c.columns = ['usuario','c4','c5','c1','c2','c3']
@@ -3895,10 +3779,7 @@ c
 <p>11040 rows × 5 columns</p>
 </div>
 
-
-
-La primera cohorte será la del mes 2, ya que queremos seleccionar "nuevos" clientes (al menos que no estuvieran el mes anterior)
-
+The first cohort will be the one from month 2, since we want to select "new" clients (unless they were not there the previous month)
 
 ```python
 c2 = c.loc[(c.c1 == 0) & (c.c2 > 0)]
@@ -4029,8 +3910,7 @@ c2
 
 
 
-Pasamos a un dataframe binario ya que solo nos importa si ese cliente ha comprado o no en cada mes.
-
+We go to a binary dataframe since we only care if that customer has purchased or not in each month.
 
 ```python
 def binarizar(variable):
@@ -4168,8 +4048,7 @@ c2_b
 
 
 
-Calcumamos el porcentaje de clientes de esta cohorte que han seguido comprando en los siguientes meses.
-
+We calculate the percentage of customers in this cohort who have continued to purchase in subsequent months.
 
 ```python
 c2_f = c2_b.sum() / c2_b.shape[0]
@@ -4189,8 +4068,7 @@ c2_f
 
 
 
-Replicamos todo el proceso para la cohorte 3
-
+We replicated the entire process for cohort 3
 
 ```python
 c3 = c.loc[(c.c2 == 0) & (c.c3 > 0)]
@@ -4213,8 +4091,7 @@ c3_f
 
 
 
-Replicamos todo el proceso para la cohorte 4
-
+We replicated the entire process for cohort 4
 
 ```python
 c4 = c.loc[(c.c3 == 0) & (c.c4 > 0)]
@@ -4238,8 +4115,7 @@ c4_f
 
 
 
-Creamos el dataframe de cohortes.
-
+We create the cohort dataframe.
 
 ```python
 cohortes = pd.DataFrame({'c2':c2_f,'c3':c3_f,'c4':c4_f})
@@ -4380,16 +4256,13 @@ sns.heatmap(cohortes,annot = True, fmt = '.0%', cmap='Greys');
     
 ![png](static/notebooks/ecommerce/part3_files/part3_110_0.png)
     
+**INSIGHT #6**: 90% of new customers do not buy again in the following months
 
+### What is the LTV of the clients?
 
-**INSIGHT #6**: El 90% de que los nuevos clientes no vuelve a comprar en los meses posteriores
+Taking into account 90% of the fact that new customers do not buy again in the following months, we can calculate the LTV with the historical one that we have without fear of being very wrong.
 
-### ¿Cual es el LTV de los clientes?
-
-Teniendo en cuenta el 90% de que los nuevos clientes no vuelve a comprar en los meses posteriores podemos calcular el LTV con el histórico que tenemos sin miedo a equivocarnos mucho.
-
-Para ello vamos a coger a los clientes de la cohorte 2 y calcular el total de sus compras.
-
+To do this, we are going to take the customers of cohort 2 and calculate the total of their purchases.
 
 ```python
 maestro_ltv = df.loc[(df.evento == 'purchase') & (df.mes != 10) & (df.mes == 11),'usuario'].to_list()
@@ -4583,44 +4456,42 @@ clientes_ltv.gasto_tot.describe()
     Name: gasto_tot, dtype: float64
 
 
+Given the variability of the mean, it would be safer to take the median.
 
-Dada la variabilidad de la media sería más seguro coger la mediana.
+**INSIGHT #7**: The average LTV is €42.
 
-**INSIGHT #7**: El LTV medio es de 42€.
+Applying our margin on that figure and the % that we want to dedicate to acquisition, we get the maximum amount to invest in CPA.
 
-Aplicando nuestro margen sobre esa cifra y el % que queremos dedicar a captación nos sale el importe máximo a invertir en CPA.
+Applying CRO actions will allow you to increase the LTV and therefore also the CPA, being a very important strategic advantage.
 
-Aplicar las acciones de CRO permitirá incrementar el LTV y por tanto también el CPA, siendo una ventaja estratégica muy importante.
+### On which customers to run the next campaigns (RFM)?
 
-### ¿Sobre qué clientes ejecutar las próximas campañas (RFM)?
+We are going to learn a technique called RFM (Recency - Frequency - Monetary).
 
-Vamos a aprender una técnica llamada RFM (Recency - Frequency - Monetary).
+This technique is very powerful for retail contexts and therefore also in ecommerce.
 
-Esta técnica es muy potente para contextos de retail y por tanto también en ecommerce.
+It allows responding to needs such as:
 
-Permite dar respuesta a necesidades como:
-
-* Cuál es la proporción de clientes que realizan un solo pedido y clientes frecuentes
-* Cuales son los clientes VIP (que potencialmente necesitan programas de fidelización y atención personalizada)
-* Cuál es la cantidad de clientes nuevos (a incentivar para que vuelvan a realizar un pedido)
-* Cuántos y cuáles son los clientes que no realizan compras hace tiempo
-* Cuántos y cuáles son los clientes en los cuales no vale la pena invertir más tiempo y recursos
+* What is the ratio of customers who place a single order and repeat customers
+* Which are the VIP clients (who potentially need loyalty programs and personalized attention)
+* What is the number of new customers (to encourage them to return to place an order)
+* How many and which are the customers who have not made purchases for a long time
+* How many and which are the clients in which it is not worth investing more time and resources
 * Etc
 
-Pese a su potencia es muy sencilla de construir, por tanto es casi obligatoria en este tipo de análisis.
+Despite its power, it is very simple to build, therefore it is almost mandatory in this type of analysis.
 
-Lo primero es identificar las variables con las que crear cada una de las dimensiones:
+The first thing is to identify the variables with which to create each of the dimensions:
 
-* Recency: ult_compra
-* Frequency: compras_tot_num
-* Monetary: gasto_tot
+* Recency: last_purchase
+* Frequency: purchases_tot_num
+* Monetary: total_expense
 
-Y discretizar cada una de ellas.
+And discretize each of them.
 
-Vamos a dejar la recencia para el final porque requerirá una transformación previa.
+We are going to leave the recency for last because it will require a previous transformation.
 
-Comenzamos por Frequency
-
+We start with Frequency
 
 ```python
 clientes['F'] = clientes.compras_tot_num.transform(lambda x: pd.cut(x,5, labels = False)) + 1
@@ -4785,8 +4656,7 @@ clientes
 
 
 
-Comprobamos
-
+we check
 
 ```python
 clientes.groupby('F').compras_tot_num.mean()
@@ -4805,7 +4675,7 @@ clientes.groupby('F').compras_tot_num.mean()
 
 
 
-Ahora Monetary
+Now Monetary
 
 
 ```python
@@ -4826,8 +4696,7 @@ clientes.groupby('M').gasto_tot.mean()
 
 
 
-Para la recencia tenemos que transformar la fecha a un número, por ejemplo la distancia en días de cada fecha a la fecha más reciente disponible.
-
+For the recency we have to transform the date into a number, for example the distance in days from each date to the most recent date available.
 
 ```python
 mas_reciente = clientes.ult_compra.max()
@@ -5021,8 +4890,7 @@ clientes
 
 
 
-Nos ha creado un timedelta, tenemos que pasarlo a número de días.
-
+A timedelta has been created for us, we have to pass it to number of days.
 
 ```python
 clientes['ult_compra_dias'] = clientes.ult_compra_dias.dt.days
@@ -5213,8 +5081,7 @@ clientes
 
 
 
-Ya podemos crear la R, pero hay que tener en cuenta que en este caso lo mejor son los valores más bajos.
-
+We can now create the R, but keep in mind that in this case the best are the lowest values.
 
 ```python
 clientes['R'] = clientes.ult_compra_dias.transform(lambda x: pd.cut(x,5, labels = False)) + 1
@@ -5234,8 +5101,7 @@ clientes.groupby('R').ult_compra_dias.mean()
 
 
 
-Para estandarizar su intrepretación con el resto de las dimensiones vamos a darle la vuelta.
-
+To standardize its interpretation with the rest of the dimensions, we are going to turn it around.
 
 ```python
 clientes['R'] = 6 - clientes.R
@@ -5255,8 +5121,7 @@ clientes.groupby('R').ult_compra_dias.mean()
 
 
 
-Integramos en un dataframe rfm.
-
+We integrate into an rfm dataframe.
 
 ```python
 clientes
@@ -5446,8 +5311,7 @@ clientes
 
 
 
-Creamos variables adicionales.
-
+We create additional variables.
 
 ```python
 clientes['valor'] = clientes.R + clientes.F + clientes.M
@@ -5637,12 +5501,9 @@ clientes
 <p>11040 rows × 12 columns</p>
 </div>
 
+On this dataframe we can already do an infinite number of analyses.
 
-
-Sobre este dataframe ya podemos hacer infinidad de análisis.
-
-Por ejemplo combinándolo con la técnica del minicubo podemos obtener todo tipo de insights.
-
+For example, combining it with the minicube technique we can obtain all kinds of insights.
 
 ```python
 #Paso 1: Seleccionar qué variables serán la métricas y cuales las dimensiones
@@ -6086,8 +5947,7 @@ minicubo
 
 
 
-Para analizar cada dimensión la seleccionamos.
-
+To analyze each dimension we select it.
 
 ```python
 minicubo[minicubo.variable == 'F']
@@ -6168,8 +6028,7 @@ minicubo[minicubo.variable == 'F']
 
 
 
-Y la analizamos de forma gráfica.
-
+And we analyze it graphically.
 
 ```python
 minicubo[minicubo.variable == 'F'].set_index('value').plot.bar(subplots = True, sharex = False, figsize = (12,12))
@@ -6875,23 +6734,20 @@ plt.tight_layout();
 
     
 ![png](static/notebooks/ecommerce/part3_files/part3_152_1.png)
-    
 
+ The analysis could be improved because in F and M the outliers cause most of the data to be concentrated in category 1.
 
-Se podría mejorar el análisis porque en F y M los atípicos hacen que se concentren la mayoría de los datos en la categoría 1.
+What should be done is eliminate those atypical ones and redo the exercise.
 
-Lo que habría que hacer es eliminar esos atípicos y volver a realizar el ejercicio.
+I leave it to you as a practice task.
 
-Te lo dejo como tarea de práctica.
+But with this analysis we are able to identify the customers who are most likely to respond best to new campaigns, as well as gain a lot of valuable insights for the business.
 
-Pero con este análisis somos capaces de identificar los clientes que con mayor probabilidad responderán mejor a nuevas campañas, además de obtener un montón de insights valiosos para el negocio.
+## Understanding the products
 
-## Entendiendo los productos
+We are going to create a dataframe at the product level to be able to analyze this dimension.
 
-Vamos a crear un dataframe a nivel de producto para poder analizar esta dimensión.
-
-Primero calculamos los conteos de cada evento en cada producto.
-
+We first calculate the counts of each event in each product.   
 
 ```python
 prod = df.groupby(['producto','evento']).size()
@@ -7042,8 +6898,7 @@ prod
 
 
 
-Vamos a incorporar el precio, para ello primero creamos un maestro de precios por producto.
-
+We are going to incorporate the price, for this we first create a price master by product.
 
 ```python
 maestro_precios = df.groupby('producto', as_index = False).precio.mean()
@@ -7280,8 +7135,7 @@ prod
 
 
 
-Reordenamos los nombres.
-
+We rearrange the names.
 
 ```python
 prod
@@ -7565,8 +7419,7 @@ prod
 
 
 
-### ¿Cuales son los productos más vendidos?
-
+### What are the most sold products?
 
 ```python
 prod.sort_values('purchase',ascending = False)[0:20]
@@ -7786,12 +7639,9 @@ prod.sort_values('purchase',ascending = False)[0:20]
 </table>
 </div>
 
+Possibly we would be able to increase sales and the average ticket simply by highlighting these products in the store.
 
-
-Posiblemente lograríamos incrementar las ventas y el ticket medio simplemente destacando estos productos en la tienda.
-
-### ¿Hay productos que no se venden y podríamos eliminar del catálogo?
-
+### Are there products that are not being sold and could be removed from the catalogue?
 
 ```python
 prod[prod.purchase == 0]
@@ -7931,26 +7781,21 @@ prod[prod.purchase == 0]
 <p>21850 rows × 6 columns</p>
 </div>
 
+INSIGHT #8: Almost half of the products have not had any sales in the 5 months of history.
 
+A whole new analysis could be started on these products:
 
-Guauu, hemos encontrado una buena!
-
-INSIGHT #8: Casi la mitad de los productos no han tenido ninguna venta en los 5 meses del histórico.
-
-Se podría comenzar todo un nuevo análisis sobre estos productos:
-
-* ¿No se ven?
-* ¿Se ven pero no se compran?
-* ¿Es porque se sustituyen por otros productos propios?
-* ¿Es porque están mucho más baratos en la competencia?
+* They are not visible?
+* Are they seen but not bought?
+* Is it because they are replaced by other own products?
+* Is it because they are much cheaper in the competition?
 * Etc
 
-Se podrían eliminar del catálogo, o como mínimo de la tienda, newsletter, etc, para que no ocupen espacio de los productos que sí se venden.
+They could be removed from the catalog, or at least from the store, newsletter, etc., so that they do not take up space from the products that are sold.
 
-### ¿Cual es la relación entre el precio y el volumen de ventas?
+### What is the relationship between price and sales volume?
 
-Ya que este análisis incluye las ventas vamos a eliminar los productos que no han tenido ninguna.
-
+Since this analysis includes sales we will eliminate the products that have not had any.
 
 ```python
 sns.scatterplot(data = prod[prod.purchase > 0], x = 'precio', y = 'purchase', hue = 'precio');
@@ -7960,12 +7805,9 @@ sns.scatterplot(data = prod[prod.purchase > 0], x = 'precio', y = 'purchase', hu
     
 ![png](static/notebooks/ecommerce/part3_files/part3_172_0.png)
     
+Yes, there is a clear decreasing relationship.
 
-
-Sí que existe una clara relación decreciente.
-
-Vamos a hacer zoom por ejemplo por debajo de 50€ para entenderlo mejor.
-
+Let's zoom in for example below €50 to understand it better.
 
 ```python
 sns.scatterplot(data = prod[(prod.purchase > 0) & (prod.precio < 50)], x = 'precio', y = 'purchase', hue = 'precio');
@@ -7977,8 +7819,7 @@ sns.scatterplot(data = prod[(prod.purchase > 0) & (prod.precio < 50)], x = 'prec
     
 
 
-### ¿Hay productos de los que los clientes se arrepienten y eliminan más del carrito?
-
+### Are there products that customers regret and remove more from the cart?
 
 ```python
 prod.insert(loc = 4,
@@ -8475,15 +8316,12 @@ prod.loc[prod.cart > 30].sort_values('remove_from_cart_porc', ascending = False)
 </table>
 </div>
 
+It would be necessary to see why these products are removed more times than they are added:
 
+* If the reason makes sense: review what happens with these products (other alternative products, etc.)
+* If it does not have it, delete these records and analyze only those with remove_from_cart_perc less than or equal to 100
 
-Habría que ver por qué estos productos se eliminan más veces de las que se añaden:
-
-* Si el motivo tiene sentido: revisar qué pasa con estos productos (otros productos alternativos, etc.)
-* Si no lo tiene eliminar estos registros y analizar únicamente los que tienen remove_from_cart_porc menor o igual a 100	
-
-### ¿Cuales son los productos más vistos?
-
+### What are the most viewed products?
 
 ```python
 prod.view.sort_values(ascending = False)[0:20].plot.bar();
@@ -8493,18 +8331,15 @@ prod.view.sort_values(ascending = False)[0:20].plot.bar();
     
 ![png](static/notebooks/ecommerce/part3_files/part3_180_0.png)
     
+Possibly we would be able to increase sales and the average ticket simply by highlighting these products in the store.
 
+Provided that in addition to being seen they are also sold.
 
-Posiblemente lograríamos incrementar las ventas y el ticket medio simplemente destacando estos productos en la tienda.
+### Are there products wanted but not purchased?
 
-Siempre que además de ser vistos también se vendan.
+For example, products that many customers look at but then do not buy.
 
-### ¿Hay productos deseados pero no comprados?
-
-Por ejemplo productos que miran muchos clientes pero que luego no los compran.
-
-Si los encontráramos habría que revisar qué pasa con ellos.
-
+If we found them, we would have to check what happens to them.
 
 ```python
 sns.scatterplot(data = prod, x = 'view', y = 'purchase');
@@ -8516,8 +8351,7 @@ sns.scatterplot(data = prod, x = 'view', y = 'purchase');
     
 
 
-Vamos a quitar el atípico y hacer zoom en la ventana de muchas vistas pocas compras.
-
+We're going to remove the outlier and zoom into the many views few purchases window.
 
 ```python
 sns.scatterplot(data = prod.loc[prod.view < 4000], x = 'view', y = 'purchase', hue = 'precio')
@@ -8536,49 +8370,44 @@ plt.ylim(0,150)
     
 ![png](static/notebooks/ecommerce/part3_files/part3_186_1.png)
     
+There is an opportunity with these products, because for some reason they generate the interest of the clients, but in the end they do not buy them.
 
+It would be necessary to do an analysis on them.
 
-Hay una oportunidad con estos productos, porque por algún motivo generan el interés de los clientes, pero finalmente no los compran.
+### Building a recommendation system
 
-Habría que hacer un análisis sobre ellos.
+One of the assets that can most increase the sales of an ecommerce is a recommendation system.
 
-### Construyendo un sistema de recomendación
+We could already apply a basic one with the analysis of the most viewed and the best sold previously carried out.
 
-Uno de los activos que más pueden incrementar las ventas de un ecommerce es un sistema de recomendación.
+But the real power comes when we create a recommender that personalizes for each purchase.
 
-Ya podríamos aplicar uno básico con los análisis de más visto y más vendido realizados anteriormente.
+Types of recommender systems:
 
-Pero la verdadera potencia viene cuando creamos un recomendador que personaliza para cada compra.
+* Collaborative filtering:
+     * Item based
+     * User based
+* From content
 
-Tipos de sistemas de recomendación:
+In our case we are going to develop one with collaborative filtering based on items.
 
-* Filtrado colaborativo:
-    * Basados en items
-    * Basados en usuario
-* De contenido
+The steps to follow are:
 
-En nuestro caso vamos a desarrollar uno con filtrado colaborativo basado en items.
+1. Create the dataframe with the kpi of interest
+2. Reduce dimension (optional)
+3. Select a distance metric
+4. Compute the item-item matrix
+5. Create the prioritization logic
 
-Los pasos a seguir son:
+#### Create the dataframe with the kpi of interest
 
-1. Crear el dataframe con el kpi de interés
-2. Reducir la dimensión (opcional)
-3. Seleccionar una métrica de distancia
-4. Calcular la matriz item-item
-5. Crear la lógica de priorización
+In this case we will use what is called an implicit kpi, which will be the number of times that the products have been purchased by the same user.
 
-#### Crear el dataframe con el kpi de interés
+Explicit Kpis would be, for example, stars or scores from 1 to 10.
 
-En este caso usaremos lo que se llama un kpi implícito, que será el número de veces que los productos han sido comprados por el mismo usuario.
+Since this is an algorithm that takes time to calculate, we are going to reduce the problem and calculate it only for the 100 best-selling products.
 
-Kpis explícitos sería por ejemplo estrellas o puntuaciones del 1 al 10.
-
-Dado que este es una algoritmo que tarda en calcularse vamos a reducir el problema y calcularlo solo para los 100 productos más vendidos.
-
-Además, por motivos didácticos vamos a hacer el paso a paso manualmente. En un uso real se recomienda usar un paquete ya preconstruído que posiblemente estará más optimizado en cuanto a rendimiento.
-
-Primero calculamos un maestro con los 100 productos más vendidos.
-
+First we calculate a master with the top 100 best-selling products.
 
 ```python
 mas_vendidos = prod.sort_values('purchase', ascending = False).producto[0:100]
@@ -8603,8 +8432,7 @@ mas_vendidos
 
 
 
-Creamos un dataframe temporal filtrando por estos productos.
-
+We create a temporary dataframe filtering by these products.
 
 ```python
 temp = df.loc[df.producto.isin(mas_vendidos)]
@@ -8795,8 +8623,7 @@ temp
 
 
 
-Creamos la matriz  usuario-item.
-
+We create the user-item array.
 
 ```python
 usuario_item = temp.loc[temp.evento == 'purchase'].groupby(['usuario','producto']).size().unstack(level = 1).fillna(0)
@@ -8985,37 +8812,24 @@ usuario_item
 <p>5064 rows × 100 columns</p>
 </div>
 
+#### Select a distance metric
 
+Most common metrics:
 
-#### Reducir la dimensión (opcional)
+* Euclidean distance
+* Correlation
+* cosine
 
-Vemos que nos ha salido una matriz sparse.
+In this case we are going to take, for example, the Euclidean distance.
 
-Posiblemente sería conveniente reducir la dimensión con técnicas como SVD, pero eso requería un minicurso en sí mismo.
-
-Aquí vamos a continuar sin hacer la reducción.
-
-#### Seleccionar una métrica de distancia
-
-Métricas más comunes:
-
-* Distancia euclídea
-* Correlación
-* Coseno
-
-En este caso vamos a coger por ejemplo la distancia euclídea.
-
-La operativizamos mediante la función spatial.distance.euclidean de Scipy.
-
+We operationalize it using Scipy's spatial.distance.euclidean function.
 
 ```python
 from scipy import spatial
 ```
+#### Calculate item-item array
 
-#### Calcular la matriz item-item
-
-Creamos el recomendador que toma como input una matriz usuario-item y devuelve una matriz item-item con la distancia euclídea como dato.
-
+We create the recommender that takes as input a user-item array and returns an item-item array with the Euclidean distance as data.
 
 ```python
 def recomendador(dataframe):
@@ -9214,27 +9028,24 @@ item_item
 <p>100 rows × 100 columns</p>
 </div>
 
+#### Create the prioritization logic
 
+We already have the recommender ready.
 
-#### Crear la lógica de priorización
+What we would have to do is a call to this table every time a user looks at a product or puts it in the cart.
 
-Ya tenemos listo el recomendador.
+But to make it more effective we could use all the information accumulated from the session or even from the entire user if he is logged in.
 
-Lo que tendríamos que hacer es una llamada a esta tabla cada vez que un usuario mire un producto o lo meta en el carrito.
+That means we need a system to recommend products whether the input is from a single product or multiple ones.
 
-Pero para que sea más efectivo podríamos usar toda la info acumulada de la sesión o incluso de todo el usuario si está logado.
+And that at the same time returns several recommendations, to cover all the "gaps" of recommendation that our web could have.
 
-Eso significa que necesitamos un sistema para recomendar productos tanto si el input es de un solo producto como de varios.
+We will apply a very simple algorithm that will do:
 
-Y que a la vez devuelva varias recomendaciones, para cubrir todos los "huecos" de recomendación que nuestra web pudiera tener.
-
-Aplicaremos un algoritmo muy sencillo que hará:
-
-1. Crear un array con los productos de entrada para extraer sus vectores de la matriz item-item
-2. Calcular la suma de distancias de todos los productos
-3. Quitarse a ellos mismos para no autorecomendarse.
-4. Devolver los 10 con menor distancia
-
+1. Create an array with the input products to extract their vectors from the item-item matrix
+2. Calculate the sum of distances of all products
+3. Remove themselves so as not to self-recommend.
+4. Return the 10 with the least distance
 
 ```python
 #En el caso de varios productos vendrá del servidor web como una cadena separada con punto y coma
@@ -9255,8 +9066,7 @@ def priorizador(productos,devuelve = 10):
     return(suma_distancias.sort_values()[0:devuelve])
 ```
 
-Comprobamos cómo funciona si le pasamos un producto
-
+We check how it works if we pass it a product
 
 ```python
 priorizador('4497')
@@ -9280,8 +9090,7 @@ priorizador('4497')
 
 
 
-Comprobamos cómo funciona si le pasamos varios productos
-
+We check how it works if we pass several products to it
 
 ```python
 priorizador('4497;4600;4768')
@@ -9303,52 +9112,50 @@ priorizador('4497;4600;4768')
     5844894             41.55
     dtype: float64
 
+# CONCLUSIONS
 
+The current trend is flat across all metrics, confirming the need for CRO stocks.
 
-# CONCLUSIONES
-
-La tendencia actual es plana en todas las métricas, lo que confirma la necesidad de las acciones de CRO.
-
-Tras el análisis realizado sobre los datos transaccionales se ha desarrollado un plan CRO de 12 iniciativas concretas organizadas en 5 grandes palancas de negocio que con alta probabilidad van a incrementar los baselines consiguiendo un incremento global de los ingresos del ecommerce.
+After the analysis carried out on the transactional data, a CRO plan has been developed with 12 specific initiatives organized into 5 major business levers that with a high probability will increase the baselines, achieving a global increase in ecommerce income.
 
 ## Baseline
 
-En cada sesión, de media:
+In each session, on average:
 
-* KPIs por sesión: Se ven 2.2 productos
-* KPIs por sesión: Se añaden 1.3 productos al carrito
-* KPIs por sesión: Se eliminan 0.9 productos del carrito
-* KPIs por sesión: Se compran 0.3 productos
-* Venta cruzada: mediana de 5 productos por compra
-* Recurrencia: el 10% de los clientes vuelve a comprar tras el primer mes
-* Conversión: 60% de añadir al carrito sobre visualizaciones
-* Conversión: 22% de compra sobre añadidos a carrito
-* Conversión: 13% de compra sobre visualizaciones
-* Facturación media mensual: 125.000€
+* KPIs per session: 2.2 products are viewed
+* KPIs per session: 1.3 products are added to the cart
+* KPIs per session: 0.9 products are removed from the cart
+* KPIs per session: 0.3 products are purchased
+* Cross-selling: median of 5 products per purchase
+* Recurrence: 10% of customers buy again after the first month
+* Conversion: 60% add to cart on views
+* Conversion: 22% of purchase on additions to cart
+* Conversion: 13% purchase on views
+* Average monthly turnover: €125,000
 
-## Acciones de incremento de visualizaciones
+## Actions to increase views
 
-1. Revisar las campañas de paid (generación y retargeting) para concentrar la inversión en franjas entre las 9 y las 13 y entre las 18 y las 20
-2. Concentrar la inversión del período navideño y post-navideño en la semana del black friday
-3. Incrementar la inversión hasta llegar al CPA máximo en base al LTV que hemos identificado
+1. Review paid campaigns (generation and retargeting) to concentrate investment in slots between 9 a.m. and 1 p.m. and between 6 p.m. and 8 p.m.
+2. Concentrate the investment of the Christmas and post-Christmas period in the week of Black Friday
+3. Increase the investment until reaching the maximum CPA based on the LTV that we have identified
 
-## Acciones de incremento de conversión
+## Conversion increase actions
 
-4. Preconfigurar la home con los productos identificados en los análisis most viewed y most sold.
-5. Trabajar sobre los productos con alta tasa de abandono de carrito
-6. Trabajar sobre los productos muy vistos pero poco comprados
+4. Preconfigure the home page with the products identified in the most viewed and most sold analysis.
+5. Work on products with high cart abandonment rates
+6. Work on products that are highly viewed but rarely purchased
 
-## Acciones de incremento de venta cruzada
+## Increase cross-sell actions
 
-7. La compra mediana incluye 5 productos
-8. Incrementar este ratio mediante la recomendación en tiempo real con el nuevo recomendador
+7. The median purchase includes 5 products
+8. Increase this ratio by recommending in real time with the new recommender
 
-## Acciones de incremento de frecuencia de compra
+## Actions to increase purchase frequency
 
-9. El 90% de los clientes sólo hace una compra
-10. Crear una newsletter periódica con el nuevo recomendador para incrementar la frecuencia de visita
-11. Campañas promocionales sobre los segmentos top de la segmentación RFM
+9. 90% of customers only make one purchase
+10. Create a regular newsletter with the new recommender to increase the frequency of visits
+11. Promotional campaigns on the top segments of the RFM segmentation
 
-## Acciones de fidelización de clientes
+## Customer loyalty actions
 
-12. Crear un programa de fidelización segmentado por la nueva segmentación RFM
+12. Create a loyalty program segmented by the new RFM segmentation
