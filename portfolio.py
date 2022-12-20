@@ -57,6 +57,20 @@ def solar():
 							part4=md.convert(part4)
 							)
 
+@app.route('/ecommerce')
+def ecommerce():
+	with open("./md/ecommerce/part1.md", "r") as file:
+		part1 = file.read()
+	with open("./md/ecommerce/part2.md", "r") as file:
+		part2 = file.read()	
+	with open("./md/ecommerce/part3.md", "r") as file:
+		part3 = file.read()
+	return render_template("ecommerce.html", 
+							part1=md.convert(part1),
+							part2=md.convert(part2),
+							part3=md.convert(part3)
+							)
+
 @app.route('/airbnbds4')
 def airbnbds4():
 	with open("./md/airbnbds4/part1.md", "r") as file:
@@ -122,4 +136,4 @@ def isaac():
 	return render_template("isaac.html", notebook=md.convert(notebook), summary=md.convert(summary))		
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', debug=True)
+	app.run(host='0.0.0.0')

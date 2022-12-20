@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-lñsdkjfñalsdjkfsañlkj
-
 {% block content %}
 <div class="jumbotron">
 	<h2 class="presentation">DS/DEV Portfolio</h2>
@@ -74,16 +72,16 @@ lñsdkjfñalsdjkfsañlkj
 						</div>
 					</div>					
 					<!-- col1 end-->
-						<!-- col1 init -->
+						<!-- col2 init -->
 						<div class="card mb-3">
-							<h3 class="card-header">Solar Plant Performance Analysis</h3>
+							<h3 class="card-header">Solar Plant Usage Analysis</h3>
 							<div class="card-body">
 								<h5 class="card-title">Discovery Project from a Solar Plant data</h5>
 								<h6 class="card-subtitle text-muted"></h6>
 							</div>
 						<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='notebooks/solar/01_Diseno_del_proyecto_files/01_Diseno_del_proyecto_13_0.jpg') }}" alt="airbnb">
 						<div class="card-body">
-							<p class="card-text">IoT data of a Solar plant that has triggered some performance issues. We are going to do Discovery Project trying to analyze and take some possible insights to imporve performance of the Plant</p>
+							<p class="card-text">Discovery Project from an ecommerce store to found some insights</p>
 						</div>
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item">#Business Analytics</li>
@@ -97,13 +95,31 @@ lñsdkjfñalsdjkfsañlkj
 							Developed on July 2022
 						</div>
 					</div>					
-					<!-- col1 end-->
-				<!-- col1 end-->
-									<!-- col1 end-->	
-					<div class="card mb-3">
-						<!-- project info -->
+					<!-- col2 end-->
+						<!-- col3 init -->
+						<div class="card mb-3">
+							<h3 class="card-header">Ecommerce Analysis Discovery Project</h3>
+							<div class="card-body">
+								<h5 class="card-title">Some business analytics insights for an ecommerce</h5>
+								<h6 class="card-subtitle text-muted"></h6>
+							</div>
+						<img style="height: 200px; width: 100%; display: block;" src="{{ url_for('static',filename='notebooks/ecommerce/ecommerce.jpg') }}" alt="ecommerce">
+						<div class="card-body">
+							<p class="card-text">An ecommerce store has given its data to do an analyisis and get some insights and possible new actions to increase current sales</p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">#Business Analytics</li>
+							<li class="list-group-item">#TimeSeries #RFM #Cohorts #CubeAnalysis</li>
+							<li class="list-group-item">#Data-Cleaning #Data-Analysis #Pandas</li>
+						</ul>
+						<div class="card-body">
+						<a href="/portfolio{{ url_for('ecommerce') }}" class="card-link">Notebook</a>
+						</div>
+						<div class="card-footer text-muted">
+							Developed on July 2022
+						</div>
 					</div>					
-				<!-- col1 end-->
+					<!-- col3 end-->
 				</div> <!-- group card -->	
 			</div> <!-- first row of projects -->
         </div>
