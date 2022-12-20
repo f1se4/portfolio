@@ -1,6 +1,6 @@
-# CREACION DEL DATAMART ANALITICO
+# CREATION OF THE ANALYTICAL DATAMART
 
-## SET UP 
+## SET UP
 
 
 ```python
@@ -19,7 +19,7 @@ pd.options.display.float_format = '{:15.2f}'.format
 pd.options.display.max_columns = 8
 ```
 
-## CARGA DE DATOS 
+## DATA UPLOAD
 
 
 ```python
@@ -51,7 +51,7 @@ ene = pd.read_sql('2020-Jan', con)
 feb = pd.read_sql('2020-Feb', con)
 ```
 
-## INTEGRACION DE DATOS 
+## DATA INTEGRATION
 
 
 ```python
@@ -231,9 +231,9 @@ df
 
 
 
-## CALIDAD DE DATOS 
+## DATA QUALITY
 
-### Tipos de variables
+### Types of variables
 
 
 ```python
@@ -259,45 +259,20 @@ df.info()
     memory usage: 175.8+ MB
     
 
-Eliminamos la columna index.
+We remove the column index.
 
 
 ```python
 df.drop(columns = 'index', inplace = True)
 ```
 
-Análisis y corrección de tipos.
+Analysis and correction of types.
 
-* pasar event_time a datetime
+* pass event_time to datetime
 
-Pasamos event_time a datetime.
-
-TRUCO PRO: pd.to_datetime() puede tardar mucho en ejecutarse en datasets grandes.
-
-Pero por algún motivo si dividimos la cadena de la fecha en sus partes y la volvemos a juntar y después transformamos a datetime especificándole el formato exacto funciona MUCHO más rápido.
-
-Te voy a enseñar las dos formas:
-
-* la fácil y tradicional con pd.to_datetime: puedes usar esta si no quieres complicarte con la función
-* la avanzada creando una función para hacer lo que he comentado
-
-Te recuerdo el link para los códigos de los formatos: 
-
-https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
-
-En mi equipo con 32GB de RAM la forma tradicional tardó más de 5 minutos, mientras que la avanzanda menos de 10 segundos.
-
+We pass event_time to datetime.
 
 ```python
-#forma tradicional, la dejo comentada porque voy a utilizar la otra
-#df.event_time = pd.to_datetime(df.event_time)
-```
-
-
-```python
-#forma avanzada crando una función
-#a esta función hay que pasarle la variable fecha y el formato en el que está
-
 def datetime_rapido(dt,formato):
 
     def divide_fecha(fecha):
@@ -344,10 +319,7 @@ df.info()
     memory usage: 159.8+ MB
     
 
-### Nombres de variables
-
-Renombramos las variables a español.
-
+### Variable names
 
 ```python
 df.columns = ['fecha',
@@ -534,7 +506,7 @@ df
 
 
 
-### Análisis de nulos
+### Analysis of nulls
 
 
 ```python
@@ -557,16 +529,16 @@ df.isna().sum().sort_values(ascending = False)
 
 
 
-Conclusiones:
+Conclusions:
 
-* categoria_cod tiene casi todos los registros a nulo
-* marca tiene casi la mitad de los registros a nulo
-* hay 500 nulos en sesión
+* categoria_cod has almost all records set to null
+* brand has almost half of the records to null
+* there are 500 nulls in session
 
-Acciones:
+Actions:
 
-* eliminar las variables categoria_cod y marca
-* eliminar los nulos de sesión ya que es una variable relevante
+* eliminate the variables category_cod and brand
+* remove session nulls as it is a relevant variable
 
 
 ```python
@@ -721,8 +693,7 @@ df
 </div>
 
 
-
-### Análisis de las variables numéricas
+### Analysis of numerical variables
 
 
 ```python
@@ -865,7 +836,7 @@ df.describe()
 
 
 
-Vemos negativos en el precio. Vamos a profundizar.
+We see negatives in the price. Let's go deeper.
 
 
 ```python
@@ -1020,9 +991,9 @@ df[df.precio <= 0]
 
 
 
-Son unos 20000 registros, podríamos eliminarlos.
+It's about 20000 records, we could delete them.
 
-Pero antes ¿se concentran quizá en algún producto determinado?
+But first, do they perhaps focus on a specific product?
 
 
 ```python
@@ -1045,8 +1016,7 @@ df[df.precio <= 0].producto.value_counts().head(10)
     Name: producto, dtype: int64
 
 
-
-No parece que sea problema de un producto concreto, así que vamos a eliminar todos los registros.
+It doesn't seem like it's a specific product issue, so we're going to remove all logs.
 
 
 ```python
@@ -1202,7 +1172,7 @@ df
 
 
 
-### Análisis de las variables categóricas
+### Analysis of categorical variables
 
 
 ```python
@@ -1256,9 +1226,9 @@ df.categoria.nunique()
 
 
 
-### Índice
+### Index
 
-Vamos a poner la fecha como el index.
+Let's put the date as the index.
 
 
 ```python
@@ -1411,15 +1381,15 @@ df
 
 
 
-## TRANSFORMACION DE DATOS
+## DATA TRANSFORMATION
 
-Vamos a crear 3 tipos de nuevas variables
+We are going to create 3 types of new variables
 
-* Extraer componentes
-* Variables de calendario: Festivos locales (Rusia)
-* Indicadores exógenos: Días no necesariamente festivos pero con interés comercial: Black Friday, Cyber Monday, Reyes, San Valentin
+* extract components
+* Calendar variables: Local holidays (Russia)
+* Exogenous indicators: Days not necessarily holidays but with commercial interest: Black Friday, Cyber Monday, Three Kings, San Valentin
 
-### Componentes de la fecha
+### Date Components
 
 
 ```python
@@ -1626,46 +1596,22 @@ df
 
 
 
-### Variables de calendario: festivos
+### Calendar variables: holidays
 
-Para incorporar festivos podemos usar el paquete holidays.
+To incorporate holidays we can use the holidays.
 
-No es perfecto, pero nos da mucha flexibilidad porque tiene fiestas de varios países e incluso a nivel comunidades.
+It's not perfect, but it gives us a lot of flexibility because it has parties from various countries and even at the community level.
 
-Lo instalamos con: conda install -c conda-forge holidays
-
-Lo importamos con: import holidays
-
-Y podemos ver el listado de países y el uso básico en:
+And we can see the list of countries and the basic use in:
 
 https://github.com/dr-prodigy/python-holidays
-
-Por ejemplo vamos a hacer la prueba con España.
 
 
 ```python
 import holidays
-
-festivo_es = holidays.ES(years=2021)
-
-for fecha, fiesta in festivo_es.items():
-    print(fecha,fiesta)
 ```
 
-    2021-01-01 Año nuevo
-    2021-01-06 Epifanía del Señor
-    2021-04-01 Jueves Santo
-    2021-04-02 Viernes Santo
-    2021-05-01 Día del Trabajador
-    2021-08-16 Asunción de la Virgen (Trasladado)
-    2021-10-12 Día de la Hispanidad
-    2021-11-01 Todos los Santos
-    2021-12-06 Día de la Constitución Española
-    2021-12-08 La Inmaculada Concepción
-    2021-12-25 Navidad
-    
-
-Definimos el objeto festivo_ru ya que este ecommerce es Ruso.
+We define the object festive_ru since this ecommerce is Russian.
 
 
 ```python
@@ -1680,7 +1626,7 @@ festivo_ru
 
 
 
-Vamos a incorporar una variable que diga en cada registro si era un día festivo o no.
+We are going to add a variable that tells each record if it was a holiday or not.
 
 
 ```python
@@ -1872,7 +1818,7 @@ df
 
 
 
-Comprobamos los festivos.
+We check the holidays.
 
 
 ```python
@@ -1897,9 +1843,9 @@ df[df.festivo == 1].date.value_counts().sort_index()
 
 
 
-### Indicadores exógenos
+### Exogenous indicators
 
-Vamos a añadir indicadores para Black Friday y San Valentín.
+We are going to add indicators for Black Friday and Valentine's Day.
 
 
 ```python
@@ -1940,9 +1886,9 @@ df['san_valentin'].value_counts()
 
 
 
-## TABLON ANALITICO FINAL
+## FINAL ANALYTICAL BOARD
 
-Revisamos lo que tenemos.
+We review what we have.
 
 
 ```python
@@ -2061,7 +2007,7 @@ df.head()
 
 
 
-Vamos a poner las columnas en un orden más natural.
+Let's put the columns in a more natural order.
 
 
 ```python
@@ -2323,7 +2269,7 @@ df
 
 
 
-Guardamos como pickle para no perder los metadatos.
+We save as pickle so as not to lose the metadata.
 
 
 ```python
