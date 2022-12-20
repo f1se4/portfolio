@@ -302,6 +302,8 @@ fig.update_layout(
 fig.show()
 ```
 
+![funnel](static/notebooks/ecommerce/funnel.png)
+
 Conclusions:
 
 * Starting rates are 60% cart on views and 22% purchase on cart
@@ -626,7 +628,7 @@ media_eventos_sesion
     purchase                      0.29
     dtype: float64
 
-Conclution:
+Conclusion:
 
 In each session, on average:
 
@@ -1675,8 +1677,7 @@ sns.heatmap(data = eventos_hora_tip);
     
 
 
-Vamos a sacar también los gráficos de líneas para verlo más claramente.
-
+Let's also pull out the line graphs to see it more clearly.
 
 ```python
 eventos_hora_tip.plot(subplots = True, sharex = False, figsize = (12,12),xticks = eventos_hora_tip.index);
